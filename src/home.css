@@ -1,0 +1,33 @@
+h1 {
+    font-size: 1.6em;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+#homeHeader {
+    font-size: 8vmin;
+    margin: 4vmin;
+}
+#homeHeaderAvatar {
+    margin-top: 0;
+    margin-right: 4vmin;
+}
+#homeHeaderDesktop {
+    padding: 1vh 0;
+}
+#homeHeaderMobile {
+    padding-bottom: 4em;
+}
+#homeBody {
+    padding: 4vh 0;
+}
+#homeFooter {
+    color: #C0C0C0;
+    padding: 2vh 0;
+}
+
+.labelLine {
+    line-height: 2.2em;
+}
