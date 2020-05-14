@@ -113,7 +113,7 @@ const MobileHeading = (props) => {
         <Menu.Item as='a' href='https://www.linkedin.com/in/justin-j-xu/'>
           <Icon name='linkedin' /> LinkedIn
         </Menu.Item>
-        <Menu.Item as='a' href='mailto://justin.xu@uwaterloo.ca'>
+        <Menu.Item as='a' href='mailto:justin.xu@uwaterloo.ca'>
           <Icon name='mail' /> Email
         </Menu.Item>
       </Sidebar>
