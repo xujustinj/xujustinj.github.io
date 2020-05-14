@@ -219,17 +219,44 @@ const Home = () => (
       </Card.Group>
 
       <Divider hidden/>
-      <Divider section horizontal>Past Projects</Divider>
-      <Container text>
-        Under construction...
-      </Container>
+      <Divider section horizontal>Past Projects (Section Under Construction)</Divider>
+      <Card.Group centered>
+        <Card raised>
+          <Card.Content as='a' href='https://github.com/xujustinj/Swift-Record-Generator'>
+            <Card.Header>Swift Record Generator</Card.Header>
+            <Card.Meta className='labelLine'>
+              <Label>Swift</Label>
+            </Card.Meta>
+            <Card.Description>
+              Measures the relative performance of Swift structs, classes, and
+              string-keyed dictionaries, with respect to mutation, copying,
+              (de)serialization, and more.
+            </Card.Description>
+          </Card.Content>
+        </Card>
+        <Card raised>
+          <Card.Content as='a' href='https://xujustinj.github.io/Extended-Essay/'>
+            <Card.Header>Ulam Spiral</Card.Header>
+            <Card.Meta className='labelLine'>
+              <Label>Recreational Math</Label>
+              <Label>Number Theory</Label>
+              <Label>Java</Label>
+            </Card.Meta>
+            <Card.Description>
+              When you highlight prime numbers on a spiral number line, strange
+              patterns appear. In high school, I wrote a paper explaining what
+              causes them, and how they can be exploited.
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      </Card.Group>
     </Segment>
 
     <Segment id='homeFooter' inverted vertical>
       <Container text>
         <small>
           Made with React and Semantic UI.<br/>
-          Last updated Sunday May 9, 2020.
+          Last updated Sunday May 10, 2020.
         </small>
       </Container>
     </Segment>
