@@ -227,7 +227,7 @@ const Home = () => (
       </Container>
 
       <Divider hidden/>
-      <Divider section horizontal>Past Projects (Section Under Construction)</Divider>
+      <Divider section horizontal>Past Projects</Divider>
       <Container text>
       <Card.Group centered>
         <Card raised>
