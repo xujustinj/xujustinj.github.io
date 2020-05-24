@@ -180,8 +180,10 @@ const Home = () => (
         <p>
           A detail-oriented no-nonsense approach gives rise to my excellent
           academic record and success at past internships. Outside of school and
-          work, I also write for UWaterloo mathNEWS, make music, and play video
-          games. (I'm terrible at video games...)
+          work, I also write for <a href='http://mathnews.uwaterloo.ca/'>
+            UW mathNEWS
+          </a>, make music, and play video games. (I'm terrible at video
+          games...)
         </p>
       </Container>
 
@@ -202,16 +204,18 @@ const Home = () => (
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <Label>AI</Label>
-              <Label>React</Label>
-              <Label>TypeScript</Label>
-              <Label>C++</Label>
+              <Label color={"blue"}>AI</Label>
+              <Label color={"orange"}>React</Label>
+              <Label color={"yellow"}>TypeScript</Label>
+              <Label color={"yellow"}>C++</Label>
             </Card.Content>
           </Card>
           <Card raised>
             <Image src={stairway_constants} />
             <Card.Content>
-              <Card.Header>Stairway Constants</Card.Header>
+              <Card.Header as='a' href='http://mathnews.uwaterloo.ca/'>
+                Stairway Constants
+              </Card.Header>
               <Card.Description>
                 A massive guide to every constant featured on the decorative
                 number line recently installed on UW campus, published across 5
@@ -219,8 +223,8 @@ const Home = () => (
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <Label>Writing</Label>
-              <Label>Mathematics</Label>
+              <Label color={"blue"}>Writing</Label>
+              <Label color={"blue"}>Mathematics</Label>
             </Card.Content>
           </Card>
         </Card.Group>
@@ -243,7 +247,7 @@ const Home = () => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label>Swift</Label>
+            <Label color={"yellow"}>Swift</Label>
           </Card.Content>
         </Card>
         <Card raised>
@@ -260,8 +264,8 @@ const Home = () => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label>Number Theory</Label>
-            <Label>Java</Label>
+            <Label color={"blue"}>Number Theory</Label>
+            <Label color={"yellow"}>Java</Label>
           </Card.Content>
         </Card>
         <Card raised>
@@ -276,8 +280,8 @@ const Home = () => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label>JavaScript</Label>
-            <Label>p5.js</Label>
+            <Label color={"yellow"}>JavaScript</Label>
+            <Label color={"orange"}>p5.js</Label>
           </Card.Content>
         </Card>
         <Card raised>
@@ -293,8 +297,8 @@ const Home = () => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label>Spreadsheets</Label>
-            <Label>Google Apps Script</Label>
+            <Label color={"orange"}>Spreadsheets</Label>
+            <Label color={"yellow"}>Google Apps Script</Label>
           </Card.Content>
         </Card>
       </Card.Group>
