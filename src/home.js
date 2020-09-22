@@ -178,7 +178,7 @@ const Home = () => (
           generalist, but secretly has passions for AI and software performance.
         </p>
         <p>
-          His detail-oriented approach and mild workaholicism give rise to an
+          His detail-oriented approach and mild workaholism give rise to an
           excellent academic record and success in past internships at Osellus
           Mobile and Wish.
         </p>
