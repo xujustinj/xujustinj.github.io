@@ -15,7 +15,7 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 
-import jx_avatar from './img/jx_avatar.png'
+import jx_avatar from './img/jx_formal.png'
 import adetos from './img/adetos.png'
 import asteria from './img/asteria.png'
 import hexagonal_2048 from './img/hexagonal_2048.png'
@@ -23,6 +23,15 @@ import stairway_constants from './img/stairway_constants.png'
 import swift_record_generator from './img/swift_record_generator.png'
 import ulam_spiral from './img/ulam_spiral.png'
 import './home.css'
+
+const languageColor = "pink";
+const toolColor = "orange";
+const techniqueColor = "blue";
+
+const githubLink = "https://github.com/xujustinj/"
+const resumeLink = "https://drive.google.com/file/d/1m9st64fjoE-SLAB7EF-y9WdFVs3xdiAY/view?usp=sharing"
+const linkedinLink = "https://www.linkedin.com/in/justin-j-xu/"
+const emailLink = "mailto:justin.xu@uwaterloo.ca"
 
 // COMMENT FROM semantic-ui-react LAYOUT EXAMPLE:
 // Heads up!
@@ -66,16 +75,16 @@ const DesktopHeading = (props) => {
             secondary={!overlay}
             size='large'
           >
-            <Menu.Item as='a' href='https://github.com/xujustinj' icon='github'>
+            <Menu.Item as='a' href={githubLink} icon='github'>
               <Icon name='github' />&nbsp; GitHub
             </Menu.Item>
-            <Menu.Item as='a' href='https://drive.google.com/file/d/18Bl6LJ0o_8e_GaF0HbPoGxq0_IvlcwWD/view?usp=sharing'>
+            <Menu.Item as='a' href={resumeLink}>
               <Icon name='newspaper' /> Résumé
             </Menu.Item>
-            <Menu.Item as='a' href='https://www.linkedin.com/in/justin-j-xu/'>
+            <Menu.Item as='a' href={linkedinLink}>
               <Icon name='linkedin' /> LinkedIn
             </Menu.Item>
-            <Menu.Item as='a' href='mailto://justin.xu@uwaterloo.ca'>
+            <Menu.Item as='a' href={emailLink}>
               <Icon name='mail' /> Email
             </Menu.Item>
           </Menu>
@@ -110,16 +119,16 @@ const MobileHeading = (props) => {
         vertical
         visible={sidebar}
       >
-        <Menu.Item as='a' href='https://github.com/xujustinj' icon='github'>
+        <Menu.Item as='a' href={githubLink} icon='github'>
           <Icon name='github' /> GitHub
         </Menu.Item>
-        <Menu.Item as='a' href='https://drive.google.com/file/d/18Bl6LJ0o_8e_GaF0HbPoGxq0_IvlcwWD/view?usp=sharing'>
+        <Menu.Item as='a' href={resumeLink}>
           <Icon name='newspaper' /> Résumé
         </Menu.Item>
-        <Menu.Item as='a' href='https://www.linkedin.com/in/justin-j-xu/'>
+        <Menu.Item as='a' href={linkedinLink}>
           <Icon name='linkedin' /> LinkedIn
         </Menu.Item>
-        <Menu.Item as='a' href='mailto:justin.xu@uwaterloo.ca'>
+        <Menu.Item as='a' href={emailLink}>
           <Icon name='mail' /> Email
         </Menu.Item>
       </Sidebar>
@@ -164,26 +173,24 @@ const Home = () => (
   <ResponsiveHeading>
     <Segment id='homeBody' vertical>
       <Container text>
-        <Header as='h1'>Hello</Header>
         <p>
-          I'm an aspiring software developer studying Computer Science at the
-          University of Waterloo. While my long-term goal is to make meaningful
-          contributions in the field of machine intelligence, I'm currently
-          exploring the wide world of programming.
+          Aspiring software developer studying CS at UWaterloo. Trying to become a
+          generalist, but secretly has passions for AI and software performance.
         </p>
         <p>
-          So far, I've taken up a keen interest in performance and optimization.
-          Beyond its obvious relevance to AI, the pursuit of efficiency often
-          leads to a deeper understanding of what's really going on, and why
-          things are the way they are.
+          His detail-oriented approach and mild workaholicism give rise to an
+          excellent academic record and success in past internships at Osellus
+          Mobile and Wish.
         </p>
         <p>
-          A detail-oriented no-nonsense approach gives rise to my excellent
-          academic record and success at past internships. Outside of school and
-          work, I also write for <a href='http://mathnews.uwaterloo.ca/'>
-            UW mathNEWS
-          </a>, make music, and play video games. (I'm terrible at video
-          games...)
+          In his natural habitat, he can be seen
+          <ul>
+            <li>writing for a math newspaper</li>
+            <li>doing pushups</li>
+            <li>washing dishes</li>
+            <li>being terrible at video games</li>
+            <li>listening to <i>Adventure</i></li>
+          </ul>
         </p>
       </Container>
 
@@ -194,26 +201,22 @@ const Home = () => (
           <Card raised>
             <Image src={asteria} />
             <Card.Content>
-              <Card.Header as='a' href='https://github.com/xujustinj/Asteria'>Asteria</Card.Header>
+              <Card.Header as='a' href='https://github.com/xujustinj/Asteria1'>Asteria</Card.Header>
               <Card.Description>
-                <b>Goal:</b> a web app interface for a multilayer perceptron
-                that performs character recognition (implemented from scratch)
-                <br/>
-                <b>So far:</b> an in-browser interactive training/testing engine
-                <br/>
+                A fast machine learning library implemented from scratch.
+                Currently working towards character recognition.
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <Label color={"blue"}>AI</Label>
-              <Label color={"orange"}>React</Label>
-              <Label color={"yellow"}>TypeScript</Label>
-              <Label color={"yellow"}>C++</Label>
+              <Label color={techniqueColor}>AI</Label>
+              <Label color={languageColor}>C++</Label>
+              <Label color={languageColor}>Python</Label>
             </Card.Content>
           </Card>
           <Card raised>
             <Image src={stairway_constants} />
             <Card.Content>
-              <Card.Header as='a' href='http://mathnews.uwaterloo.ca/'>
+              <Card.Header>
                 Stairway Constants
               </Card.Header>
               <Card.Description>
@@ -223,8 +226,8 @@ const Home = () => (
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <Label color={"blue"}>Writing</Label>
-              <Label color={"blue"}>Mathematics</Label>
+              <Label color={techniqueColor}>Writing</Label>
+              <Label color={techniqueColor}>Mathematics</Label>
             </Card.Content>
           </Card>
         </Card.Group>
@@ -247,7 +250,7 @@ const Home = () => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label color={"yellow"}>Swift</Label>
+            <Label color={languageColor}>Swift</Label>
           </Card.Content>
         </Card>
         <Card raised>
@@ -260,12 +263,12 @@ const Home = () => (
               When you highlight prime numbers on a spiral number line, strange
               patterns appear. In high school, I wrote a <a href='https://xujustinj.github.io/Extended-Essay/03-01-19%20Version%20(Revision).pdf'>
                 paper
-              </a> explaining what causes them, and how they could be exploited.
+              </a> explaining what causes them, and how they might be useful.
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label color={"blue"}>Number Theory</Label>
-            <Label color={"yellow"}>Java</Label>
+            <Label color={techniqueColor}>Number Theory</Label>
+            <Label color={languageColor}>Java</Label>
           </Card.Content>
         </Card>
         <Card raised>
@@ -276,12 +279,12 @@ const Home = () => (
             </Card.Header>
             <Card.Description>
               My introductory project to JavaScript, inspired by my love for the
-              original game.
+              original game. Swipe or use QWEASD to control the board.
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label color={"yellow"}>JavaScript</Label>
-            <Label color={"orange"}>p5.js</Label>
+            <Label color={languageColor}>JavaScript</Label>
+            <Label color={toolColor}>p5.js</Label>
           </Card.Content>
         </Card>
         <Card raised>
@@ -297,8 +300,8 @@ const Home = () => (
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Label color={"orange"}>Spreadsheets</Label>
-            <Label color={"yellow"}>Google Apps Script</Label>
+            <Label color={toolColor}>Spreadsheets</Label>
+            <Label color={languageColor}>Google Apps Script</Label>
           </Card.Content>
         </Card>
       </Card.Group>
@@ -309,7 +312,7 @@ const Home = () => (
       <Container text>
         <small>
           Made with React and Semantic UI.<br/>
-          Last updated Sunday May 24, 2020.
+          Last updated Monday September 21, 2020.
         </small>
       </Container>
     </Segment>
