@@ -174,23 +174,9 @@ const Home = () => (
     <Segment id='homeBody' vertical>
       <Container text>
         <p>
-          Aspiring software developer studying CS at UWaterloo. Trying to become a
-          generalist, but secretly has passions for AI and software performance.
-        </p>
-        <p>
-          His detail-oriented approach and mild workaholism give rise to an
-          excellent academic record and success in past internships at Osellus
-          Mobile and Wish.
-        </p>
-        <p>
-          In his natural habitat, he can be seen
-          <ul>
-            <li>writing for a math newspaper</li>
-            <li>doing pushups</li>
-            <li>washing dishes</li>
-            <li>being terrible at video games</li>
-            <li>listening to <i>Adventure</i></li>
-          </ul>
+          Aspiring software developer studying CS at UWaterloo. Trying to become
+          a generalist, but secretly has passions for AI and software
+          performance.
         </p>
       </Container>
 
@@ -201,7 +187,7 @@ const Home = () => (
           <Card raised>
             <Image src={asteria} />
             <Card.Content>
-              <Card.Header as='a' href='https://github.com/xujustinj/Asteria1'>Asteria</Card.Header>
+              <Card.Header as='a' href='https://github.com/xujustinj/Asteria'>Asteria</Card.Header>
               <Card.Description>
                 A fast machine learning library implemented from scratch.
                 Currently working towards character recognition.
@@ -240,7 +226,7 @@ const Home = () => (
         <Card raised>
           <Image src={swift_record_generator} />
           <Card.Content>
-            <Card.Header as='a' href='https://github.com/xujustinj/Swift-Record-Generator'>
+            <Card.Header as='a' href='https://github.com/xujustinj/swift-record-generator'>
               Swift Record Generator
             </Card.Header>
             <Card.Description>
@@ -312,7 +298,7 @@ const Home = () => (
       <Container text>
         <small>
           Made with React and Semantic UI.<br/>
-          Last updated Monday September 21, 2020.
+          Last updated Thursday Feburary 25, 2021.
         </small>
       </Container>
     </Segment>
