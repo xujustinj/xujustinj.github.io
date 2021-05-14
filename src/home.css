@@ -1,25 +1,25 @@
 p {
-    font-size: 14pt;
+  font-size: 14pt;
 }
 
 #homeHeader {
-    font-size: 8vmin;
-    margin: 4vmin;
+  font-size: 8vmin;
+  margin: 4vmin;
 }
 #homeHeaderAvatar {
-    margin-top: 0;
-    margin-right: 4vmin;
+  margin-top: 0;
+  margin-right: 4vmin;
 }
 #homeHeaderDesktop {
-    padding: 1vh 0;
+  padding: 1vh 0;
 }
 #homeHeaderMobile {
-    padding-bottom: 4em;
+  padding-bottom: 4em;
 }
 #homeBody {
-    padding: 4vh 0;
+  padding: 4vh 0;
 }
 #homeFooter {
-    color: #C0C0C0;
-    padding: 2vh 0;
+  color: #c0c0c0;
+  padding: 2vh 0;
 }
