@@ -2,24 +2,21 @@ p {
   font-size: 14pt;
 }
 
-#homeHeader {
-  font-size: 8vmin;
-  margin: 4vmin;
+#title {
+  font-size: 32pt;
 }
-#homeHeaderAvatar {
-  margin-top: 0;
-  margin-right: 4vmin;
+#avatar {
+  max-width: 20vw;
+  margin-right: min(32px, 5vw);
+  margin-bottom: 8px;
 }
-#homeHeaderDesktop {
+#navbar {
   padding: 1vh 0;
-}
-#homeHeaderMobile {
-  padding-bottom: 4em;
 }
 #homeBody {
   padding: 4vh 0;
 }
-#homeFooter {
+#foot {
   color: #c0c0c0;
-  padding: 2vh 0;
+  padding: 24px 0;
 }
