@@ -27,10 +27,7 @@ const NavBar = () => (
       <Icon name="github" />
       &nbsp; GitHub
     </Menu.Item>
-    <Menu.Item
-      as="a"
-      href="https://drive.google.com/file/d/1Gmz2ra2j20rVt_x6TgdV845ySR1QhyoW/view"
-    >
+    <Menu.Item as="a" href="/resume">
       <Icon name="newspaper" /> Résumé
     </Menu.Item>
     <Menu.Item as="a" href="https://www.linkedin.com/in/xujustinj/">
