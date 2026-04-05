@@ -21,7 +21,6 @@
           ];
 
           shellHook = ''
-            export NODE_ENV=development
             echo "xujustinj.github.io dev shell (Nix) activated for ${system}"
           '';
         };

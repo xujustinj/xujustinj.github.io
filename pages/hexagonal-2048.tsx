@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Embed } from "../components/Embed";
 import { Section } from "../components/Section";

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import styled from "styled-components";
 import { CardGrid } from "../components/CardGrid";
 import { EmojiBulletItem } from "../components/EmojiBullet";
