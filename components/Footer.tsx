@@ -22,7 +22,7 @@ interface FooterLinkProps {
   children: ReactNode;
 }
 const FooterLink = (props: FooterLinkProps) => (
-  <IconTextLink href={props.href} passHref>
+  <IconTextLink href={props.href}>
     {/* fa-fw: fixed width */}
     <FontAwesomeIcon icon={props.icon} className={"fa-fw"} />
     {props.children}

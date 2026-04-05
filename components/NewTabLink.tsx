@@ -1,14 +1,12 @@
-import Link, { LinkProps } from "next/link";
-import { ReactNode } from "react";
+import Link, { type LinkProps } from "next/link";
+import { type ReactNode } from "react";
 
-export type NewTabLinkProps = Omit<LinkProps, "passHref"> & {
+export type NewTabLinkProps = Omit<LinkProps, "target" | "rel"> & {
   children?: ReactNode | ReactNode[];
 };
 
-export const NewTabLink = (props: NewTabLinkProps) => (
-  <Link href={props.href} passHref>
-    <a target={"_blank"} rel="noopener noreferrer">
-      {props.children}
-    </a>
+export const NewTabLink = ({ children, ...props }: NewTabLinkProps) => (
+  <Link {...props} target="_blank" rel="noopener noreferrer">
+    {children}
   </Link>
 );

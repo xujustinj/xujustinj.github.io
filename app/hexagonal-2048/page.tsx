@@ -1,11 +1,12 @@
+import type { Metadata } from "next";
 import styled from "styled-components";
-import { Embed } from "../components/Embed";
-import { Section } from "../components/Section";
-import { adapt } from "../styles/Adaptive";
+import { Embed } from "../../components/Embed";
+import { Section } from "../../components/Section";
+import { adapt } from "../../styles/Adaptive";
 
-export function getServerSideProps() {
-  return { props: { title: "Hexagonal 2048" } };
-}
+export const metadata: Metadata = {
+  title: "Hexagonal 2048",
+};
 
 const GameInfo = styled.p`
   ${adapt({
@@ -31,7 +32,7 @@ const Game = styled(Embed)`
   border: none;
 `;
 
-const Home = () => {
+export default function Hexagonal2048Page() {
   return (
     <>
       <Section $foreground="black" $background="white" id="intro">
@@ -63,6 +64,4 @@ const Home = () => {
       </Section>
     </>
   );
-};
-
-export default Home;
+}
