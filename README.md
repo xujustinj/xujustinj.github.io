@@ -4,6 +4,17 @@ This version of my website is based off [Waterpark's frontend](https://github.co
 
 ## Notes
 
+### Dependencies
+
+**Node.js:** Production builds run on [AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/). Amplify’s default Linux build image only wires up **Node 20 and 22** via `nvm` for app builds—not every upstream LTS—so choosing another major locally can diverge from what Amplify can run.
+
+This repo pins **Node 22** in two places so dev and deploy match:
+
+- **`amplify.yml`** — `nvm install 22` / `nvm use 22` before `pnpm install` and `next build`
+- **`flake.nix`** — `nodejs_22` in the Nix dev shell
+
+Before upgrading Node or Next.js, check Amplify’s current supported Node versions and [build / SSR troubleshooting docs](https://docs.aws.amazon.com/amplify/latest/userguide/troubleshooting-builds.html).
+
 ### Creating the Boilerplate
 
 ```sh
