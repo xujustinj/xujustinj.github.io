@@ -3,10 +3,12 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - corepack enable
+        - corepack prepare pnpm@10.33.0 --activate
+        - pnpm install --frozen-lockfile
     build:
       commands:
-        - npm run build
+        - pnpm run build
   artifacts:
     baseDirectory: .next
     files:
