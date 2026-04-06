@@ -21,9 +21,26 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
+}
+
+/* Sidenotes section heading from GFM (remark-gfm emits class="sr-only"). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 `;
 
@@ -32,6 +49,19 @@ const NAV_TITLE_BY_PATH: Record<string, string> = {
   "/": "",
   "/hexagonal-2048": "Hexagonal 2048",
 };
+
+function resolveNavTitle(pathname: string): string {
+  if (pathname in NAV_TITLE_BY_PATH) {
+    return NAV_TITLE_BY_PATH[pathname as keyof typeof NAV_TITLE_BY_PATH];
+  }
+  if (pathname === "/blog") {
+    return "Blog";
+  }
+  if (pathname.startsWith("/blog/")) {
+    return "Blog";
+  }
+  return "";
+}
 
 /**
  * Client shell for `app/layout.tsx`: styled-components SSR registry, global
@@ -49,8 +79,7 @@ export function Layout({ children }: { children: ReactNode }) {
   });
 
   const pathname = usePathname();
-  const title =
-    pathname !== null ? (NAV_TITLE_BY_PATH[pathname] ?? "") : "";
+  const title = pathname !== null ? resolveNavTitle(pathname) : "";
 
   const shell = (
     <>
