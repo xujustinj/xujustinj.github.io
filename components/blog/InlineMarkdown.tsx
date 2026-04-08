@@ -1,4 +1,6 @@
 import { compileMDX } from "next-mdx-remote/rsc";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 import remarkSmartypants from "remark-smartypants";
 
 type Props = {
@@ -20,7 +22,8 @@ export async function InlineMarkdown({ source }: Props) {
     options: {
       parseFrontmatter: false,
       mdxOptions: {
-        remarkPlugins: [remarkSmartypants],
+        remarkPlugins: [remarkMath, remarkSmartypants],
+        rehypePlugins: [rehypeKatex],
       },
     },
     components: {

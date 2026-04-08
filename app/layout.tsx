@@ -1,3 +1,4 @@
+import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { Favicons } from "../components/Favicons";

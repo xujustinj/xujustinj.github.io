@@ -8,5 +8,11 @@ export const POST_LAYOUT_GAP = "12px";
 /** Outer cap for TOC + gap + article (42rem). Centered as one unit on the post page. */
 export const POST_ARTICLE_SHELL_MAX_PLAIN = `calc(${BLOG_RAIL_WIDTH} + ${POST_LAYOUT_GAP} + 42rem)`;
 
+/** Article column only (no TOC); use when the post has no ## / ### headings. */
+export const POST_ARTICLE_SHELL_MAX_ARTICLE_ONLY = `42rem`;
+
 /** Same when the article column includes sidenotes (42rem + gap + rail). */
 export const POST_ARTICLE_SHELL_MAX_SIDENOTES = `calc(${BLOG_RAIL_WIDTH} + ${POST_LAYOUT_GAP} + 42rem + ${POST_LAYOUT_GAP} + ${BLOG_RAIL_WIDTH})`;
+
+/** Sidenotes but no TOC column (no left rail). */
+export const POST_ARTICLE_SHELL_MAX_SIDENOTES_NO_TOC = `calc(42rem + ${POST_LAYOUT_GAP} + ${BLOG_RAIL_WIDTH})`;

@@ -16,18 +16,29 @@ import NavBar from "./NavBar";
 config.autoAddCss = false;
 
 const GlobalStyle = createGlobalStyle`
-* {
+/* Site text: inherit from html. Do not set font on * — it overrides KaTeX's math fonts. */
+html {
   font-family: var(--font-ibm-plex-sans), sans-serif;
-  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-html {
-  scroll-behavior: smooth;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+/* KaTeX defaults to ~1.21em, which sits taller than IBM Plex body/title copy. */
+.inline-md .katex,
+.post-body .katex {
+  font-size: 1em;
+}
+
+.post-body .katex-display > .katex {
+  font-size: 1.21em;
 }
 
 /* Sidenotes section heading from GFM (remark-gfm emits class="sr-only"). */

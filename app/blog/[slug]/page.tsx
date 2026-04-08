@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { AuthorsLine } from "../../../components/blog/AuthorsLine";
 import { PublicationMetaInline } from "../../../components/blog/PublicationMeta";
 import {
@@ -22,18 +22,20 @@ import { InlineMarkdown } from "../../../components/blog/InlineMarkdown";
 import { getAllBlogSlugs, getBlogSourceBySlug } from "../../../lib/blog";
 import { blogPostMdxCompileOptions } from "../../../lib/mdx";
 import { stripInlineMarkdown } from "../../../lib/markdownPlain";
-import { adapt } from "../../../styles/Adaptive";
+import { adapt, MOBILE_BREAKPOINT } from "../../../styles/Adaptive";
 import {
   BLOG_RAIL_WIDTH,
+  POST_ARTICLE_SHELL_MAX_ARTICLE_ONLY,
   POST_ARTICLE_SHELL_MAX_PLAIN,
   POST_ARTICLE_SHELL_MAX_SIDENOTES,
+  POST_ARTICLE_SHELL_MAX_SIDENOTES_NO_TOC,
   POST_LAYOUT_GAP,
 } from "../../../styles/blogLayout";
 import { Colour } from "../../../styles/Colours";
 
 const LightBG = Colour({ h: "blue", s: "faded", v: "offwhite" });
 
-const PostArticleShell = styled.div`
+const PostArticleShell = styled.div<{ $hasToc: boolean }>`
   ${adapt({
     mobile: `
       display: block;
@@ -51,13 +53,8 @@ const PostArticleShell = styled.div`
       align-items: flex-start;
       gap: ${POST_LAYOUT_GAP};
       width: 100%;
-      max-width: min(${POST_ARTICLE_SHELL_MAX_PLAIN}, 100%);
       margin-left: auto;
       margin-right: auto;
-      &:has(.post-body .sidenote-row),
-      &:has(.post-body section.footnotes) {
-        max-width: min(${POST_ARTICLE_SHELL_MAX_SIDENOTES}, 100%);
-      }
       .post-sidenote-gutter {
         display: none;
       }
@@ -71,6 +68,25 @@ const PostArticleShell = styled.div`
       }
     `,
   })}
+
+  ${({ $hasToc }) => css`
+    @media (min-width: ${MOBILE_BREAKPOINT}) {
+      max-width: min(
+        ${$hasToc ? POST_ARTICLE_SHELL_MAX_PLAIN : POST_ARTICLE_SHELL_MAX_ARTICLE_ONLY},
+        100%
+      );
+
+      &:has(.post-body .sidenote-row),
+      &:has(.post-body section.footnotes) {
+        max-width: min(
+          ${$hasToc
+            ? POST_ARTICLE_SHELL_MAX_SIDENOTES
+            : POST_ARTICLE_SHELL_MAX_SIDENOTES_NO_TOC},
+          100%
+        );
+      }
+    }
+  `}
 `;
 
 const PostProse = styled(Prose)`
@@ -210,18 +226,21 @@ export default async function BlogPostPage({ params }: Props) {
   const headingIds = new Map<string, number>();
   const titleId = makeHeadingId(post.frontmatter.title, headingIds);
   const bodyHeadings = extractHeadings(post.content, headingIds);
-  const toc: TocItem[] = [
-    {
-      id: titleId,
-      level: 1,
-      label: <InlineMarkdown source={post.frontmatter.title} />,
-    },
-    ...bodyHeadings.map((h) => ({
-      id: h.id,
-      level: h.level,
-      label: <InlineMarkdown source={h.text} />,
-    })),
-  ];
+  const showToc = bodyHeadings.length > 0;
+  const toc: TocItem[] = showToc
+    ? [
+        {
+          id: titleId,
+          level: 1,
+          label: <InlineMarkdown source={post.frontmatter.title} />,
+        },
+        ...bodyHeadings.map((h) => ({
+          id: h.id,
+          level: h.level,
+          label: <InlineMarkdown source={h.text} />,
+        })),
+      ]
+    : [];
 
   // IDs must come only from `extractHeadings` + title above. Calling
   // `makeHeadingId` again during MDX render would re-increment the slug map
@@ -265,8 +284,8 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <Section $foreground="black" $background={LightBG} id="post">
-      <PostArticleShell>
-        <TableOfContents items={toc} />
+      <PostArticleShell $hasToc={showToc}>
+        {showToc ? <TableOfContents items={toc} /> : null}
         <PostProse>
           <BackLink href="/blog">
             <BackLabel>← Blog</BackLabel>
