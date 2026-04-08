@@ -18,6 +18,27 @@ export const Prose = styled.div`
     margin: 0 0 1em 0;
   }
 
+  /* GFM blockquotes: inset + left rule; nesting stacks another vertical bar. */
+  blockquote {
+    margin: 0 0 1em 0;
+    padding: 0 0 0 1rem;
+    border-left: 3px solid ${Colour({ v: "medium" })};
+    font-style: normal;
+  }
+
+  blockquote blockquote {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+  }
+
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+
   /* Only the last top-level paragraph in the MDX body, not paragraphs inside sidenote rows. */
   .post-body {
     & > p:last-child {
