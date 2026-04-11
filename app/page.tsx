@@ -7,7 +7,7 @@ import { Section, SectionHeading } from "../components/Section";
 import { Items } from "../data/Items";
 import ProfileKyoto from "../public/assets/profile-kyoto.jpg";
 import { adapt } from "../styles/Adaptive";
-import { Colour } from "../styles/Colours";
+import { bgLight, bgDark } from "../styles/Colours";
 
 const IntroContainer = styled.div`
   display: flex;
@@ -22,9 +22,6 @@ const IntroContainer = styled.div`
   gap: 32px;
   align-items: top;
 `;
-
-const LightBG = Colour({ h: "blue", s: "faded", v: "offwhite" });
-const DarkBG = Colour({ h: "blue", s: "faded", v: "darkest" });
 
 const IntroIcon = styled.div`
   ${adapt({
@@ -85,7 +82,7 @@ const NameText = styled.h2`
 export default function HomePage() {
   return (
     <>
-      <Section $foreground="black" $background={LightBG} id="intro">
+      <Section $foreground="black" $background={bgLight} id="intro">
         <IntroContainer>
           <IntroIcon>
             <Image
@@ -124,12 +121,12 @@ export default function HomePage() {
         </IntroContainer>
       </Section>
 
-      <Section $foreground="white" $background={DarkBG} id="featured">
+      <Section $foreground="white" $background={bgDark} id="featured">
         <SectionHeading>Featured Stuff</SectionHeading>
         <CardGrid items={Items.filter((item) => item.status === "featured")} />
       </Section>
 
-      <Section $foreground="black" $background={LightBG} id="other">
+      <Section $foreground="black" $background={bgLight} id="other">
         <SectionHeading>Other Stuff</SectionHeading>
         <CardGrid
           items={Items.filter(

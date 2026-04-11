@@ -40,9 +40,11 @@ interface ColourProps {
 }
 export const Colour = ({ h, s, v }: ColourProps) => {
   const hue = Hues[h ?? "blue"];
-  const sat = Saturations[h === undefined ? "gone" : s ?? "medium"];
+  const sat = Saturations[h === undefined ? "gone" : (s ?? "medium")];
   const val = Values[v ?? "medium"];
   return `hsl(${hue}, ${sat}%, ${val}%)`;
 };
 
 export const primary = Colour({ h: "blue" });
+export const bgLight = Colour({ h: "blue", s: "faded", v: "offwhite" });
+export const bgDark = Colour({ h: "blue", s: "faded", v: "darkest" });

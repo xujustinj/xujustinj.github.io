@@ -14,9 +14,7 @@ import {
 } from "../../components/blog/PublicationMeta";
 import { InlineMarkdown } from "../../components/blog/InlineMarkdown";
 import { getBlogIndex } from "../../lib/blog";
-import { Colour } from "../../styles/Colours";
-
-const LightBG = Colour({ h: "blue", s: "faded", v: "offwhite" });
+import { bgLight } from "../../styles/Colours";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -26,7 +24,7 @@ export default async function BlogIndexPage() {
   const posts = getBlogIndex();
 
   return (
-    <Section $foreground="black" $background={LightBG} id="blog">
+    <Section $foreground="black" $background={bgLight} id="blog">
       <SectionHeading>Blog</SectionHeading>
       <PostList>
         {posts.map((post) => (

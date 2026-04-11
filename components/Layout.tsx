@@ -4,12 +4,12 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { usePathname, useServerInsertedHTML } from "next/navigation";
 import { type ReactNode, useState } from "react";
-import {
+import styled, {
   ServerStyleSheet,
   StyleSheetManager,
   createGlobalStyle,
 } from "styled-components";
-import { Colour } from "../styles/Colours";
+import { Colour, bgLight } from "../styles/Colours";
 import { Footer } from "./Footer";
 import NavBar from "./NavBar";
 
@@ -55,6 +55,17 @@ body {
 }
 `;
 
+const LayoutContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const MainContainer = styled.main`
+  flex-grow: 1;
+  background-color: ${bgLight};
+`;
+
 /** Map URL pathname → centre title in the nav bar (empty on home). */
 const NAV_TITLE_BY_PATH: Record<string, string> = {
   "/": "",
@@ -93,15 +104,15 @@ export function Layout({ children }: { children: ReactNode }) {
   const title = pathname !== null ? resolveNavTitle(pathname) : "";
 
   const shell = (
-    <>
+    <LayoutContainer>
       <GlobalStyle />
       <NavBar title={title} />
-      {children}
+      <MainContainer>{children}</MainContainer>
       <Footer
         $background={Colour({ h: "blue", s: "faded", v: "darker" })}
         $foreground="white"
       />
-    </>
+    </LayoutContainer>
   );
 
   if (typeof window !== "undefined") {

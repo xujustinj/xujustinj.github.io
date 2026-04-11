@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Embed } from "../../components/Embed";
 import { Section } from "../../components/Section";
 import { adapt } from "../../styles/Adaptive";
+import { bgLight } from "../../styles/Colours";
 
 export const metadata: Metadata = {
   title: "Hexagonal 2048",
@@ -35,7 +36,7 @@ const Game = styled(Embed)`
 export default function Hexagonal2048Page() {
   return (
     <>
-      <Section $foreground="black" $background="white" id="intro">
+      <Section $foreground="black" $background={bgLight} id="intro">
         <GameInfo>
           Just like{" "}
           <a href="https://play2048.co/" target={"_blank"} rel="noreferrer">

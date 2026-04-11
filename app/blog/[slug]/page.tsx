@@ -31,9 +31,7 @@ import {
   POST_ARTICLE_SHELL_MAX_SIDENOTES_NO_TOC,
   POST_LAYOUT_GAP,
 } from "../../../styles/blogLayout";
-import { Colour } from "../../../styles/Colours";
-
-const LightBG = Colour({ h: "blue", s: "faded", v: "offwhite" });
+import { bgLight } from "../../../styles/Colours";
 
 const PostArticleShell = styled.div<{ $hasToc: boolean }>`
   ${adapt({
@@ -283,7 +281,7 @@ export default async function BlogPostPage({ params }: Props) {
   const hasRepost = Boolean(fm.repostDate);
 
   return (
-    <Section $foreground="black" $background={LightBG} id="post">
+    <Section $foreground="black" $background={bgLight} id="post">
       <PostArticleShell $hasToc={showToc}>
         {showToc ? <TableOfContents items={toc} /> : null}
         <PostProse>
