@@ -44,6 +44,30 @@ export const Prose = styled.div`
     & > p:last-child {
       margin-bottom: 0;
     }
+
+    figure {
+      margin: 0 0 1em 0;
+      text-align: center;
+    }
+
+    figure img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      margin-top: 0.5em;
+      ${adapt({
+        mobile: `font-size: 10.5pt;`,
+        desktop: `font-size: 11pt;`,
+      })}
+      line-height: 1.45;
+      color: ${Colour({ v: "medium" })};
+      text-align: center;
+    }
   }
 
   h2,

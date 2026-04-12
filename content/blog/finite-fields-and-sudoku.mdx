@@ -1,0 +1,112 @@
+---
+title: "Finite Fields and Sudoku"
+excerpt: "A raw proof that there is only one field on four elements."
+authors:
+  - name: "Justin Xu"
+    url: "/blog"
+date: "2024-11-21"
+original-date: "2024-11-21"
+original-publication: "Medium"
+original-url: "https://medium.com/@xujustinj/finite-fields-and-sudoku-d7c663543250"
+repost-date: "2026-04-11"
+---
+
+Recently, my brother asked me for help proving some properties that are supposedly true for any field containing exactly $4$ elements.
+If he had looked online, he would've quickly found a bunch of general proofs implying that there is exactly one finite field of order $4$ up to isomorphism, and that their elements are the roots of some quartic binomial, and that this isn't a special property of the number $4$.
+But he asked me, and I don't know anything other than the field axioms.
+
+> $4$ is a pretty small number, surely there's only a couple of fields like that.
+> Let's just figure them out and check each one!
+
+So we rawdogged it.
+
+A field is defined by its composition tables, which define how addition and multiplication behave on the elements of the field.
+Thus, the search space is the set of all ways to fill two $4 \times 4$ grids.
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/1*tRYKFJE48AV4Uz6853Y_Lg.png"
+    alt="partially-filled composition tables for a 4-element field, with superscripts indicating possible values for the remaining cells"
+  />
+  <figcaption>
+    partially-filled composition tables, with superscripts indicating possible values for the remaining cells
+  </figcaption>
+</figure>
+
+The grids come partially pre-filled thanks to the additive and multiplicative identities.
+(The proof that $0$ times anything equals $0$ is trivial.)
+They're also symmetric about the main diagonal because addition and multiplication are commutative. So there really isn't that much left to fill in!
+Next, we derive two properties from the field axioms:
+
+$$
+\begin{aligned}
+    y \neq z &\implies x + y \neq x + z \\
+    x \neq 0 \land y \neq z &\implies xy \neq xz
+\end{aligned}
+$$
+
+**In English**: every row and column (except the $0$ row/column in the multiplication table) must contain distinct values.
+The addition table becomes a $4 \times 4$ Sudoku puzzle, and the multiplication table becomes a $3 \times 3$ Sudoku puzzle, with no sub-grids.
+
+> *Erm, actually, since there are no sub-grids, these are actually just called Latin squares.*
+> But that's not as fun!
+
+Before we can even start, the multiplication table fills itself:
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/1*1zMWCG7JBror6TEntoLiZQ.png"
+    alt="The same composition tables for a 4-element field, but with the multiplication table now fully filled in."
+  />
+  <figcaption>
+    inside your algebraic structures problem there are two Sudoku puzzles
+  </figcaption>
+</figure>
+
+Meanwhile, the addition puzzle still has multiple solutions, even after considering the diagonal symmetry of the grid.
+However, there is one field axiom we have yet to apply.
+The axiom of distributivity connects the two grids, and it has something interesting to say:
+
+$$
+\begin{aligned}
+    a + a &= a (1 + 1) \\
+    b + b &= b (1 + 1) \\
+\end{aligned}
+$$
+
+By consequence, **if any of these sums ($1+1$, $a+a$, or $b+b$) is equal to zero, then all of them must equal zero**.
+By Sudoku rules we know there are 3 zeros left to put in this grid.
+They either all go on the diagonal, or none of them go on the diagonal.
+But 3 is an odd number!
+You cannot place an odd number of things off of the diagonal, without breaking the diagonal symmetry.
+
+So we must place the zeros along the main diagonal, and then the rest of the values instantly fall into place:
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/1*C10rmoYyFE0tAMUJnSbs5g.png"
+    alt="The completed composition tables for a 4-element field."
+  />
+  <figcaption>
+    the Sudoku is solved by considering an additional constraint
+  </figcaption>
+</figure>
+
+Since we found only one solution, there can be at most one possible field of order $4$.
+(You still have to verify that the operations fully satisfy the field axioms.)
+If you have a field on $4$ elements, then each of those elements corresponds to one of $\set{0,1,a,b}$ in the above tables.
+
+> *Why use big theorem when simple logic do trick?*
+
+Of course, this approach doesn't scale -- which is exactly why we use big theorems.
+But it is a pretty fun exercise for small finite fields... like $9$ perhaps?
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/resize:fit:800/1*kUVGZ_fbz-3aV5a8TQZFkg.png"
+    alt="Empty composition tables for a 9-element field."
+  />
+  <figcaption>
+    exercise left for the reader
+  </figcaption>
+</figure>
