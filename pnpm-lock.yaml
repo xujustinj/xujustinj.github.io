@@ -63,6 +63,9 @@ importers:
       remark-smartypants:
         specifier: ^3.0.2
         version: 3.0.2
+      sharp:
+        specifier: 0.33.2
+        version: 0.33.2
       styled-components:
         specifier: ^6.1.8
         version: 6.3.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -97,9 +100,6 @@ importers:
       eslint-config-next:
         specifier: 16.2.2
         version: 16.2.2(@typescript-eslint/parser@6.21.0(eslint@9.39.4)(typescript@5.3.3))(eslint@9.39.4)(typescript@5.3.3)
-      sharp:
-        specifier: 0.33.2
-        version: 0.33.2
       typescript:
         specifier: 5.3.3
         version: 5.3.3
