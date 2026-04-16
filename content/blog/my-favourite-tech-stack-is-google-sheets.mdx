@@ -1,0 +1,151 @@
+---
+title: "My Favourite Tech Stack is Google Sheets"
+excerpt: "5 reasons I'm a spreadsheet hacker"
+authors:
+  - name: "Justin Xu"
+    url: "/blog"
+date: "2021-12-07"
+original-date: "2021-12-06"
+original-publication: "Medium"
+original-url: "https://medium.com/@xujustinj/my-favourite-tech-stack-is-google-sheets-79a797887b80"
+repost-date: "2026-04-11"
+---
+
+About once a year, I'm called upon to build an app for "internal" use:
+
+- a personal calendar system for myself
+- a notetaking app for daily scrum
+- a gaming statistics dashboard for my friends
+- [a tournament bracket for a table tennis club](https://docs.google.com/spreadsheets/d/1JsttjsZt6USt7h1Z66PhwibUmafxuH1Mwkzk2tNlDag/edit?usp=sharing)
+- a tool to investigate data inconsistencies at work
+
+To the surprise of others, I whip it up in Google Sheets using a combination of formulas, macros, and fancy formatting.
+The result looks surprisingly complete -- not enough to be a public web app, but enough to satisfy the original need: an *internal* tool.
+
+Broadly, I create two kinds of tools in Google Sheets, which I think of as
+
+- **repositories**, which contain shared data as part of the app itself.
+  The statistics dashboard is an example of a repository.
+- **templates**, which are meant to be copied and filled with data by the user.
+  The tournament bracket is an example of a template.
+  Many repositories eventually become templates after you factor out the reusable parts of their functionality.
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/1*M1lm-Og5jrYTGNiTJsPlzg.png"
+    alt="A screenshot of the main menu of the tournament planner."
+  />
+  <figcaption>
+    Main menu of the tournament planner -- the coloured cells are buttons!
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/1*drC_zY84hstwBnlKUJ5WZA.png"
+    alt="A screenshot of the tournament bracket."
+  />
+  <figcaption>
+    Part of the tournament bracket -- players advance as scores are entered.
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src="https://cdn-images-1.medium.com/v2/1*DV7MLV-pQ0NyOdojvnLlKw.png"
+    alt="A screenshot of the main dashboard in the gaming statistics spreadsheet."
+  />
+  <figcaption>
+    Part of the main dashboard in the gaming statistics spreadsheet.
+  </figcaption>
+</figure>
+
+How I do all of this is worth its own entire unwritten series of posts -- or you can visit [Ben Collins' site](https://www.benlcollins.com/), where he offers excellent tutorials.
+But why Google Sheets in the first place?
+
+## Reason 1: it really is a tech stack
+
+Google Sheets provides everything you need to implement whole applications.
+
+- **data**: It is a misconception that spreadsheets are only suited for flatfile databases.
+  You can achieve a simple relational database in a spreadsheet by storing each table as its own sheet, and dereferencing foreign keys with `VLOOKUP`.
+  My applications usually treat data as read-only.
+  If you must, macros can perform `INSERT`/`UPDATE`/`DELETE` operations, or a Google Form can be linked to accept external user input.
+- **backend**: Optional, but I find it useful to perform complex data transformations (particularly aggregation, filtering, sorting) in hidden sheets.
+  You can use built-in formulas, or write your own with Google Apps Script.
+- **frontend**: For the most part, simple cell formatting goes a long way to making a spreadsheet look exciting.
+  Add formulas, charts, conditional formatting, and sparklines to make things visual and dynamic.
+  Add checkboxes, dropdowns, buttons, and filters to make things interactive.
+
+It also comes with
+
+- **access control**: permissions, protected sheets/ranges
+- **version control**: edit history
+- **infrastructure / hosting**: automatically handled by Google
+- **forking**: making a copy
+
+## Reason 2: move fast and build things
+
+I find developing in Google Sheets to be extremely quick.
+Part of it comes with practice, but it's also due to the WYSIWYG nature of the tool -- no jumping back and forth between code.
+You can test a formula in the same cell you're writing it in.
+Filling a formula down (or using `ARRAYFORMULA`) instantly applies it to all of the data.
+Changing colours or size is just that -- you can do it without even taking your eye off the cells.
+
+While it might not beat any bespoke script, the user-sheet system as a whole is still highly performant thanks to memoization.
+Formulas don't recompute unless their dependencies change, so anyone can revisit the results almost instantly, over and over again.
+If you're looking to explore your data, and don't yet know exactly what you're looking for (such as when you're designing and building your tool), this will save you a lot of time.
+
+Don't know what formula to use?
+Google has [excellent documentation](https://support.google.com/docs/table/25273).
+To anyone looking to get better at building spreadsheets, I highly recommend reading the full list of formulas to get a sense of what is possible.
+Tutorials abound, of varying quality.
+If you're truly stuck, also remember that Stack Overflow isn't just for writing conventional code.
+
+## Reason 3: for the people
+
+If you're building a tool, half the battle is putting it in the hands of the people who will benefit from it.
+Sharing makes that as easy as sending an invitation or a link.
+With just a modern browser, anyone (authorized) can open it, anywhere.
+If you're desperate, you can even access the tool from your smartphone, though the experience will surely suffer.
+
+This doesn't just apply to your tool!
+When users copy a template to fill it with their own data, they don't just end up with a local copy.
+The resulting instance is equally shareable as the original.
+
+Being in Google Sheets also means that you can take advantage of all sorts of Google integrations.
+Want a Slack notification every time someone comments on your sheet?
+[There's an app for that.](https://slack.com/marketplace/A0F7YS32P-google-drive)
+
+## Reason 4: by the people
+
+Personally, I love it when someone iterates on something I've built.
+It makes me proud that others see enough value in it to take the time to explore its potential.
+Google Sheets makes that easier than any platform I know.
+By default, every part of the tool can be edited (even the backend, by unhiding things).
+If there are parts that you don't want others to tinker with, you can use protected sheets and ranges.
+
+Among the people I've met, spreadsheet literacy is more common than code literacy because the latter usually grants the former.
+As the users of an internal tool, my team wants to be able to explore data and add features themselves.
+Thus, putting the tool in a Google Sheet makes it customizable to a larger part of the team.
+If they're not versed in spreadsheets, comments still allow your users to give direct feedback on a specific part of the tool.
+
+## Reason 5: feel like a hacker
+
+As much as I praise the flexibility of Google Sheets, it also has obvious limitations.
+Not everything is possible or practical, so it's important to learn what you have at your disposal and decide whether a spreadsheet is actually appropriate.
+I'm pretty good (and lucky) at making that assessment, so I have yet to run into a situation where I discover that the thing I want to do is impossible.
+In fact, my usual discovery is that more is possible than I originally thought.
+
+Building things in Google Sheets is thrilling.
+Compared to conventional coding, spreadsheet development is a unique problem-solving experience because of the distinct interface and its set of limitations.
+For once, you're not using a framework designed for the job.
+Building tools in Google Sheets feels like a naughty appropriaton of the software's power-user features to do something outside its regular use case.
+
+I love the reaction I get when others realize I've built what they want in a spreadsheet, because it challenges their conventional view of what a spreadsheet is for.
+As you work with Google Sheets, that feeling dissipates for yourself, and is replaced with confidence.
+You're a spreadsheet hacker -- challenge accepted.
+
+---
+
+> Disclaimer: Google isn't paying me to write this, I'm just a fan :)
