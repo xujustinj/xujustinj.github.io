@@ -8,11 +8,13 @@ import { adapt } from "../../styles/Adaptive";
 import { BLOG_RAIL_WIDTH } from "../../styles/blogLayout";
 import { primary } from "../../styles/Colours";
 
+export type TocLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 export type TocItem = {
   id: string;
   /** Rendered inline markdown (built on the server). */
   label: ReactNode;
-  level: 1 | 2 | 3;
+  level: TocLevel;
 };
 
 const TocContainer = styled.nav`
@@ -45,7 +47,7 @@ const TocList = styled.ul`
 `;
 
 /** H1: 12px, H2: 24px, H3: 36px */
-const TocRow = styled.li<{ $active: boolean; $level: 1 | 2 | 3 }>`
+const TocRow = styled.li<{ $active: boolean; $level: TocLevel }>`
   margin: 0;
   padding: 6px 0;
   padding-left: ${(p) => `${p.$level * 12}px`};
@@ -54,7 +56,7 @@ const TocRow = styled.li<{ $active: boolean; $level: 1 | 2 | 3 }>`
     ${(p) => (p.$active ? primary : "transparent")};
 `;
 
-const TocLink = styled(Link)<{ $active: boolean; $level: 1 | 2 | 3 }>`
+const TocLink = styled(Link)<{ $active: boolean; $level: TocLevel }>`
   display: inline-block;
   color: ${(p) => (p.$active ? primary : "inherit")};
   text-decoration: none;

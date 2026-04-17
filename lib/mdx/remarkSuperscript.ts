@@ -1,30 +1,34 @@
-import type { Root } from "mdast";
-import type { Transformer } from "unified";
+import type { Literal, Node, Parent } from "unist";
 import { visit } from "unist-util-visit";
 
 /**
  * Pandoc-style superscript: `20^th^` → `<sup>th</sup>`.
  * Runs after {@link remark-math} so `^` inside `$…$` stays in math nodes.
  */
-export function remarkSuperscript(): Transformer<Root, Root> {
-  return (tree) => {
-    visit(tree, "text", (node, index, parent) => {
+export function remarkSuperscript() {
+  return (tree: Parent) => {
+    visit(tree, (node, index, parent) => {
       if (!parent || typeof index !== "number" || node.type !== "text") {
         return;
       }
 
-      const values = node.value.split("^");
+      const raw = (node as Literal).value;
+      if (typeof raw !== "string") {
+        return;
+      }
+
+      const values = raw.split("^");
       if (values.length === 1 || values.length % 2 === 0) {
         return;
       }
 
-      const children = values.map((str, i) =>
+      const children: Node[] = values.map((str, i) =>
         i % 2 === 0
-          ? { type: "text" as const, value: str }
+          ? { type: "text", value: str }
           : {
-              type: "superscript" as const,
-              data: { hName: "sup" as const },
-              children: [{ type: "text" as const, value: str }],
+              type: "superscript",
+              data: { hName: "sup" },
+              children: [{ type: "text", value: str }],
             },
       );
 
