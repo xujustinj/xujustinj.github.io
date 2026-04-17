@@ -1,1 +1,10 @@
-export { blogPostMdxCompileOptions } from "./blogPostCompileOptions";
+export {
+  documentMdxCompileOptions,
+  inlineMdxCompileOptions,
+} from "./mdxCompileOptions";
+export { compileMdx } from "./compileMdx";
+export {
+  type Heading,
+  extractHeadings,
+  makeHeadingId,
+} from "./markdownHeadings";

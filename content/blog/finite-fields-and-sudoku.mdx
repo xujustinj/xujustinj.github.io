@@ -23,15 +23,11 @@ So we rawdogged it.
 A field is defined by its composition tables, which define how addition and multiplication behave on the elements of the field.
 Thus, the search space is the set of all ways to fill two $4 \times 4$ grids.
 
-<figure>
-  <img
-    src="https://cdn-images-1.medium.com/v2/1*tRYKFJE48AV4Uz6853Y_Lg.png"
-    alt="partially-filled composition tables for a 4-element field, with superscripts indicating possible values for the remaining cells"
-  />
-  <figcaption>
-    partially-filled composition tables, with superscripts indicating possible values for the remaining cells
-  </figcaption>
-</figure>
+<CaptionedImage
+  src="https://cdn-images-1.medium.com/v2/1*tRYKFJE48AV4Uz6853Y_Lg.png"
+  alt="partially-filled composition tables for a 4-element field, with superscripts indicating possible values for the remaining cells"
+  caption="partially-filled composition tables, with superscripts indicating possible values for the remaining cells"
+/>
 
 The grids come partially pre-filled thanks to the additive and multiplicative identities.
 (The proof that $0$ times anything equals $0$ is trivial.)
@@ -53,15 +49,11 @@ The addition table becomes a $4 \times 4$ Sudoku puzzle, and the multiplication 
 
 Before we can even start, the multiplication table fills itself:
 
-<figure>
-  <img
-    src="https://cdn-images-1.medium.com/v2/1*1zMWCG7JBror6TEntoLiZQ.png"
-    alt="The same composition tables for a 4-element field, but with the multiplication table now fully filled in."
-  />
-  <figcaption>
-    inside your algebraic structures problem there are two Sudoku puzzles
-  </figcaption>
-</figure>
+<CaptionedImage
+  src="https://cdn-images-1.medium.com/v2/1*1zMWCG7JBror6TEntoLiZQ.png"
+  alt="The same composition tables for a 4-element field, but with the multiplication table now fully filled in."
+  caption="inside your algebraic structures problem there are two Sudoku puzzles"
+/>
 
 Meanwhile, the addition puzzle still has multiple solutions, even after considering the diagonal symmetry of the grid.
 However, there is one field axiom we have yet to apply.
@@ -82,15 +74,11 @@ You cannot place an odd number of things off of the diagonal, without breaking t
 
 So we must place the zeros along the main diagonal, and then the rest of the values instantly fall into place:
 
-<figure>
-  <img
-    src="https://cdn-images-1.medium.com/v2/1*C10rmoYyFE0tAMUJnSbs5g.png"
-    alt="The completed composition tables for a 4-element field."
-  />
-  <figcaption>
-    the Sudoku is solved by considering an additional constraint
-  </figcaption>
-</figure>
+<CaptionedImage
+  src="https://cdn-images-1.medium.com/v2/1*C10rmoYyFE0tAMUJnSbs5g.png"
+  alt="The completed composition tables for a 4-element field."
+  caption="the Sudoku is solved by considering an additional constraint"
+/>
 
 Since we found only one solution, there can be at most one possible field of order $4$.
 (You still have to verify that the operations fully satisfy the field axioms.)
@@ -101,12 +89,8 @@ If you have a field on $4$ elements, then each of those elements corresponds to 
 Of course, this approach doesn't scale -- which is exactly why we use big theorems.
 But it is a pretty fun exercise for small finite fields... like $9$ perhaps?
 
-<figure>
-  <img
-    src="https://cdn-images-1.medium.com/v2/resize:fit:800/1*kUVGZ_fbz-3aV5a8TQZFkg.png"
-    alt="Empty composition tables for a 9-element field."
-  />
-  <figcaption>
-    exercise left for the reader
-  </figcaption>
-</figure>
+<CaptionedImage
+  src="https://cdn-images-1.medium.com/v2/resize:fit:800/1*kUVGZ_fbz-3aV5a8TQZFkg.png"
+  alt="Empty composition tables for a 9-element field."
+  caption="exercise left for the reader"
+/>

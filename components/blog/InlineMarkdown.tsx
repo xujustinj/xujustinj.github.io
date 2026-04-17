@@ -1,7 +1,5 @@
 import { compileMDX } from "next-mdx-remote/rsc";
-import rehypeKatex from "rehype-katex";
-import remarkMath from "remark-math";
-import remarkSmartypants from "remark-smartypants";
+import { inlineMdxCompileOptions } from "../../lib/mdx/mdxCompileOptions";
 
 type Props = {
   /** Inline markdown (e.g. *italic*, **bold**). */
@@ -10,6 +8,7 @@ type Props = {
 
 /**
  * Renders a short inline markdown string (no block elements) for titles and TOC.
+ * Uses the same remark/KaTeX pipeline as full MDX ({@link inlineMdxCompileOptions}).
  */
 export async function InlineMarkdown({ source }: Props) {
   const trimmed = source.trim();
@@ -19,13 +18,7 @@ export async function InlineMarkdown({ source }: Props) {
 
   const { content } = await compileMDX({
     source: trimmed,
-    options: {
-      parseFrontmatter: false,
-      mdxOptions: {
-        remarkPlugins: [remarkMath, remarkSmartypants],
-        rehypePlugins: [rehypeKatex],
-      },
-    },
+    options: inlineMdxCompileOptions,
     components: {
       p: ({ children }) => <span>{children}</span>,
     },

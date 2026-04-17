@@ -17,10 +17,9 @@ import {
   TableOfContents,
 } from "../../../components/blog/TableOfContents";
 import { Section } from "../../../components/Section";
-import { compileMDX } from "next-mdx-remote/rsc";
 import { InlineMarkdown } from "../../../components/blog/InlineMarkdown";
 import { getAllBlogSlugs, getBlogSourceBySlug } from "../../../lib/blog";
-import { blogPostMdxCompileOptions } from "../../../lib/mdx";
+import { compileMdx, extractHeadings, makeHeadingId } from "../../../lib/mdx";
 import { stripInlineMarkdown } from "../../../lib/markdownPlain";
 import { adapt, MOBILE_BREAKPOINT } from "../../../styles/Adaptive";
 import {
@@ -119,61 +118,6 @@ const BackLabel = styled.span`
   })}
 `;
 
-type Heading = { id: string; text: string; level: 2 | 3 };
-
-function slugifyHeading(text: string): string {
-  return stripInlineMarkdown(text)
-    .trim()
-    .toLowerCase()
-    .replace(/[’']/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function extractHeadings(
-  source: string,
-  seen: Map<string, number>,
-): Heading[] {
-  const headings: Heading[] = [];
-
-  const lines = source.split(/\r?\n/);
-  let inFence = false;
-
-  for (const line of lines) {
-    const fence = line.match(/^\s*```/);
-    if (fence) {
-      inFence = !inFence;
-      continue;
-    }
-    if (inFence) continue;
-
-    const m = line.match(/^(#{2,3})\s+(.+?)\s*$/);
-    if (!m) continue;
-    const level = m[1].length as 2 | 3;
-    const text = m[2].replace(/\s+#*\s*$/, "").trim();
-    if (text.length === 0) continue;
-
-    const base = slugifyHeading(text);
-    const count = (seen.get(base) ?? 0) + 1;
-    seen.set(base, count);
-    const id = count === 1 ? base : `${base}-${count}`;
-
-    headings.push({ id, text, level });
-  }
-
-  return headings;
-}
-
-function makeHeadingId(
-  text: string,
-  seen: Map<string, number>,
-): string {
-  const base = slugifyHeading(text);
-  const count = (seen.get(base) ?? 0) + 1;
-  seen.set(base, count);
-  return count === 1 ? base : `${base}-${count}`;
-}
-
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -240,41 +184,7 @@ export default async function BlogPostPage({ params }: Props) {
       ]
     : [];
 
-  // IDs must come only from `extractHeadings` + title above. Calling
-  // `makeHeadingId` again during MDX render would re-increment the slug map
-  // and produce different ids than the TOC (e.g. `foo` vs `foo-2`).
-  let bodyHeadingIndex = 0;
-
-  const { content } = await compileMDX({
-    source: post.content,
-    options: blogPostMdxCompileOptions,
-    components: {
-      h2: ({ children, ...rest }) => {
-        const h = bodyHeadings[bodyHeadingIndex];
-        if (h?.level === 2) {
-          bodyHeadingIndex++;
-          return (
-            <h2 {...rest} id={h.id}>
-              {children}
-            </h2>
-          );
-        }
-        return <h2 {...rest}>{children}</h2>;
-      },
-      h3: ({ children, ...rest }) => {
-        const h = bodyHeadings[bodyHeadingIndex];
-        if (h?.level === 3) {
-          bodyHeadingIndex++;
-          return (
-            <h3 {...rest} id={h.id}>
-              {children}
-            </h3>
-          );
-        }
-        return <h3 {...rest}>{children}</h3>;
-      },
-    },
-  });
+  const { content } = await compileMdx(post.content, bodyHeadings);
 
   const fm = post.frontmatter;
   const hasSyndication = Boolean(fm.originalDate && fm.originalPublication);

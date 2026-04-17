@@ -18,6 +18,12 @@ export const Prose = styled.div`
     margin: 0 0 1em 0;
   }
 
+  hr {
+    margin: 1.75em 0;
+    border: 0;
+    border-top: 1px solid ${Colour({ v: "lighter" })};
+  }
+
   /* GFM blockquotes: inset + left rule; nesting stacks another vertical bar. */
   blockquote {
     margin: 0 0 1em 0;
@@ -41,13 +47,28 @@ export const Prose = styled.div`
 
   /* Only the last top-level paragraph in the MDX body, not paragraphs inside sidenote rows. */
   .post-body {
-    & > p:last-child {
+    & > p:last-child,
+    & > hr:last-child {
       margin-bottom: 0;
     }
 
     figure {
       margin: 0 0 1em 0;
       text-align: center;
+    }
+
+    /* Order-independent spacing: caption above or below via flex gap (not margin-top on figcaption). */
+    figure:has(figcaption) {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25em;
+    }
+
+    /* Non-caption blocks often carry prose margins; gap handles spacing inside the figure. */
+    figure:has(figcaption) > :not(figcaption) {
+      margin: 0;
+      min-width: 0;
     }
 
     figure img {
@@ -58,8 +79,13 @@ export const Prose = styled.div`
       height: auto;
     }
 
+    /* Intrinsic-width media: stay centered; wrappers for embeds stay full-width (stretch). */
+    figure:has(figcaption) > img {
+      align-self: center;
+    }
+
     figcaption {
-      margin-top: 0.5em;
+      margin: 0;
       ${adapt({
         mobile: `font-size: 10.5pt;`,
         desktop: `font-size: 11pt;`,
@@ -67,6 +93,15 @@ export const Prose = styled.div`
       line-height: 1.45;
       color: ${Colour({ v: "medium" })};
       text-align: center;
+
+      /* MDX often wraps caption text in a paragraph; global prose p margins would sit under the caption and read as a huge gap before the media when the caption is first. */
+      p {
+        margin: 0;
+      }
+
+      p + p {
+        margin-top: 0.35em;
+      }
     }
   }
 
