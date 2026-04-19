@@ -1,4 +1,4 @@
-import type { BlogFrontmatter } from "../../lib/blog";
+import type { BlogFrontmatter } from "@lib/blog";
 import { FormattedPostDate } from "./FormattedPostDate";
 
 /** Shared copy for syndication + repost (post page and /blog index). */

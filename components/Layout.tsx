@@ -9,7 +9,7 @@ import styled, {
   StyleSheetManager,
   createGlobalStyle,
 } from "styled-components";
-import { Colour, bgLight } from "../styles/Colours";
+import { Colour, bgLight } from "@styles/Colours";
 import { Footer } from "./Footer";
 import NavBar from "./NavBar";
 

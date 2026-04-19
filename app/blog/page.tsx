@@ -5,16 +5,16 @@ import {
   PostList,
   PostListItem,
   PostMetaLine,
-} from "../../components/blog/BlogProse";
-import { Section } from "../../components/Section";
-import { AuthorsLine } from "../../components/blog/AuthorsLine";
+} from "@components/blog/BlogProse";
+import { Section } from "@components/Section";
+import { AuthorsLine } from "@components/blog/AuthorsLine";
 import {
   PublicationMetaInline,
   publicationMetaVisible,
-} from "../../components/blog/PublicationMeta";
-import { InlineMarkdown } from "../../components/blog/InlineMarkdown";
-import { getBlogIndex } from "../../lib/blog";
-import { bgLight } from "../../styles/Colours";
+} from "@components/blog/PublicationMeta";
+import { InlineMarkdown } from "@components/blog/InlineMarkdown";
+import { getBlogIndex } from "@lib/blog";
+import { bgLight } from "@styles/Colours";
 
 export const metadata: Metadata = {
   title: "Blog",

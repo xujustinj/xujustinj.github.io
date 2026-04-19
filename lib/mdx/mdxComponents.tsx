@@ -1,8 +1,8 @@
-import { CaptionedImage } from "../../components/blog/Captioned";
+import { CaptionedImage } from "@components/blog/Captioned";
 import {
   SpotifyPlaylistEmbed,
   SpotifyTrackEmbed,
-} from "../../components/blog/SpotifyEmbed";
+} from "@components/blog/SpotifyEmbed";
 
 /**
  * Default MDX components for site content (`compileMdx`). Heading overrides are

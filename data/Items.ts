@@ -1,4 +1,4 @@
-import { Item } from "../model/Item";
+import { Item } from "@models/Item";
 import { Tags } from "./Tags";
 import { FontAwesome } from "./FontAwesome";
 import { Icons } from "./Icons";

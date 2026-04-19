@@ -2,9 +2,9 @@ import { css } from "styled-components";
 import {
   BLOG_RAIL_WIDTH,
   POST_LAYOUT_GAP,
-} from "../../styles/blogLayout";
-import { MOBILE_MAX_WIDTH_PX } from "../../styles/Adaptive";
-import { Colour } from "../../styles/Colours";
+} from "@styles/blogLayout";
+import { MOBILE_MAX_WIDTH_PX } from "@styles/Adaptive";
+import { Colour } from "@styles/Colours";
 
 /** Margin sidenotes for viewports wider than mobile (same threshold as `adapt`). */
 const SIDENOTE_DESKTOP_MIN_PX = MOBILE_MAX_WIDTH_PX + 1;

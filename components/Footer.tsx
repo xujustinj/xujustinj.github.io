@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { FontAwesome } from "../data/FontAwesome";
-import { adapt } from "../styles/Adaptive";
+import { FontAwesome } from "@data/FontAwesome";
+import { adapt } from "@styles/Adaptive";
 import { Section, SectionProps } from "./Section";
 
 const IconTextLink = styled(Link)`

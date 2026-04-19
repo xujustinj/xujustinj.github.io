@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { Colour } from "../styles/Colours";
+import { Colour } from "@styles/Colours";
 
 // The NavBar is split into three segments: left, centre, and right.
 const NavBarContainer = styled.div`

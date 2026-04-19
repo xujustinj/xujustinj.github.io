@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import { CardGrid } from "../components/CardGrid";
-import { EmojiBulletItem } from "../components/EmojiBullet";
-import { Section, SectionHeading } from "../components/Section";
-import { Items } from "../data/Items";
+import { CardGrid } from "@components/CardGrid";
+import { EmojiBulletItem } from "@components/EmojiBullet";
+import { Section, SectionHeading } from "@components/Section";
+import { Items } from "@data/Items";
 import ProfileKyoto from "../public/assets/profile-kyoto.jpg";
-import { adapt } from "../styles/Adaptive";
-import { bgLight, bgDark } from "../styles/Colours";
+import { adapt } from "@styles/Adaptive";
+import { bgLight, bgDark } from "@styles/Colours";
 
 const IntroContainer = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import styled, { css } from "styled-components";
-import { AuthorsLine } from "../../../components/blog/AuthorsLine";
-import { PublicationMetaInline } from "../../../components/blog/PublicationMeta";
+import { AuthorsLine } from "@components/blog/AuthorsLine";
+import { PublicationMetaInline } from "@components/blog/PublicationMeta";
 import {
   PostAuthors,
   PostDate,
@@ -10,22 +10,22 @@ import {
   PostSyndication,
   PostTitle,
   Prose,
-} from "../../../components/blog/BlogProse";
-import { PostSeriesNavBar } from "../../../components/blog/PostSeriesNavBar";
+} from "@components/blog/BlogProse";
+import { PostSeriesNavBar } from "@components/blog/PostSeriesNavBar";
 import {
   type TocItem,
   TableOfContents,
-} from "../../../components/blog/TableOfContents";
-import { Section } from "../../../components/Section";
-import { InlineMarkdown } from "../../../components/blog/InlineMarkdown";
+} from "@components/blog/TableOfContents";
+import { Section } from "@components/Section";
+import { InlineMarkdown } from "@components/blog/InlineMarkdown";
 import {
   getAllBlogSlugs,
   getBlogSourceBySlug,
   resolveBlogNeighbor,
-} from "../../../lib/blog";
-import { compileMdx, extractHeadings, makeHeadingId } from "../../../lib/mdx";
-import { stripInlineMarkdown } from "../../../lib/markdownPlain";
-import { adapt, MOBILE_BREAKPOINT } from "../../../styles/Adaptive";
+} from "@lib/blog";
+import { compileMdx, extractHeadings, makeHeadingId } from "@lib/mdx";
+import { stripInlineMarkdown } from "@lib/markdownPlain";
+import { adapt, MOBILE_BREAKPOINT } from "@styles/Adaptive";
 import {
   BLOG_RAIL_WIDTH,
   POST_ARTICLE_SHELL_MAX_ARTICLE_ONLY,
@@ -33,8 +33,8 @@ import {
   POST_ARTICLE_SHELL_MAX_SIDENOTES,
   POST_ARTICLE_SHELL_MAX_SIDENOTES_NO_TOC,
   POST_LAYOUT_GAP,
-} from "../../../styles/blogLayout";
-import { bgLight } from "../../../styles/Colours";
+} from "@styles/blogLayout";
+import { bgLight } from "@styles/Colours";
 
 const PostSidenoteGutter = styled.div.attrs({
   "aria-hidden": true,

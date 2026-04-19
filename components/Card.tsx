@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import { Item } from "../model/Item";
-import { adapt } from "../styles/Adaptive";
-import { Colour, primary } from "../styles/Colours";
+import { Item } from "@models/Item";
+import { adapt } from "@styles/Adaptive";
+import { Colour, primary } from "@styles/Colours";
 import { TagBubble } from "./TagBubble";
 
 interface CardContainerProps {

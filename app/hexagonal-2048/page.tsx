@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import styled from "styled-components";
-import { Embed } from "../../components/Embed";
-import { Section } from "../../components/Section";
-import { adapt } from "../../styles/Adaptive";
-import { bgLight } from "../../styles/Colours";
+import { Embed } from "@components/Embed";
+import { Section } from "@components/Section";
+import { adapt } from "@styles/Adaptive";
+import { bgLight } from "@styles/Colours";
 
 export const metadata: Metadata = {
   title: "Hexagonal 2048",

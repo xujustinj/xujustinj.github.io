@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Item } from "../model/Item";
+import { Item } from "@models/Item";
 import { Card } from "./Card";
 
 const Grid = styled.div`

@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@data/*": ["./data/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@lib/*": ["./lib/*"],
+      "@models/*": ["./models/*"],
+      "@styles/*": ["./styles/*"]
+    },
     "target": "esnext",
     "module": "esnext",
     "jsx": "react-jsx",

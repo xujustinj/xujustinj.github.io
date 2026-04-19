@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Tag } from "../model/Tag";
+import { Tag } from "@models/Tag";
 
 const Bubble = styled.span<{
   $backgroundColour?: string;

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { sidenoteProseStyles } from "./sidenoteProseStyles";
-import { adapt } from "../../styles/Adaptive";
-import { Colour, primary } from "../../styles/Colours";
+import { adapt } from "@styles/Adaptive";
+import { Colour, primary } from "@styles/Colours";
 
 export const Prose = styled.div`
   max-width: min(42rem, 100%);

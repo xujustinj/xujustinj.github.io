@@ -2,10 +2,10 @@ import Link from "next/link";
 import styled, { css } from "styled-components";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import type { BlogNeighborNav } from "../../lib/blog";
-import { stripInlineMarkdown } from "../../lib/markdownPlain";
-import { adapt } from "../../styles/Adaptive";
-import { Colour } from "../../styles/Colours";
+import type { BlogNeighborNav } from "@lib/blog";
+import { stripInlineMarkdown } from "@lib/markdownPlain";
+import { adapt } from "@styles/Adaptive";
+import { Colour } from "@styles/Colours";
 import { InlineMarkdown } from "./InlineMarkdown";
 
 /* ——— series neighbor links (prev / next) ——— */

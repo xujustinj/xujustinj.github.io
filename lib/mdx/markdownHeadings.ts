@@ -1,4 +1,4 @@
-import { stripInlineMarkdown } from "../markdownPlain";
+import { stripInlineMarkdown } from "@lib/markdownPlain";
 
 /** Document-order heading from markdown `#` … `######` lines. */
 export type Heading = { id: string; text: string; level: 1 | 2 | 3 | 4 | 5 | 6 };

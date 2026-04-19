@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { adapt } from "../styles/Adaptive";
-import { SECTION_CONTENT_MAX_WIDTH } from "../styles/layout";
+import { adapt } from "@styles/Adaptive";
+import { SECTION_CONTENT_MAX_WIDTH } from "@styles/layout";
 
 export interface SectionProps {
   $foreground: string;

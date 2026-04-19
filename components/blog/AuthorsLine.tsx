@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import type { BlogAuthor } from "../../lib/blog";
+import type { BlogAuthor } from "@lib/blog";
 
 /** Renders author names with optional links; comma-separated with “and” before the last. */
 export function AuthorsLine({ authors }: { authors: BlogAuthor[] }) {

@@ -1,5 +1,5 @@
-import { Tag } from "../model/Tag";
-import { Colour, Hue } from "../styles/Colours";
+import { Tag } from "@models/Tag";
+import { Colour, Hue } from "@styles/Colours";
 
 const TagCategory = (
   names: Record<string, string>,

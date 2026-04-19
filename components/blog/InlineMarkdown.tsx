@@ -1,6 +1,6 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import styled from "styled-components";
-import { inlineMdxCompileOptions } from "../../lib/mdx/mdxCompileOptions";
+import { inlineMdxCompileOptions } from "@lib/mdx/mdxCompileOptions";
 
 type Props = {
   /** Inline markdown (e.g. *italic*, **bold**). */
