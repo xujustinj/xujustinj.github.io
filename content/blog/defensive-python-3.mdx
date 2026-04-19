@@ -1,0 +1,228 @@
+---
+title: "Defensive Python 3"
+excerpt: "`override`, forced kwargs, and forced args"
+authors:
+  - name: "thegooseberry"
+    url: "/blog"
+date: "2025-09-21"
+original-date: "2025-09-21"
+original-publication: "Unpressed Volume 0, Issue 11"
+original-url: "https://unpressed.pub/volume/0/issue/11/defensive-py-3"
+repost-date: "2026-04-18"
+series: "Defensive Python"
+series-number: "3"
+previous: "defensive-python-2"
+next: "defensive-python-4"
+---
+
+Many folks know that Python, the programming language, is named after Monty Python, the beloved legendary British comedy troupe.
+Monty Python itself is a fictional name, [probably chosen for sounding funny](https://en.wikipedia.org/wiki/Monty_Python), but Python is also a real surname belonging to [over one thousand people](https://forebears.io/surnames/python), the majority of whom live in Switzerland.
+
+In an alternate universe, the troupe might have named themselves Gwen Dibley's Flying Circus (after a random stranger), leading to a programming language called Dibley.
+And so, here we return for the third instalment of Defensive Dibley.
+
+## 8: `override` `override`
+
+Many object-oriented languages have an optional keyword you can put on an instance method definition to indicate that you expect the `Super`class to have a method of the same name (and signature), which you intend to replace with this implementation.
+
+```typescript
+// Typescript
+class Sub extends Super {
+  override doSomething() {
+    // do something
+  };
+};
+```
+
+It's especially useful if the `Super`class comes from a library that you don't control.
+When the very competent maintainers of that library decide to rename `doSomething` without telling you, the `override` keyword ensures that you will find out at compile time, before your customers find out at runtime.
+
+```cpp
+// C++
+struct Sub : Super {
+  void doSomething() override {
+    // do something
+  }
+};
+```
+
+However, there is no such thing as compile time in Python.
+Instead, we have two approximations.
+First, there are static analysis tools like linters that will light up your IDE like a Christmas tree if there are errors.
+Second, there are checks that can run when a module is imported (which is technically during runtime), but before any code from the module is used; the code will instantly crash if the check fails.
+This leads to two different ways to check `override`s in Python:
+
+```python
+# Python standard library, which relies on static analysis tools
+from typing import override
+
+# third-party package, which runs at import time
+from overrides import override
+
+# regardless which one you use
+class Sub(Super):
+  @override
+  def do_something(self):
+    ... # do something
+```
+
+Pick one and use it.
+Which one to choose is really up to whether you lint or run your code more often, but you should be aware that neither gives you full protection.[^why-not-both]
+[`typing.override`](https://docs.python.org/3/library/typing.html#typing.override) will let you catch the error in your IDE while writing the code, but doesn't stop you from running it.
+`overrides.override` is an offensive validation that will usually instantly crash your code if something is wrong... but you won't know until you try to run it, and a lazily loaded module might not crash right away.
+
+[^why-not-both]: Why can't a single annotation do both?
+Technically, the `typing.override` decorator could incorporate all the functionality from `overrides.override`, but that would be against the ethos of the `typing` module, which tries to have no effect on runtime behaviour.
+Meanwhile, as far as a type checker is concerned, `overrides.override` is just another third-party decorator that wouldn't deserve the special treatment afforded to `typing.override`.
+Moreover, if you try to merge the decorators into your own custom decorator, you will still lose that special treatment.
+
+If you care about purity, [`overrides`](https://pypi.org/project/overrides/) isn't a built-in Python package, but it's one of those packages (like Pydantic, which I promise I'll cover someday) which is so widespread that it might as well be standard.
+
+I don't know anyone pedantic enough to chain both of them together, but you could be the first:
+
+```python
+from typing import override as override_static
+from overrides import override as override_runtime
+
+class Sub(Super):
+  @override_runtime
+  @override_static
+  def do_something(self):
+    ... # do something
+```
+
+## 9: forced kwargs
+
+We've touched on the permutation problem before in the context of return values.
+When you have a function that returns 5 things in a tuple, there are $n! = 120$ ways to assign the elements of that tuple into $5$ variables, and $119$ of them are wrong.
+The same problem applies when calling a function -- a function with $5$ positional arguments is a disaster waiting to happen.
+
+```python
+text = ...
+find_mentions(text, "Dibley", 1, 55, False)
+```
+
+Good luck figuring out what that function call is supposed to do! Hopefully, the source code can rescue you:
+
+```python
+def find_mentions(
+  text: str,
+  target: str,
+  start: int,
+  end: int,
+  case_sensitive: bool = True,
+) -> Sequence[int]:
+  """
+  Find all indices where the target occurs in the text,
+  between start_index inclusive and end_index exclusive.
+  """
+  ...
+```
+
+Armed with that knowledge, you can go back and fix that horrendous code using Python's keyword argument ("kwarg") syntax:
+
+```python
+find_mentions(
+  text=text,
+  target="Dibley",
+  start=1,
+  end=55,
+  case_sensitive=False,
+)
+```
+
+If you think it looks better to put `target` before `text`, kwargs let you do that too.
+Moreover, as long as the arguments are well-named, readers can now actually understand what the function call does without even going to the documentation.
+
+As a defensive Pythonista, this is probably old news to you, but your muggle and AI colleagues might not share the wisdom of kwargs.
+If you were the one who created `find_mentions`, how could you prevent others from writing horrid kwargless function calls?
+
+Before answering that, here is a second, totally unrelated problem.
+If you've dealt with default arguments in Python, you might remember that it is normally illegal to put a default argument before a required argument.
+If you wanted to set `start=0` as a very reasonable default, but had no default for `end`, then you would have to awkwardly put `end` before start.
+How can you get around this?
+
+Now, we answer both questions with a single asterisk:
+
+```python
+def find_mentions(
+  *,  # here it is
+  text: str,
+  target: str,
+  start: int = 0,  # totally legal after an asterisk
+  end: int,
+  case_sensitive: bool = True,
+) -> Sequence[int]:
+  ...
+```
+
+The asterisk requires all of the arguments that come after it to be given in keyword form, causing kwargless calls to raise both linting and runtime errors.
+After the asterisk, arguments can be defined in *any* order, even placing default arguments before required ones.
+
+## 10: forced args
+
+This last tip isn't necessarily defensive Python, but it goes hand in hand with [#9](#9-forced-kwargs).
+You might be familiar with Python's syntax for forwarding args and kwargs:
+
+```python
+def call(model: Model, *args, **kwargs):
+  start = time.time()
+  outputs = model(*args, **kwargs)
+  end = time.time()
+  print(f"Model took {end - start} seconds to execute.")
+  return outputs
+
+# calls your_model(x, 3, backward=True, use_gpu=False)
+call(your_model, x, 3, backward=True, use_gpu=False)
+```
+
+This is great, until you think about it some more and realize that this doesn't work.
+What if the model had an argument named `model`?
+
+```python
+# should call your_model(x, 3, model="Dibley", use_gpu=False) under the hood
+>>> call(your_model, x, y, 3, model="Dibley", use_gpu=False)
+TypeError: call() got multiple values for argument 'model'
+```
+
+Whoops!
+A band-aid solution might be to rename that parameter to something that nobody in their right mind would use:
+
+```python
+def call(__private_model_please_nobody_use_this__: Model, *args, **kwargs):
+  ...
+  outputs = __private_model_please_nobody_use_this__(*args, **kwargs)
+  ...
+  return outputs
+```
+
+But the defensive Pythonista inside you should feel a bit uncomfortable from this.
+Not only is it ugly beyond words, it is only a matter of Murphy's law before some model comes along expecting `__private_model_please_nobody_use_this__` as one of its arguments.
+
+The solution is the opposite of the asterisk:
+
+```python
+def call(model: Model, /, *args, **kwargs):
+  ...
+```
+
+The slash tells Python that any argument coming before the slash must be treated as positional-only.
+If a kwarg named `model` is provided by the user, it skips everything before the slash and ends up directly inside kwargs, as we hoped.
+
+This little-known feature is almost never used, except in the Python standard library itself, where it is used to rain bad practices on its developers by preventing them from using kwargs.
+For example, the method signature of `str.find` is roughly equivalent to this:
+
+```python
+class str:
+  def find(self, sub: str, start: int, end: int, /):
+    ...
+
+>>> "Gwen Dibley's Flying Circus".find("Dibley", start=3, end=16)
+TypeError: str.find() takes no keyword arguments
+
+>>> "Gwen Dibley's Flying Circus".find("Dibley", 3, 16)  # ew
+5
+```
+
+Other bad offenders include `range` and `str.count`.
+Don't be like Python.

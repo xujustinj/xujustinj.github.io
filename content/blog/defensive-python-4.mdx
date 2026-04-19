@@ -1,0 +1,302 @@
+---
+title: "Defensive Python 4"
+excerpt: "error handling"
+authors:
+  - name: "thegooseberry"
+    url: "/blog"
+date: "2026-04-05"
+original-date: "2026-04-05"
+original-publication: "Unpressed Volume 1, Issue 1"
+original-url: "https://unpressed.pub/volume/1/issue/1/def-py-4"
+repost-date: "2026-04-18"
+series: "Defensive Python"
+series-number: "4"
+previous: "defensive-python-3"
+---
+
+In hindsight, naming the series "Defensive Python X" was probably a bad idea.
+Defensive Python 2 could be parsed as either ((Defensive Python) 2) or (Defensive (Python 2)), when it really talks about Python 3.
+Fortunately, now that we're at installment 4, there will likely be no further confusion, if there was any to begin with.
+"Python" has long been synonymous with Python 3.
+Nobody uses the old major versions of Python anymore except for some legacy applications like [brat](https://brat.nlplab.org/).
+
+At the time of writing, it is Pi Day 2026, and the latest minor version of Python is 3.14, spawning many "Pithon" puns.
+However, some folks in Indiana might argue that "Pithon" ought to be reserved for Python 4.
+In memory of [Edward J. Goodwin](https://en.wikipedia.org/wiki/Indiana_pi_bill), we dedicate this installment to all things error handling.
+
+## 11: failed to foo the bar
+
+Our examples all revolve around a hypothetical utility function:
+
+```python
+def foo(bar: str) -> str:
+  """
+  Foo the bar.
+  """
+  return ...
+```
+
+It doesn't really matter what `foo` does.
+Unbeknownst to you, for some values of `bar`, it contains a non-deterministic bug that will cause it to `raise` some kind of `Exception` some of the time.
+But as a reasonable programmer, you assume that this function does what the documentation says it does... until proven otherwise.
+
+Your task today is to implement some kind of batch processing around `foo`.
+So you start with a simple implementation:
+
+```python
+def batch_foo(bars: Iterable[str]) -> Iterable[str]:
+  """
+  Foo all the bars.
+  """
+  # TODO: maybe implement multiprocessing
+  for bar in bars:
+    yield foo(bar)
+```
+
+Easy!
+Then you go to run it:
+
+```text
+Traceback (most recent call last):
+  ...
+  File "batch_foo.py", line 42, in batch_foo
+    yield foo(bar)
+          ^^^^^^^^
+  File "site-packages/some_library/foo.py", line 5, in foo
+    raise Exception()
+Exception
+```
+
+This proves that perhaps `foo` is not as reliable as you originally thought.
+How can we change the way we call `foo`, to help defend ourselves from this?
+
+Before we start, let's give this error to our coding LLM, Strawde Goofus 4.6, to see what it thinks:
+
+```python
+for bar in bars:
+  try:
+    foo(bar)
+  except:
+    # 1. print a useless message
+    print("Failed to foo the bar")
+    # OR
+    # 2. raise a completely new exception
+    raise Exception("Failed to foo the bar")
+```
+
+I want to impress that either of the above are the absolute worst things you can do.
+Both of these completely destroy the information held in the original exception that was raised, and along with it any chance you had to chase down the bug in foo.
+All the while, this creates the illusion that you have done some kind of proper error handling.
+Humans rarely write this kind of slop because it would involve a lazy programmer going out of their way to be explicitly unhelpful.
+But LLMs seem to enjoy doing this all the time.
+
+So what should you actually do?
+
+## 12. `raise ... from`
+
+First of all, you probably want to figure out which `bar` in your inputs was bad.
+Unfortunately, the exception didn't seem to include anything of that sort.
+But not to worry, we can add it ourselves!
+Before Python 3.11, the best way to do this was `raise ... from`:
+
+```python
+for i, bar in enumerate(bars, start=1):
+  try:
+    yield foo(bar)
+  except Exception as e:
+    raise RuntimeError(f"Exception in foo({bar!r}) on iteration {i}") from e
+```
+
+Doing this preserves the stack trace of the original exception inside of the new exception that is raised from it:
+
+```text
+Traceback (most recent call last):
+  File "batch_foo.py", line 43, in batch_foo
+    yield foo(bar)
+          ^^^^^^^^
+  File "site-packages/some_library/foo.py", line 5, in foo
+    raise Exception()
+Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  ...
+  File "batch_foo.py", line 45, in batch_foo
+    raise RuntimeError(f"Exception in foo({bar!r}) on iteration {i}") from e
+RuntimeError: Exception in foo('boo') on iteration 3
+```
+
+Now you can see that the string that failed was `'boo'`,[^repr] which was the `3`rd element of the input.
+Just the index information on its own is helpful because it tells you that the bug doesn't happen every time -- the function made it through a few calls to `foo` before anything went wrong.
+
+[^repr]: The quotation marks come from our use of `{bar!r}` in the format string. It is equivalent to `{repr(bar)}`.
+
+## 13: `add_note`
+
+There are still some drawbacks to `raise ... from`.
+For one, your traceback just got a lot taller and harder to read. For another, any code outside of batch_foo is now going to see your RuntimeError instead of whatever class the original exception e was. To overcome this, in Python 3.11+, you can use add_note to cleanly put the information on the original exception without changing its identity:
+
+```python
+for i, bar in enumerate(bars, start=1):
+  try:
+    yield foo(bar)
+  except Exception as e:
+    e.add_note(f"  batch_foo: i = {i}")
+    e.add_note(f"  batch_foo: bar = {bar!r}")
+    raise
+```
+
+The exception you'll get from this is
+
+```text
+Traceback (most recent call last):
+  ...
+  File "batch_foo.py", line 43, in batch_foo
+    yield foo(bar)
+          ^^^^^^^^
+  File "site-packages/some_library/foo.py", line 5, in foo
+    raise Exception()
+Exception
+  batch_foo: i = 3
+  batch_foo: bar = 'boo'
+```
+
+The original traceback is untouched, and your relevant information is printed cleanly and concisely underneath!
+
+## 14: `logger.exception`
+
+At this point, one might ask: why don’t you just add a print statement? Or even better, a logger.error, which stays in the same stderr stream that the exception tracebacks are being logged to when the program crashes.
+
+```python
+# logging copypasta
+import logging
+logger = logging.getLogger(__name__)
+
+def batch_foo(bars: Iterable[str]) -> Iterable[str]:
+  for bar in bars:
+    try:
+      yield foo(bar)
+    except:
+      logger.error(f"Exception in foo({bar!r}) on iteration {i}")
+      raise
+```
+
+If you do this, then in an average terminal, your exception looks like
+
+```text
+Exception in foo('boo') on iteration 3
+Traceback (most recent call last):
+  ...
+  File "batch_foo.py", line 43, in batch_foo
+    yield foo(bar)
+          ^^^^^^^^
+  File "site-packages/some_library/foo.py", line 5, in foo
+    raise Exception()
+Exception
+```
+
+But now, imagine someone was calling your batch_foo function like this:
+
+```python
+try:
+  batch_foo(["foo", "bar", "boo", "far"])
+except:
+  rickroll()
+  raise
+```
+
+In this contrived example, between `Exception in foo('boo') on iteration 3` and `Traceback`, you are going to see the full lyrics to *Never Gonna Give You Up*.
+Furthermore, if the caller actually did handle the exception, the `logger.error` still prints its nuisance message anyway.
+These issues lead us to a general rule of thumb for any kind of output-triggering statement, including `print`, `logger.*`, and `raise`:
+
+> If you ever have multiple output statements, never assume that the outputs from them are going to appear together.
+
+Therefore, it shouldn't make sense to log and raise, since those are two separate output "statements".
+Instead, you should do one of two things:
+
+- If you *don't* intend to handle the exception, you should use raise from or add_note like was shown in the last 2 tips.
+- If you *do* intend to handle the exception, but you still want to log it, keep reading.
+
+For now, let's skip over inputs when `foo` doesn't work on them:
+
+```python
+for i, bar in enumerate(bars, start=1):
+  try:
+    yield foo(bar)
+  except Exception as e:
+    print(f"Exception in foo({bar!r}) on iteration {i} due to {e}, skipping.")
+    continue
+```
+
+You've even included the exception `e` in your error message, ensuring that it is preserved... right?
+
+```text
+Exception in foo('boo') on iteration 3 due to , skipping.
+```
+
+For many exception classes, there's no guarantee that an exception has a helpful message, or even any message at all.
+For example, a failed assert has no message by default unless you specifically configure one.
+To overcome this, you probably want to keep the stack trace too.
+`logger.exception` does just that!
+It outputs your message and the stack trace all at once, fulfilling our need to have a single output statement.
+
+```python
+try:
+  yield foo(bar)
+except:
+  logger.exception(f"Exception in foo({bar!r}) on iteration {i}, skipping.")
+  continue
+```
+
+You don't even need to include the caught exception in the call; the library just figures it out:
+
+```text
+Exception in foo('boo') on iteration 3
+Traceback (most recent call last):
+  ...
+  File "batch_foo.py", line 43, in batch_foo
+    yield foo(bar)
+          ^^^^^^^^
+  File "site-packages/some_library/foo.py", line 5, in foo
+    raise Exception()
+Exception
+```
+
+## 15: Fallbacks considered harmful
+
+After Strawde Goofus 4.6 did a little more digging, it has decided that foo is too brittle, and created this instead:
+
+```python
+def batch_foo(bars: Iterable[str]) -> Iterable[str]:
+  """
+  Unhelpful docstring that states the obvious.
+  """
+  for bar in bars:
+    try:
+      yield foo(bar)
+    except:
+      # ✨ fallback in case foo fails
+      yield foo_fallback(bar)
+```
+
+where `foo_fallback` is some thousand-line function with quintuple-nested if statements trying to fix what Strawde thinks is the bug inside of `foo`.
+
+This... works?
+But I would argue that it would be preferable to keep the bug rather than to have this.
+Strawde Goofus has now duplicated our logic into two functions: `foo`, and `foo_fallback`.
+We already know that `foo` is buggy, but what about `foo_fallback`?
+Well, `foo_fallback` is only invoked when `foo` itself raises an exception.
+That means that it can be completely broken on the inputs where `foo` doesn't raise an exception, and we would be none the wiser.
+
+In order for a problem with either `foo` or `foo_fallback` to be surfaced, both functions have to fail.
+This is especially bad when non-determinism is involved.
+Let's say the bugs in `foo` and `foo_fallback` happen 5% of the time.
+Your unit tests, focusing on a single one of these functions, might discover the bug in about 20 tests.
+But if you're at a scrappy startup, or writing research code, or just doing a hobby project, you're more likely to find out something is broken when the system as a whole fails to work.
+And what are the odds of that?
+1 in 400.
+Good luck catching that before it goes to production.
+
+Instead of a fallback, what should you tell Strawde?
+*Just fix `foo`.*

@@ -1,10 +1,12 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import rehypeKatex from "rehype-katex";
+import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkSmartypants from "remark-smartypants";
 import { rehypePairSidenotes } from "./rehypePairSidenotes";
 import { rehypeWrapPostBody } from "./rehypeWrapPostBody";
+import { rehypeWrapTables } from "./rehypeWrapTables";
 import { remarkSuperscript } from "./remarkSuperscript";
 
 type MdxCompileOptions = NonNullable<MDXRemoteProps["options"]>;
@@ -16,7 +18,13 @@ const remarkPlugins = [remarkGfm, remarkMath, remarkSmartypants, remarkSuperscri
  * path so inline snippets (titles, TOC labels) and full pages behave the same
  * for prose features (GFM, math, smart typography, Pandoc-style superscript, KaTeX).
  */
-const rehypeBase = [rehypeKatex];
+/** Shiki themes: https://shiki.style/themes — dark blocks read better on this light layout than pale IDE themes. */
+const rehypePrettyCodePlugin = [
+  rehypePrettyCode,
+  { theme: "github-dark", keepBackground: true },
+] as [typeof rehypePrettyCode, import("rehype-pretty-code").Options];
+
+const rehypeBase = [rehypeKatex, rehypePrettyCodePlugin];
 
 /**
  * Full-page / block MDX: KaTeX, `.post-body` wrapper, and sidenote pairing.
@@ -26,7 +34,12 @@ export const documentMdxCompileOptions: MdxCompileOptions = {
   parseFrontmatter: false,
   mdxOptions: {
     remarkPlugins,
-    rehypePlugins: [...rehypeBase, rehypeWrapPostBody, rehypePairSidenotes],
+    rehypePlugins: [
+      ...rehypeBase,
+      rehypeWrapPostBody,
+      rehypeWrapTables,
+      rehypePairSidenotes,
+    ],
   },
 };
 

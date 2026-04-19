@@ -24,15 +24,37 @@ export type BlogFrontmatter = {
   originalDate?: string;
   /** Venue / issue line. Required with `original-date` for syndication. From `original-publication`. */
   originalPublication?: string;
-};
+} & (
+  | {}
+  | {
+      /** Optional display name for a multi-part series (from `series`). */
+      series: string;
+      /** Part index within the series (from `series-number`). Not necessarily a number. */
+      seriesNumber: string;
+      /** Optional slug (no extension) of the previous post in a series. */
+      previous?: string;
+      /** Optional slug (no extension) of the next post in a series. */
+      next?: string;
+    }
+);
 
 export type BlogIndexItem = BlogFrontmatter & {
   slug: string;
 };
 
+/** Resolved target for series prev/next links (includes the neighbor post’s part index when set). */
+export type BlogNeighborNav = {
+  slug: string;
+  title: string;
+  seriesNumber: string;
+};
+
 type RawFrontmatter = Record<string, unknown>;
 
-function pickString(obj: RawFrontmatter, ...keys: string[]): string | undefined {
+function pickString(
+  obj: RawFrontmatter,
+  ...keys: string[]
+): string | undefined {
   for (const k of keys) {
     const v = obj[k];
     if (typeof v === "string" && v.length > 0) {
@@ -100,16 +122,23 @@ function normalizeBlogFrontmatter(
     "original-url",
     "originalUrl",
   );
-  const originalDate = pickString(
-    data,
-    "original-date",
-    "originalDate",
-  );
+  const originalDate = pickString(data, "original-date", "originalDate");
   const originalPublication = pickString(
     data,
     "original-publication",
     "originalPublication",
   );
+
+  const series = pickString(data, "series");
+  const seriesData =
+    series !== undefined
+      ? {
+          series,
+          previous: pickString(data, "previous"),
+          next: pickString(data, "next"),
+          seriesNumber: pickString(data, "series-number", "seriesNumber"),
+        }
+      : {};
 
   return {
     title,
@@ -120,6 +149,7 @@ function normalizeBlogFrontmatter(
     originalUrl,
     originalDate,
     originalPublication,
+    ...seriesData,
   };
 }
 
@@ -184,4 +214,32 @@ export function getBlogSourceBySlug(slug: string): {
     frontmatter: fm,
     content,
   };
+}
+
+/**
+ * Resolves a neighbor slug from frontmatter to title + slug for prev/next navigation.
+ * Returns undefined if the slug is missing or the post does not exist.
+ */
+export function resolveBlogNeighbor(
+  slug: string | undefined,
+): BlogNeighborNav | undefined {
+  if (slug === undefined) return undefined;
+  const trimmed = slug.trim();
+  if (trimmed.length === 0) return undefined;
+  try {
+    const post = getBlogSourceBySlug(trimmed);
+    const fm = post.frontmatter;
+    if (!("seriesNumber" in fm)) {
+      throw new Error(
+        `Blog post ${trimmed} missing series number in frontmatter`,
+      );
+    }
+    return {
+      slug: trimmed,
+      title: fm.title,
+      seriesNumber: fm.seriesNumber,
+    };
+  } catch {
+    return undefined;
+  }
 }

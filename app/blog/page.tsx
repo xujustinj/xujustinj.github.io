@@ -6,7 +6,7 @@ import {
   PostListItem,
   PostMetaLine,
 } from "../../components/blog/BlogProse";
-import { Section, SectionHeading } from "../../components/Section";
+import { Section } from "../../components/Section";
 import { AuthorsLine } from "../../components/blog/AuthorsLine";
 import {
   PublicationMetaInline,
@@ -25,7 +25,6 @@ export default async function BlogIndexPage() {
 
   return (
     <Section $foreground="black" $background={bgLight} id="blog">
-      <SectionHeading>Blog</SectionHeading>
       <PostList>
         {posts.map((post) => (
           <PostListItem key={post.slug}>

@@ -52,9 +52,106 @@ export const Prose = styled.div`
       margin-bottom: 0;
     }
 
+    /* GFM tables: narrow tables centered; wide tables scroll (rehypeWrapTables). */
+    .post-body-table-wrap {
+      display: flex;
+      overflow-x: auto;
+      margin: 0 0 1em 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-body-table-wrap table {
+      flex-shrink: 0;
+      margin-inline: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 0 0 1em 0;
+    }
+
+    th,
+    td {
+      border: 1px solid ${Colour({ v: "lighter" })};
+      padding: 0.45em 0.75em;
+    }
+
+    th {
+      background: ${Colour({ h: "blue", s: "faded", v: "lightest" })};
+    }
+
     figure {
       margin: 0 0 1em 0;
       text-align: center;
+    }
+
+    /* rehype-pretty-code: dark Shiki theme + figure spacing; avoid double margin vs global pre. */
+    figure[data-rehype-pretty-code-figure] {
+      text-align: left;
+    }
+
+    figure[data-rehype-pretty-code-figure] pre {
+      margin: 0;
+      /* Horizontal: no padding-right on pre — it does not add to scrollWidth; end gap lives on the inner code element. */
+      padding: 12px 0 12px 16px;
+      border: 1px solid hsla(210, 12%, 28%, 0.45);
+      box-shadow: 0 1px 2px hsla(210, 20%, 10%, 0.12);
+      /*
+       * Custom scrollbars: do not set scrollbar-width / scrollbar-color here — in
+       * Chromium (incl. Cursor’s Simple Browser) those override ::-webkit-scrollbar-*,
+       * which brings back OS-style scrollbars with arrow buttons.
+       */
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-button {
+        display: none;
+        width: 0;
+        min-width: 0;
+        height: 0;
+        min-height: 0;
+      }
+
+      &::-webkit-scrollbar-button:horizontal:start:decrement,
+      &::-webkit-scrollbar-button:horizontal:end:increment,
+      &::-webkit-scrollbar-button:vertical:start:decrement,
+      &::-webkit-scrollbar-button:vertical:end:increment {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: hsl(215, 13%, 14%);
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: hsl(215, 11%, 38%);
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: hsl(215, 11%, 48%);
+      }
+
+      &::-webkit-scrollbar-corner {
+        background: hsl(215, 13%, 14%);
+      }
+    }
+
+    /*
+     * Shiki uses display:grid on code; without width: max-content the grid stays
+     * only as wide as the pre, so long lines overflow inside code and padding-right
+     * does not extend scrollWidth. min-width:100% keeps short blocks full-width.
+     */
+    figure[data-rehype-pretty-code-figure] pre code {
+      width: max-content;
+      min-width: 100%;
+      box-sizing: border-box;
+      padding-inline-end: 1.25em;
     }
 
     /* Order-independent spacing: caption above or below via flex gap (not margin-top on figcaption). */
@@ -141,8 +238,10 @@ export const Prose = styled.div`
   code {
     font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.95em;
+    font-weight: 400;
   }
 
+  /* Plain / non-Shiki pre (rare): tinted panel. Shiki blocks use theme background via inline style. */
   pre {
     margin: 0 0 1em 0;
     padding: 12px 16px;

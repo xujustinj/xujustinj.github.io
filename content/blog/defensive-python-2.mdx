@@ -1,0 +1,272 @@
+---
+title: "Defensive Python 2"
+excerpt: "`from electric import boogaloo`"
+authors:
+  - name: "thegooseberry"
+    url: "/blog"
+date: "2025-05-04"
+original-date: "2025-05-04"
+original-publication: "Unpressed Volume 0, Issue 5"
+original-url: https://unpressed.pub/volume/0/issue/5/defensive-python"
+repost-date: "2026-04-18"
+series: "Defensive Python"
+series-number: "2"
+previous: "defensive-python-1"
+next: "defensive-python-3"
+---
+
+Python is a feature iceberg.
+Standing atop it, you behold a vast ocean of libraries (often written in more performant languages like C), ready to do your bidding with a mere pip install and a few ugly lines of code.
+Many programmers learn enough Python to sail the high C's, and leave it at that.
+
+Or, one day, you ask yourself the question.
+*"I wonder if there's a way to --"* and a crevasse opens up beneath you, plunging you into the ice.
+Some hours later, you emerge from the underside, disgusted that 1) there indeed was a way and 2) you did not like it.
+But if you come to accept what you have seen, your iceberg rises a little higher above the C...
+
+They say higher ground is easier to defend.
+
+## 4: truthiness considered harmful
+
+Our example of the day is a function that simultaneously finds the largest element in a list, the first/last indices where it appears, and the number of times it appears.
+
+```python
+def find_max(values: list[T]) -> tuple[T, int, int, int]:
+  assert values
+  max_value = values[0]
+  first_index = last_index
+  count = 1
+  ...
+  return max_value, first_index, last_index, count
+```
+
+There is an annoying pet peeve of mine on the first line: [truthiness](https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/).
+
+```python
+assert values
+```
+
+What are we asserting, exactly? To translate for people who no speak Pythonicano, the assertion is intended to check that the list is not empty:
+
+```python
+assert len(values) > 0
+```
+
+But this is not the only way to check that a list is not empty.
+We could also use the `not` operator:
+
+```python
+assert not values
+```
+
+But in other contexts it can also mean any or all of
+
+```python
+assert values is not None
+assert values != 0
+assert values != ""
+```
+
+Python is a language that is supposed to read like English, so it baffles me to no end when it is abbreviated like this.
+Using truthiness is lazy and can lead to confusion:
+
+```python
+def maybe_length(values: list[T] | None) -> int | None:
+  """
+  Get the length of the list, otherwise return None.
+  """
+  return len(values) if values else None
+
+>>> maybe_length([])
+None  # oops
+```
+
+Replacing a truthy value with an explicit boolean condition costs at most a dozen more characters.
+You can definitely afford to explicitly state the condition.
+
+> *"What about boolean operations?"*
+
+```python
+>>> length = len(values or [])  # smelly
+>>> length = 0 if values is None else len(values)  # better
+```
+
+No excuses.
+
+## 5: runtime immutable collections
+
+Now that that's out of the way, here's a full implementation of the function.[^pythonic]
+
+[^pythonic]: A Pythonic developer would actually just use the built-in functions max, index, and count to implement the function in 4 separate loops through the entire list.
+*"That's moronic!"* you might say -- and I did too, until I benchmarked it.
+The moronic way is actually about 40% faster, since those built-in functions are written in C.
+
+```python
+def find_max(values: list[T]) -> tuple[T, int, int, int]:
+  assert len(values) > 0  # fixed
+  max_value = values[0]
+  first_index = last_index = 0
+  count = 1
+  for i, x in enumerate(values[1:], start=1):
+    if x > max_value:
+      values[max_value] = x  # HI I AM A BUG
+      first_index = last_index = i
+      count = 1
+    elif x == max_value:
+      last_index = i
+      count += 1
+  return max_value, first_index, last_index, count
+```
+
+If you are  observant, you might spot the bug -- we accidentally updated `values[max_value]` instead of `max_value` itself.
+Not only is this wrong, but it also screws up the original list, which was passed by reference.
+
+```python
+>>> values = [1, 0, 2, 2, 1]
+>>> find_max(values)
+1, 3, 4, 2
+>>> values
+[1, 2, 2, 2, 1]  # oops
+```
+
+However, if we pass in a tuple instead:
+
+```python
+>>> values = (1, 0, 2, 2, 1)
+>>> find_max(values)
+TypeError: 'tuple' object does not support item assignment
+```
+
+Tuples are the immutable sibling of lists, so the tuple caught the bug the moment we tried to change its contents -- offensive programming!
+Similarly, you can use [`frozenset`](https://docs.python.org/3/library/stdtypes.html#frozenset) as an immutable set, or [`types.MappingProxyType`](https://docs.python.org/3/library/types.html#types.MappingProxyType) as an immutable `dict`.[^frozendict]
+As a bonus, immutable collections can also be hashed, allowing you to store them in sets or use them as keys in dictionaries.
+
+[^frozendict]: If those names sound ridiculous to you, you can use one of the many third-party implementations of immutable collections instead.
+I can't endorse any specific libraries, having never used any myself, but [`frozendict`](https://pypi.org/project/frozendict/) appears quite frequently in my `pip freeze` so I guess other people use it a lot.
+
+## 6: immutable type annotations
+
+In Python, `list` and `tuple` are distinct classes -- so passing a tuple into a function that expects a list will cause your type checker to scream.
+If you want your function to accept both, you will need
+
+```python
+from collections.abc import Sequence  # for Python 3.9+
+from typing import Sequence  # for Python <3.9
+
+def find_max(values: Sequence[T]) -> tuple[T, int, int, int]:
+    ...
+```
+
+[`collections.abc.Sequence`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence) is a common parent type of `list` and `tuple`. I use it instead of `list` or `tuple` in my method signatures all the time, because
+
+1. The [robustness principle](https://en.wikipedia.org/wiki/Robustness_principle): *be liberal in what you accept*.
+2. The `Sequence` interface is read-only, so your type checker will catch bugs like `values[max_value] = x`.
+
+Immutable type annotations offer a different kind of defense than offensive programming -- they are statically checked *before* the code is ever run.
+However, they aren't checked at runtime, so you should still use immutable collection classes like `tuple` and `frozenset` if you want to defend them from code you can't control, like third-party libraries.
+
+There are also nicely-named parent types for `dict`, `set`, and their immutable counterparts.
+
+| concrete classes you want to accept                                 | immutable type annotation                  |
+| :-----------------------------------------------------------------: | :----------------------------------------: |
+| `list[T]` <br/> `tuple[T, ...]`                                     | `Sequence[T]`                              |
+| `dict[K, V]` <br/> `types.MappingProxyType[K, V]`                   | `Mapping[K, V]`                            |
+| `set[T]` <br/> `frozenset[T]`                                       | `Set[T]`                                   |
+| `list[T]` <br/> `tuple[T, ...]` <br/> `set[T]` <br/> `frozenset[T]` | `Collection[T]`[^mappings-are-collections] |
+
+[^mappings-are-collections]: `Mapping[T,Any]` is also a subtype of `Collection[T]`, but probably not in any useful sense, since that's not what you use mappings for.
+
+## 7: unpackable returns are a code smell
+
+After fixing the bug, we publish our `find_max` function.
+Someone installs it without reading the documentation, and calls it with the wrong variable names:
+
+```python
+>>> values = (0, 1, 0, 2, 3, 1, 0, 3)
+>>> first_index, last_index, max_value, count = find_max(values)
+>>> max_value
+7  # oops
+```
+
+The bug was completely invisible to the poor user's type checker. Sure, they got a bit unlucky there by calling it on a `Sequence[int]`, but as a defensive programmer you need to have a sixth sense for bad luck.
+The defense against this kind of confusion is to prevent it from even arising in the first place.
+
+The cause of the confusion?
+Tuple returns are smelly.
+They're not always bad -- users are not going to mess up the order if the function returned only `first_index` and `last_index`.
+But as the tuple gets longer, it literally gets *exponentially* smellier.
+There are $n!$ ways to unpack an iterable of $n$ things, but only $1$ permutation is ever right.
+
+To prevent unpacking, you probably want to return a non-unpackable data structure from find_max instead, where the return values can be directly accessed by name ("`max_value`", "`first_index`", etc.).
+Besides defining your own class from scratch, there are a few ways to implement such record data structures:
+
+|                                                  | non-<br/>unpackable       | supports <br/> individually- <br/> typed fields | fields <br/> cannot be <br/> reassigned | supports <br/> arbitrary <br/> validation |
+| :----------------------------------------------- | :-----------------------: | :---------------------------------------------: | :-------------------------------------: | :---------------------------------------: |
+| `namedtuple("Foo", [...])`                       | &#x274C;                  | &#x274C;                                        | &#x2705;                                | &#x274C;                                  |
+| `Mapping[str, Any]`                              | &#x2705;[^unpack-mapping] | &#x274C;                                        | &#x2705;                                | &#x274C;                                  |
+| `class Foo(TypedDict): ...`                      | &#x2705;[^unpack-mapping] | &#x2705;                                        | Python 3.13+                            | &#x274C;                                  |
+| `class Foo(NamedTuple): ...`                     | &#x274C;                  | &#x2705;                                        | &#x2705;                                | &#x274C;                                  |
+| `@dataclass(frozen=True)` <br/> `class Foo: ...` | &#x2705;                  | &#x2705;                                        | &#x2705;                                | &#x2705;                                  |
+
+[^unpack-mapping]: It is totally legal Python to unpack `a, b = {"foo": 1, "bar": 2}`, for the same reason that `Mapping[T,Any]` is a subtype of `Collection[T]`.
+This results in `a = "foo"` and `b = "bar"`.
+That said, nobody in their right mind would see a `Mapping` return value and think to unpack it.
+
+Seasoned Python developers should be well-versed in all of these solutions, since some programming frameworks expect functions to only return primitive record types like `namedtuple`s or `dict`s.
+But for the most part, dataclasses are the best vanilla Python technique to get the job done:
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class FoundMax(Generic[T]):
+  max_value: T
+  first_index: int
+  last_index: int
+  count: int
+
+  def __post_init__(self):
+    # Arbitrary validation!
+    assert self.first_index <= self.last_index
+    assert self.count > 0
+    assert self.count <= self.last_index - self.first_index + 1
+
+  @property
+  def is_unique(self) -> bool:
+    # An example convenience method on the return object!
+    return self.count == 1
+```
+
+An added benefit of this single return object is that we can now handle failure cases more gracefully too.
+
+```python
+def find_max(values: Sequence[T]) -> FoundMax[T] | None:
+  if len(values) == 0:
+    return None
+  ...
+  return FoundMax(
+    max_value=max_value,
+    first_index=first_index,
+    last_index=last_index,
+    count=count,
+  )
+
+>>> values = (0, 1, 0, 2, 3, 1, 0, 3)
+>>> result = find_max(values)
+>>> assert result is not None
+
+>>> result
+FoundMax(max_value=3, first_index=4, last_index=7, count=2)
+
+>>> result.max_value
+3
+```
+
+People often ask why I hardly document my code, despite otherwise being a perfectionist.
+Besides laziness, the reason is actually evident in this example.
+Even with zero comments or documentation, a perfectly defensive function should already be self-explanatory to users just based on its name and signature.
+Such is the power of dataclasses...
+
+> *"Wait -- you said they are the best **vanilla** Python technique? Is there something even better?"*
+
+I guess you'll just have to stay tuned!

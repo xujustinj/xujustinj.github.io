@@ -32,7 +32,6 @@ body {
 }
 
 /* KaTeX defaults to ~1.21em, which sits taller than IBM Plex body/title copy. */
-.inline-md .katex,
 .post-body .katex {
   font-size: 1em;
 }
@@ -102,11 +101,12 @@ export function Layout({ children }: { children: ReactNode }) {
 
   const pathname = usePathname();
   const title = pathname !== null ? resolveNavTitle(pathname) : "";
+  const titleHref = title === "Blog" ? "/blog" : undefined;
 
   const shell = (
     <LayoutContainer>
       <GlobalStyle />
-      <NavBar title={title} />
+      <NavBar title={title} titleHref={titleHref} />
       <MainContainer>{children}</MainContainer>
       <Footer
         $background={Colour({ h: "blue", s: "faded", v: "darker" })}

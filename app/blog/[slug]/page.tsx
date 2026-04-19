@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import styled, { css } from "styled-components";
 import { AuthorsLine } from "../../../components/blog/AuthorsLine";
@@ -12,13 +11,18 @@ import {
   PostTitle,
   Prose,
 } from "../../../components/blog/BlogProse";
+import { PostSeriesNavBar } from "../../../components/blog/PostSeriesNavBar";
 import {
   type TocItem,
   TableOfContents,
 } from "../../../components/blog/TableOfContents";
 import { Section } from "../../../components/Section";
 import { InlineMarkdown } from "../../../components/blog/InlineMarkdown";
-import { getAllBlogSlugs, getBlogSourceBySlug } from "../../../lib/blog";
+import {
+  getAllBlogSlugs,
+  getBlogSourceBySlug,
+  resolveBlogNeighbor,
+} from "../../../lib/blog";
 import { compileMdx, extractHeadings, makeHeadingId } from "../../../lib/mdx";
 import { stripInlineMarkdown } from "../../../lib/markdownPlain";
 import { adapt, MOBILE_BREAKPOINT } from "../../../styles/Adaptive";
@@ -32,6 +36,10 @@ import {
 } from "../../../styles/blogLayout";
 import { bgLight } from "../../../styles/Colours";
 
+const PostSidenoteGutter = styled.div.attrs({
+  "aria-hidden": true,
+})``;
+
 const PostArticleShell = styled.div<{ $hasToc: boolean }>`
   ${adapt({
     mobile: `
@@ -39,9 +47,6 @@ const PostArticleShell = styled.div<{ $hasToc: boolean }>`
       max-width: none;
       margin-left: 0;
       margin-right: 0;
-      .post-sidenote-gutter {
-        display: none;
-      }
     `,
     desktop: `
       display: flex;
@@ -52,19 +57,23 @@ const PostArticleShell = styled.div<{ $hasToc: boolean }>`
       width: 100%;
       margin-left: auto;
       margin-right: auto;
-      .post-sidenote-gutter {
-        display: none;
-      }
-      &:has(.post-body .sidenote-row) .post-sidenote-gutter,
-      &:has(.post-body section.footnotes) .post-sidenote-gutter {
-        display: block;
-        flex: 0 0 ${BLOG_RAIL_WIDTH};
-        width: ${BLOG_RAIL_WIDTH};
-        min-width: 0;
-        box-sizing: border-box;
-      }
     `,
   })}
+
+  ${PostSidenoteGutter} {
+    display: none;
+  }
+
+  @media (min-width: ${MOBILE_BREAKPOINT}) {
+    &:has(.post-body .sidenote-row) ${PostSidenoteGutter},
+    &:has(.post-body section.footnotes) ${PostSidenoteGutter} {
+      display: block;
+      flex: 0 0 ${BLOG_RAIL_WIDTH};
+      width: ${BLOG_RAIL_WIDTH};
+      min-width: 0;
+      box-sizing: border-box;
+    }
+  }
 
   ${({ $hasToc }) => css`
     @media (min-width: ${MOBILE_BREAKPOINT}) {
@@ -95,26 +104,6 @@ const PostProse = styled(Prose)`
       margin-left: 0;
       margin-right: 0;
     `,
-  })}
-`;
-
-const BackLink = styled(Link)`
-  display: inline-block;
-  margin-bottom: 24px;
-  font-size: 11pt;
-  color: inherit;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-  }
-`;
-
-const BackLabel = styled.span`
-  ${adapt({
-    mobile: `font-size: 11pt;`,
-    desktop: `font-size: 12pt;`,
   })}
 `;
 
@@ -195,9 +184,15 @@ export default async function BlogPostPage({ params }: Props) {
       <PostArticleShell $hasToc={showToc}>
         {showToc ? <TableOfContents items={toc} /> : null}
         <PostProse>
-          <BackLink href="/blog">
-            <BackLabel>← Blog</BackLabel>
-          </BackLink>
+          {("series" in fm) && (
+            <PostSeriesNavBar
+              previous={resolveBlogNeighbor(fm.previous)}
+              next={resolveBlogNeighbor(fm.next)}
+              series={fm.series}
+              seriesNumber={fm.seriesNumber}
+              slot="above-title"
+            />
+          )}
           <PostTitle id={titleId}>
             <InlineMarkdown source={post.frontmatter.title} />
           </PostTitle>
@@ -222,11 +217,15 @@ export default async function BlogPostPage({ params }: Props) {
             </PostSyndication>
           )}
           {content}
+          {("series" in fm) && (<PostSeriesNavBar
+            previous={resolveBlogNeighbor(fm.previous)}
+            next={resolveBlogNeighbor(fm.next)}
+            series={fm.series}
+            seriesNumber={fm.seriesNumber}
+            slot="under-body"
+          />)}
         </PostProse>
-        <div
-          className="post-sidenote-gutter"
-          aria-hidden="true"
-        />
+        <PostSidenoteGutter />
       </PostArticleShell>
     </Section>
   );

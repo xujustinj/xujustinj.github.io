@@ -50,8 +50,20 @@ const PageTitle = styled.h1`
   white-space: nowrap;
 `;
 
+const PageTitleLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+`;
+
 export interface NavBarProps {
   title: string;
+  /** When set, the title is a link (e.g. Blog → /blog). */
+  titleHref?: string;
 }
 const NavBar = (props: NavBarProps) => (
   <NavBarContainer>
@@ -59,7 +71,13 @@ const NavBar = (props: NavBarProps) => (
       <Logo />
     </NavBarSegment>
     <NavBarSegment $alignment="center">
-      <PageTitle>{props.title}</PageTitle>
+      <PageTitle>
+        {props.titleHref !== undefined ? (
+          <PageTitleLink href={props.titleHref}>{props.title}</PageTitleLink>
+        ) : (
+          props.title
+        )}
+      </PageTitle>
     </NavBarSegment>
     <NavBarSegment $alignment="end" />
   </NavBarContainer>
