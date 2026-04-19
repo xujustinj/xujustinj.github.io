@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { sidenoteProseStyles } from "./sidenoteProseStyles";
 import { adapt } from "@styles/Adaptive";
-import { Colour, primary } from "@styles/Colours";
+import { Colour } from "@styles/Colours";
 
 export const Prose = styled.div`
   max-width: min(42rem, 100%);
@@ -272,8 +272,8 @@ export const PostTitle = styled.h1`
   font-weight: 700;
 `;
 
-export const PostDate = styled.p<{ $bottom?: string }>`
-  margin: 0 0 ${(p) => p.$bottom ?? "24px"} 0;
+export const PostDate = styled.p`
+  margin: 0 0 24px 0;
   font-size: 11pt;
   color: ${Colour({ v: "medium" })};
 `;
@@ -292,8 +292,8 @@ export const PostAuthors = styled.p`
 `;
 
 /** Shown when `repost-date` is set (this site’s copy date). */
-export const PostRepost = styled.p<{ $compactBottom?: boolean }>`
-  margin: 0 0 ${(p) => (p.$compactBottom ? "8px" : "24px")} 0;
+export const PostRepost = styled.p`
+  margin: 0 0 24px 0;
   font-size: 11pt;
   color: ${Colour({ v: "medium" })};
 `;
@@ -309,18 +309,6 @@ export const PostSyndication = styled.p`
     color: inherit;
     text-decoration-thickness: 1px;
   }
-`;
-
-export const TodoBanner = styled.p`
-  margin: 0 0 24px 0;
-  padding: 12px 16px;
-  border-left: 4px solid ${primary};
-  background: ${Colour({ h: "blue", s: "faded", v: "lightest" })};
-  ${adapt({
-    mobile: `font-size: 11pt;`,
-    desktop: `font-size: 12pt;`,
-  })}
-  line-height: 1.45;
 `;
 
 export const PostList = styled.ul`
