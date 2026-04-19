@@ -1,7 +1,5 @@
 import { stripInlineMarkdown } from "@lib/markdownPlain";
-
-/** Document-order heading from markdown `#` … `######` lines. */
-export type Heading = { id: string; text: string; level: 1 | 2 | 3 | 4 | 5 | 6 };
+import type { Heading, HeadingLevel } from "@models/MarkdownHeading";
 
 function slugifyHeading(text: string): string {
   return stripInlineMarkdown(text)
@@ -35,7 +33,7 @@ export function extractHeadings(
 
     const m = line.match(/^(#{1,6})\s+(.+?)\s*$/);
     if (!m) continue;
-    const level = m[1].length as Heading["level"];
+    const level = m[1].length as HeadingLevel;
     const text = m[2].replace(/\s+#*\s*$/, "").trim();
     if (text.length === 0) continue;
 

@@ -4,11 +4,12 @@ import Link from "next/link";
 import { type ReactNode, useMemo } from "react";
 import styled from "styled-components";
 import { useTocSectionScroll } from "@hooks/useTocSectionScroll";
+import type { HeadingLevel } from "@models/MarkdownHeading";
 import { adapt } from "@styles/Adaptive";
 import { BLOG_RAIL_WIDTH } from "@styles/blogLayout";
 import { primary } from "@styles/Colours";
 
-export type TocLevel = 1 | 2 | 3 | 4 | 5 | 6;
+export type TocLevel = HeadingLevel;
 
 export type TocItem = {
   id: string;

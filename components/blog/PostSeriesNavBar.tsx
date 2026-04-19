@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled, { css } from "styled-components";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import type { BlogNeighborNav } from "@lib/blog";
+import type { BlogNeighborNav } from "@models/Blog";
 import { stripInlineMarkdown } from "@lib/markdownPlain";
 import { adapt } from "@styles/Adaptive";
 import { Colour } from "@styles/Colours";

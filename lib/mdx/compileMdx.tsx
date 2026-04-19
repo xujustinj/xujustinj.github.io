@@ -4,7 +4,7 @@ import {
   type ReactElement,
 } from "react";
 import { compileMDX } from "next-mdx-remote/rsc";
-import type { Heading } from "./markdownHeadings";
+import type { Heading } from "@models/MarkdownHeading";
 import { documentMdxCompileOptions } from "./mdxCompileOptions";
 import { mdxComponents } from "./mdxComponents";
 
