@@ -1,7 +1,6 @@
 import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
-import { Favicons } from "@components/Favicons";
 import { Layout } from "@components/Layout";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -35,9 +34,6 @@ export default function RootLayout({
       lang="en-ca"
       className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
     >
-      <head>
-        <Favicons />
-      </head>
       <body>
         <Layout>{children}</Layout>
       </body>
