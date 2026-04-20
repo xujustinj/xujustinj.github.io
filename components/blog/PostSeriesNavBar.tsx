@@ -118,7 +118,7 @@ const SeriesTitleLink = styled(Link)`
 type Props = {
   previous?: BlogNeighborNav;
   next?: BlogNeighborNav;
-  /** Series id for `/blog?series=…`. */
+  /** Stable series id; links to `/blog/series/[id]`. */
   seriesId: string;
   seriesTitle: string;
   seriesNumber: string;
@@ -147,7 +147,7 @@ export async function PostSeriesNavBar({
         <NavSide $align="left">
           {previous !== undefined ? (
             <PrevNeighborLink
-              href={`/blog/${previous.slug}`}
+              href={`/blog/post/${previous.slug}`}
               rel="prev"
               aria-label={`Previous post: ${neighborLinkAriaLabel(previous)}`}
             >
@@ -170,7 +170,7 @@ export async function PostSeriesNavBar({
             </PartLine>
             <TitleLine>
               <SeriesTitleLink
-                href={`/blog?series=${encodeURIComponent(seriesId)}`}
+                href={`/blog/series/${encodeURIComponent(seriesId)}`}
                 aria-label={`All posts in ${stripInlineMarkdown(seriesTitle)}`}
               >
                 <InlineMarkdown source={`**${seriesTitle}**`} />
@@ -181,7 +181,7 @@ export async function PostSeriesNavBar({
         <NavSide $align="right">
           {next !== undefined ? (
             <NextNeighborLink
-              href={`/blog/${next.slug}`}
+              href={`/blog/post/${next.slug}`}
               rel="next"
               aria-label={`Next post: ${neighborLinkAriaLabel(next)}`}>
               <NeighborTextStack>

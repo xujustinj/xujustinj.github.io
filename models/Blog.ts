@@ -23,7 +23,7 @@ export type BlogFrontmatter = {
 } & (
   | {}
   | {
-      /** Stable series id (from `series` or `series-id`). Used in `/blog?series=…` and URLs. */
+      /** Stable series id (from `series` or `series-id`). Used in `/blog/series/[id]`. */
       series: string;
       /** Human-readable series name (from `series-title`). */
       seriesTitle: string;

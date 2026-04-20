@@ -181,6 +181,18 @@ export type GetBlogIndexOptions = {
   series?: string;
 };
 
+/** Distinct `series` ids across all posts (for `/blog/series/[id]` static params). */
+export function getAllSeriesIds(): string[] {
+  const items = getBlogIndex();
+  const seen = new Set<string>();
+  for (const item of items) {
+    if ("series" in item) {
+      seen.add(item.series);
+    }
+  }
+  return [...seen].sort((a, b) => a.localeCompare(b));
+}
+
 export function getBlogIndex(options?: GetBlogIndexOptions): BlogIndexItem[] {
   const slugs = getAllBlogSlugs();
   const items = slugs.map((slug) => {

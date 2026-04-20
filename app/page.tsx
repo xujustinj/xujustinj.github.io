@@ -104,12 +104,11 @@ export default function HomePage() {
               </Link>
             </EmojiBulletItem>
             <EmojiBulletItem $bullet={"💻"}>
-              writing,{" "}
-              <Link
-                href={
-                  "/blog/google-sheets"
-                }
-              >
+              <Link href="/blog">
+                writing
+              </Link>
+              ,{" "}
+              <Link href="/blog/post/google-sheets">
                 spreadsheet hacking
               </Link>
               , web development
