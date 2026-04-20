@@ -369,7 +369,7 @@ export const PostLink = styled(Link)`
 export const PostExcerpt = styled.p`
   margin: 8px 0 0 0;
   font-size: 11pt;
-  color: ${Colour({ v: "dark" })};
+  color: inherit;
   line-height: 1.45;
 `;
 
@@ -377,4 +377,10 @@ export const PostMetaLine = styled.p`
   margin: 4px 0 0 0;
   font-size: 10pt;
   color: ${Colour({ v: "medium" })};
+  line-height: 1.45;
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+  }
 `;

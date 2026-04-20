@@ -9,11 +9,7 @@ import {
   PostMetaLine,
 } from "@components/blog/BlogProse";
 import { Section } from "@components/Section";
-import { AuthorsLine } from "@components/blog/AuthorsLine";
-import {
-  PublicationMetaInline,
-  publicationMetaVisible,
-} from "@components/blog/PublicationMeta";
+import { PublicationMetaInline } from "@components/blog/PublicationMeta";
 import { InlineMarkdown } from "@components/blog/InlineMarkdown";
 import { getBlogIndex } from "@lib/blog";
 import { bgLight } from "@styles/Colours";
@@ -66,12 +62,6 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
                 <InlineMarkdown source={post.title} />
               </PostLink>
               <PostMetaLine>
-                {post.authors !== undefined && post.authors.length > 0 ? (
-                  <>
-                    <AuthorsLine authors={post.authors} />
-                    {publicationMetaVisible(post) ? " · " : null}
-                  </>
-                ) : null}
                 <PublicationMetaInline fm={post} />
               </PostMetaLine>
               {post.excerpt === undefined ? null : (
