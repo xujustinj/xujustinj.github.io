@@ -320,6 +320,17 @@ export const BlogIndexShell = styled.div`
   margin-right: auto;
 `;
 
+/** Page title above the blog index list (`PostTitle`-sized). */
+export const BlogIndexHeading = styled.h1`
+  margin: 0 0 1.25rem 0;
+  ${adapt({
+    mobile: `font-size: 22pt;`,
+    desktop: `font-size: 28pt;`,
+  })}
+  font-weight: 700;
+  line-height: 1.15;
+`;
+
 export const PostList = styled.ul`
   list-style: none;
   margin: 0;

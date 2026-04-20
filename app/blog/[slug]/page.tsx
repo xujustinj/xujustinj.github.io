@@ -188,7 +188,7 @@ export default async function BlogPostPage({ params }: Props) {
             <PostSeriesNavBar
               previous={resolveBlogNeighbor(fm.previous)}
               next={resolveBlogNeighbor(fm.next)}
-              series={fm.series}
+              seriesTitle={fm.seriesTitle}
               seriesNumber={fm.seriesNumber}
               slot="above-title"
             />
@@ -220,7 +220,7 @@ export default async function BlogPostPage({ params }: Props) {
           {("series" in fm) && (<PostSeriesNavBar
             previous={resolveBlogNeighbor(fm.previous)}
             next={resolveBlogNeighbor(fm.next)}
-            series={fm.series}
+            seriesTitle={fm.seriesTitle}
             seriesNumber={fm.seriesNumber}
             slot="under-body"
           />)}

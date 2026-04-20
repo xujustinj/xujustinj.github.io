@@ -108,7 +108,7 @@ const NavCenter = styled.div`
 type Props = {
   previous?: BlogNeighborNav;
   next?: BlogNeighborNav;
-  series: string;
+  seriesTitle: string;
   seriesNumber: string;
   slot: "above-title" | "under-body";
 };
@@ -116,14 +116,14 @@ type Props = {
 export async function PostSeriesNavBar({
   previous,
   next,
-  series,
+  seriesTitle,
   seriesNumber,
   slot,
 }: Props) {
   const hasNeighbors = previous !== undefined || next !== undefined;
 
   let ariaLabel = "Series navigation";
-  ariaLabel = `Part ${stripInlineMarkdown(seriesNumber)} of ${stripInlineMarkdown(series)}`;
+  ariaLabel = `Part ${stripInlineMarkdown(seriesNumber)} of ${stripInlineMarkdown(seriesTitle)}`;
   if (hasNeighbors) {
     ariaLabel += ". Previous and next posts";
   }
@@ -156,7 +156,7 @@ export async function PostSeriesNavBar({
               <InlineMarkdown source={`Part ${seriesNumber} of`} />
             </PartLine>
             <TitleLine>
-              <InlineMarkdown source={`**${series}**`} />
+              <InlineMarkdown source={`**${seriesTitle}**`} />
             </TitleLine>
           </SeriesCenterRoot>
         </NavCenter>

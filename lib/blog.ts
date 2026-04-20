@@ -23,6 +23,25 @@ function pickString(
   return undefined;
 }
 
+function parseSeriesIndex(
+  data: RawFrontmatter,
+  slugForErrors: string,
+): number {
+  const raw = data["series-index"] ?? data.seriesIndex;
+  if (typeof raw === "number" && Number.isFinite(raw)) {
+    return raw;
+  }
+  if (typeof raw === "string") {
+    const n = Number(raw.trim());
+    if (Number.isFinite(n)) {
+      return n;
+    }
+  }
+  throw new Error(
+    `Blog post ${slugForErrors} missing or invalid series-index (need a number)`,
+  );
+}
+
 function parseAuthors(data: RawFrontmatter): BlogAuthor[] | undefined {
   const raw = data.authors ?? data.author;
   if (raw === undefined) return undefined;
@@ -88,15 +107,27 @@ function normalizeBlogFrontmatter(
     "originalPublication",
   );
 
-  const series = pickString(data, "series");
+  const seriesId = pickString(data, "series", "series-id", "seriesId");
+  const seriesNumber = pickString(data, "series-number", "seriesNumber");
   const seriesData =
-    series !== undefined
-      ? {
-          series,
-          previous: pickString(data, "previous"),
-          next: pickString(data, "next"),
-          seriesNumber: pickString(data, "series-number", "seriesNumber"),
-        }
+    seriesId !== undefined
+      ? (() => {
+          if (seriesNumber === undefined) {
+            throw new Error(
+              `Blog post ${slugForErrors} has series id but missing series-number`,
+            );
+          }
+          const seriesTitle =
+            pickString(data, "series-title", "seriesTitle") ?? seriesId;
+          return {
+            series: seriesId,
+            seriesTitle,
+            seriesIndex: parseSeriesIndex(data, slugForErrors),
+            previous: pickString(data, "previous"),
+            next: pickString(data, "next"),
+            seriesNumber,
+          };
+        })()
       : {};
 
   return {
@@ -145,7 +176,12 @@ function readBlogFile(slug: string): { filePath: string; raw: string } {
   return { filePath, raw };
 }
 
-export function getBlogIndex(): BlogIndexItem[] {
+export type GetBlogIndexOptions = {
+  /** When set, only posts in this series (id), ordered by `seriesIndex` ascending. */
+  series?: string;
+};
+
+export function getBlogIndex(options?: GetBlogIndexOptions): BlogIndexItem[] {
   const slugs = getAllBlogSlugs();
   const items = slugs.map((slug) => {
     const { raw } = readBlogFile(slug);
@@ -156,6 +192,16 @@ export function getBlogIndex(): BlogIndexItem[] {
       ...fm,
     };
   });
+
+  const seriesFilter = options?.series?.trim();
+  if (seriesFilter !== undefined && seriesFilter.length > 0) {
+    return items
+      .filter(
+        (item): item is BlogIndexItem & { seriesIndex: number } =>
+          "seriesIndex" in item && item.series === seriesFilter,
+      )
+      .sort((a, b) => a.seriesIndex - b.seriesIndex);
+  }
 
   return items.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),

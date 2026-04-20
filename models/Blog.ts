@@ -23,9 +23,13 @@ export type BlogFrontmatter = {
 } & (
   | {}
   | {
-      /** Optional display name for a multi-part series (from `series`). */
+      /** Stable series id (from `series` or `series-id`). Used in `/blog?series=…` and URLs. */
       series: string;
-      /** Part index within the series (from `series-number`). Not necessarily a number. */
+      /** Human-readable series name (from `series-title`). */
+      seriesTitle: string;
+      /** Sort order within the series (from `series-index`). */
+      seriesIndex: number;
+      /** Part label within the series (from `series-number`). Not necessarily numeric. */
       seriesNumber: string;
       /** Optional slug (no extension) of the previous post in a series. */
       previous?: string;
