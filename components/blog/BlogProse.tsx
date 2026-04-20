@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { sidenoteProseStyles } from "./sidenoteProseStyles";
 import { adapt } from "@styles/Adaptive";
+import { POST_ARTICLE_SHELL_MAX_ARTICLE_ONLY } from "@styles/blogLayout";
 import { Colour } from "@styles/Colours";
 
 export const Prose = styled.div`
@@ -270,6 +271,7 @@ export const PostTitle = styled.h1`
     desktop: `font-size: 28pt;`,
   })}
   font-weight: 700;
+  line-height: 1.15;
 `;
 
 export const PostDate = styled.p`
@@ -309,6 +311,13 @@ export const PostSyndication = styled.p`
     color: inherit;
     text-decoration-thickness: 1px;
   }
+`;
+
+/** Same measure as a post with no TOC/sidenotes (`PostArticleShell` + `Prose`). */
+export const BlogIndexShell = styled.div`
+  max-width: min(${POST_ARTICLE_SHELL_MAX_ARTICLE_ONLY}, 100%);
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const PostList = styled.ul`

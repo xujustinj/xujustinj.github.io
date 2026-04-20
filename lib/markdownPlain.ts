@@ -9,5 +9,6 @@ export function stripInlineMarkdown(source: string): string {
   t = t.replace(/__([^_]+)__/g, "$1");
   t = t.replace(/_([^_]+)_/g, "$1");
   t = t.replace(/`([^`]+)`/g, "$1");
+  t = t.replace(/\$([^$]+)\$/g, "$1");
   return t;
 }

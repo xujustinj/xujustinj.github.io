@@ -53,7 +53,7 @@ const NextNeighborLink = styled(Link)`
 `;
 
 function neighborLinkAriaLabel(neighbor: BlogNeighborNav): string {
-  return `Part ${neighbor.seriesNumber}: ${stripInlineMarkdown(neighbor.title)}`;
+  return `Part ${stripInlineMarkdown(neighbor.seriesNumber)}: ${stripInlineMarkdown(neighbor.title)}`;
 }
 
 /* ——— bar chrome + center label ——— */
@@ -123,7 +123,7 @@ export async function PostSeriesNavBar({
   const hasNeighbors = previous !== undefined || next !== undefined;
 
   let ariaLabel = "Series navigation";
-  ariaLabel = `Part ${seriesNumber} of ${stripInlineMarkdown(series)}`;
+  ariaLabel = `Part ${stripInlineMarkdown(seriesNumber)} of ${stripInlineMarkdown(series)}`;
   if (hasNeighbors) {
     ariaLabel += ". Previous and next posts";
   }
@@ -140,7 +140,9 @@ export async function PostSeriesNavBar({
             >
               <FontAwesomeIcon icon={faChevronLeft} aria-hidden />
               <NeighborTextStack>
-                <PartLine>Part {previous.seriesNumber}</PartLine>
+                <PartLine>
+                  <InlineMarkdown source={`Part ${previous.seriesNumber}`} />
+                </PartLine>
                 <TitleLine>
                   <InlineMarkdown source={`**${previous.title}**`} />
                 </TitleLine>
@@ -150,7 +152,9 @@ export async function PostSeriesNavBar({
         </NavSide>
         <NavCenter>
           <SeriesCenterRoot>
-            <PartLine>Part {seriesNumber} of</PartLine>
+            <PartLine>
+              <InlineMarkdown source={`Part ${seriesNumber} of`} />
+            </PartLine>
             <TitleLine>
               <InlineMarkdown source={`**${series}**`} />
             </TitleLine>
@@ -163,7 +167,9 @@ export async function PostSeriesNavBar({
               rel="next"
               aria-label={`Next post: ${neighborLinkAriaLabel(next)}`}>
               <NeighborTextStack>
-                <PartLine>Part {next.seriesNumber}</PartLine>
+                <PartLine>
+                  <InlineMarkdown source={`Part ${next.seriesNumber}`} />
+                </PartLine>
                 <TitleLine>
                   <InlineMarkdown source={`**${next.title}**`} />
                 </TitleLine>

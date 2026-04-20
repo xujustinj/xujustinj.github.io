@@ -1,0 +1,241 @@
+---
+title: "Stairway Constants, part $[0,1)$"
+excerpt: "the start of an era"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2020-01-17"
+original-date: "2020-01-17"
+original-publication: "mathNEWS v142i1"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2020/01/mathNEWS-142-1.pdf#page=20"
+repost-date: "2026-04-20"
+series: "Stairway Constants"
+series-number: "$[0,1)$"
+---
+
+In the W19 term, a number line was added to the north-northeast stairwell in MC (the one near the DC and M3 bridges), putting [CC's 2018 review of vertical transportation mechanisms in MC](https://mathnews.uwaterloo.ca/wp-content/uploads/2018/10/mathnews-138-2.pdf#page=7) out of date.
+Well, things haven't changed that much.
+If anything, the number line has only further solidified the stairwell's position as the nicest one in MC.
+Perhaps now it is also the most educational stairwell in UW.
+
+But is it really educational, or just an expensive spiral of black paint?
+What can we learn from this piece of art (and the wealth of mathematical knowledge on the Internet)?
+I invite you out for a walk: MC north-northeast stairwell, basement level.
+Bring this article with you.
+
+## Floor $0$
+
+*"This place exists?"*
+Of course there's a Floor $0$.
+What kind of heretics would start their number line at $1$?
+You look around, and there's not much down here other than a really loud pipe and a door you're not allowed to open.
+It's as if this landing exists solely to host the start of the number line.
+
+To the left of the big pink $0$, the black number line gives you a taste of the negative numbers, until it runs into the wall around $-0.2$.
+(You remark that they could have fit $\flac{-1}{12}$ in there, and wonder why they didn't.)
+
+Slightly to the right of the big pink $0$ is a silvery plaque:
+
+> ### $\epsilon$
+> **arbitrarily small positive number**
+
+After taking calculus, the response is automatic: there exists a positive $\delta$ which is sufficiently small to guarantee that something else is less than $\epsilon$. In that sense, $\delta$ is also an arbitrarily small positive number, but disappointingly, they seem to have left it out.
+
+Or maybe it's just a bit further along.
+You turn right and begin to follow the line.
+The tick marks count up by the hundredths, and you count $11$ before you get to the next number.
+Unfortunately, it's not $\delta$.
+
+> ### $L$
+> **Liouville's constant** \
+> $0.11000100000\dots$
+
+(For more digits, see [OEIS A012245](https://oeis.org/A012245).)
+A transcendental number is a number that is not the root of any polynomial with integer coefficients.
+Transcendental numbers are some of the most interesting numbers, and include superstars like $\pi$, $e$, and $e^\pi$.
+Meanwhile, Joseph Liouville was a 19th century French mathematician, known for proving the existence of transcendental numbers.
+The proof goes like this:
+
+> 1. **Lemma**: Liouville numbers exist.
+> 2. **Lemma**: all Liouville numbers are transcendental.
+> 3. Profit.
+
+But what are these magical Liouville numbers?
+To discuss them, we need a concept of approximation for real numbers.
+Take Liouville's constant ($L$), for example.
+One way to approximate $L$ is with a sequence of rational numbers that converges to it.
+For a first attempt, let the $q$th term be the closest rational number that has the denominator $q$.
+
+$$
+\tfrac{0}{1},
+\tfrac{0}{2},
+\tfrac{0}{3},
+\tfrac{0}{4},
+\tfrac{1}{5},
+\tfrac{1}{6},
+\dots,
+\tfrac{1}{12},
+\tfrac{1}{13},
+\tfrac{2}{14},
+\dots,
+\tfrac{2}{22},
+\tfrac{3}{23},
+\dots,
+\tfrac{3}{31},
+\tfrac{4}{32},
+\dots
+$$
+
+At most, we're off by $\flac{1}{2q}$, so the approximations get closer to $L$ as the sequence goes on... really slowly.
+What if we only kept "good approximations": the fractions with denominator $q$ that are within $\flac{1}{q^2}$ of $L$?
+
+$$
+\tfrac{0}{1},
+\tfrac{0}{2},
+\tfrac{0}{3},
+\tfrac{1}{8},
+\tfrac{1}{9},
+\tfrac{2}{18},
+\tfrac{3}{27},
+\tfrac{10}{91},
+\tfrac{11}{100},
+\dots
+$$
+
+This converges much faster.
+In theory, we could make the closeness criteria as strict as we want.
+$\flac{1}{q^3}$?
+$\flac{1}{q^{43.7}}$?
+As long as there are infinitely many of these "really good" approximations, we can form a sequence that converges to $L$.
+However, this is impossibly rare.
+For example, $\pi$ can at best be approximated by an infinite sequence with a precision of $\flac{1}{q^2}$.[^pi-approximation]
+
+[^pi-approximation]: Contingent on N. A. Carella's paper[*Irrationality Measure of Pi*](https://arxiv.org/abs/1902.08817) that probably hasn't been peer reviewed yet.
+*Note from 2026: it still hasn't been peer reviewed yet.*
+
+Liouville numbers are those impossibly rare numbers.
+They are defined as all numbers which have infinitely many rational approximations within a margin of $\flac{1}{q^n}$ -- for any $n$.
+Even if I take $n = 5040$, I can find a fraction $\flac{p}{q}$, which is within $\flac{1}{q^{5040}}$ of Liouville's constant.
+And then I can find another, and another, and another... infinitely many of them.
+
+Liouville proved the existence of his numbers by showing that for any integer $a > 1$, the following is a Liouville number:
+
+$$
+\sum_{k=1}^{\infty} a^{-k!}
+$$
+
+If you plug in $a = 10$, you get $L$, Liouville's constant.
+(If you would rather work in binary, plug in $a = 2$, and check out [OEIS A092874](https://oeis.org/A092874).)
+
+***Exercise**: find a rational number $\flac{p}{q}$ which is within $\flac{1}{q^{42}}$ of $L$.*
+
+## Floor $0.5$
+
+The sound of fluids rushing through pipes is a bit quieter now.
+You are a mere ten steps up from the great pink $0$, which you can still see.
+Next to you is a much more imposing pink $0.5$.
+A scientist would grumble that this style is inconsistent, because it gives $1.5$ more significant figures than $1$.
+An artist would grumble that this style makes $0.5$ looks more important than $0$.
+A mathematician would grumble that symbolically, $0.5$ is a construct of our arbitrary base $10$ system.
+At least it looks cool.
+
+To the left and right of the questionable pink number, are two plaques:
+
+> ### $P$
+> **Prime constant** \
+> $0.4146825098\dots$
+
+(For more digits, see [OEIS A051006](https://oeis.org/A051006).)
+Depending on how many digits of the square root of two you know, you do a double take.
+Is that $\sqrt{2} - 1$?
+It isn't, but you wouldn't be wrong about the remarkable two-ness of this number.
+If you convert the prime constant to base $2$, you get $0.01101010001010001010\dots$ (for more digits, see [OEIS A010051](https://oeis.org/A010051)).
+The prime constant is known to be irrational, but Wikipedia says (without citation) that nobody knows whether it is transcendental.
+(Perhaps you can find out?)
+***Exercise**: why is it called the prime constant?*
+
+> ### $\gamma$
+> **Euler-Mascheroni constant** \
+> $0.5772156649\dots$
+
+(For more digits, see [OEIS A001620](https://oeis.org/A001620).)
+Leonhard Euler was the first person known to identify the significance of $\gamma$, and needs no introduction.
+Lorenzo Mascheroni was born forty-three years after Euler; he mastered Euler's techniques and calculated $\gamma$ correctly to nineteen decimal places by hand![^mascheroni-gamma]
+We can distinguish $\gamma$ from the other umpteen numbers named after Euler because it's the only one that's also named after Mascheroni.
+
+[^mascheroni-gamma]: According to [this website](http://www-history.mcs.st-andrews.ac.uk/Biographies/Mascheroni.html).
+Fumbling my way through the Latin manuscript by Mascheroni himself, I was only able to find sixteen digits.
+
+But what is $\gamma$?
+Everyone who hasn't forgotten first-year calculus should be familiar with the pain of Riemann sums:
+
+$$
+\ln(n) = \int_1^n \tfrac{1}{x} dx
+\approx
+\tfrac{1}{1} + \tfrac{1}{2} + \tfrac{1}{3} + \dots + \tfrac{1}{n-1}
+=
+\sum_{i=1}^{n-1} \tfrac{1}{i}
+$$
+
+But this is pretty nifty: if we don't have a calculator, we can add up a bunch of simple reciprocals by hand to approximate $\ln(n)$.
+The only problem is, we overshoot by a bit, because this is an upper Riemann sum.
+At $n = 7$, the error is more than $0.5$; at $n = 70$, the error is more than $0.57$.
+Keep increasing $n$ and eventually the error exceeds $0.577$, then $0.5772$, then $0.57721\dots$ and so you get the digits of the Euler-Mascheroni constant.
+(This is not a good way to compute $\gamma$.)
+
+$$
+\gamma = \lim_{n\to\infty} \left(\sum_{i=1}^{n-1} \tfrac{1}{i} - \ln(n)\right)
+$$
+
+In a nutshell, the Euler-Mascheroni constant is the error term of an ambitious crossover event between the discrete and continuous worlds of mathematics.
+Because of this, it pops up in all sorts of weird places.
+Perhaps the coolest example is [Robin's Theorem](https://mathworld.wolfram.com/RobinsTheorem.html).
+If you find a number $n > 5040$ whose positive divisors (including $1$ and itself) sum to more than $e^\gamma n \ln(\ln(n))$, you will have refuted the Riemann hypothesis.
+If you prove that no such number exists, then you prove the Riemann hypothesis.
+***Exercise**: prove or disprove the Riemann hypothesis.*
+
+## Floor $1$
+
+Climbing another ten stairs, you return to civilization from the depths of the basement.
+A big pink $1$ greets you with congratulations.
+This is where we leave off, but before you can exit, another plaque introduces itself.
+
+> ### $G$
+> **Gauss's constant** \
+> $0.8346268416\dots$
+
+(For more digits, see [OEIS A014549](https://oeis.org/A014549).)
+Like Euler, Gauss needs no introduction.
+However, his constant likely does.
+Rooted in the depths of very hard integrals, Gauss's constant is involved in a great number of seemingly unrelated problems under topics like:
+
+- the gamma function
+- the arc length of an $\infty$-shaped curve called the lemniscate of (Jakob) Bernoulli
+- definite integrals of $\sqrt{\sin x}$ and $\sqrt{\cos x}$
+
+In fact, the constant is named after Gauss because he proved that $G$ is the value of yet another very hard definite integral.
+Thus, with regard to undergraduate math, Gauss's constant is probably the most esoteric one so far.
+Nonetheless, its definition is well within our grasp.
+$G$ is the reciprocal of the arithmetic-geometric mean of two simple numbers: $1$ and $\sqrt{2}$.
+
+$$
+G = \tfrac{1}{\text{agm}(1, \sqrt{2})}
+$$
+
+The magic behind $G$ is the "$\text{agm}$" part of its definition.
+The arithmetic-geometric mean (AGM) of two positive numbers $x$ and $y$ is the limit of a pair of sequences $(a_n)$ and $(g_n)$ defined like this:
+
+1. Let $a_0 = x$ and $g_0 = y$.
+2. $a_{i+1}$ is the arithmetic mean of $a_i$ and $g_i$: $(a_i + g_i)/2$.
+3. $g_{i+1}$ is the geometric mean of $a_i$ and $g_i$: $\sqrt{a_i g_i}$.
+
+***Exercise**: prove that $(a_n)$ and $(g_n)$ have the same limit.*
+The sequences converge very quickly, so within a few operations on a normal calculator, you can compute $G$ to high precision.
+Just remember that back when Gauss was your age, he had to do it by hand.
+
+---
+
+So there we go, the first floor of a multi-floor series dedicated to the constants that decorate the north-northeast stairwell in MC.
+Next time, we pick back up at Floor $1$ where we left off.
+
+***Exercise**: don't take the elevator.*

@@ -12,7 +12,8 @@ function slugifyHeading(text: string): string {
 
 /**
  * Scans markdown `#` … `######` lines (outside fenced code) so TOC ids match
- * the slug rules used when rendering headings.
+ * the slug rules used when rendering headings. Includes atx headings inside
+ * blockquotes (`> ### …`, including nested `> >`).
  */
 export function extractHeadings(
   source: string,
@@ -31,7 +32,7 @@ export function extractHeadings(
     }
     if (inFence) continue;
 
-    const m = line.match(/^(#{1,6})\s+(.+?)\s*$/);
+    const m = line.match(/^\s*(?:>\s*)*(#{1,6})\s+(.+?)\s*$/);
     if (!m) continue;
     const level = m[1].length as HeadingLevel;
     const text = m[2].replace(/\s+#*\s*$/, "").trim();

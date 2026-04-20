@@ -8,10 +8,17 @@ import { rehypePairSidenotes } from "./rehypePairSidenotes";
 import { rehypeWrapPostBody } from "./rehypeWrapPostBody";
 import { rehypeWrapTables } from "./rehypeWrapTables";
 import { remarkSuperscript } from "./remarkSuperscript";
+import type { KatexOptions } from "katex";
+import type { Options as RehypePrettyCodeOptions } from "rehype-pretty-code";
 
 type MdxCompileOptions = NonNullable<MDXRemoteProps["options"]>;
 
-const remarkPlugins = [remarkGfm, remarkMath, remarkSmartypants, remarkSuperscript];
+const remarkPlugins = [
+  remarkGfm,
+  remarkMath,
+  remarkSmartypants,
+  remarkSuperscript,
+];
 
 /**
  * Shared Markdown/MDX preprocessing and math rendering. Used for every compile
@@ -22,9 +29,19 @@ const remarkPlugins = [remarkGfm, remarkMath, remarkSmartypants, remarkSuperscri
 const rehypePrettyCodePlugin = [
   rehypePrettyCode,
   { theme: "github-dark", keepBackground: true },
-] as [typeof rehypePrettyCode, import("rehype-pretty-code").Options];
+] as const satisfies [typeof rehypePrettyCode, RehypePrettyCodeOptions];
 
-const rehypeBase = [rehypeKatex, rehypePrettyCodePlugin];
+/** Slash-style fraction: `\flac{a}{b}` → `\left. a \middle/ b \right.` */
+const rehypeKatexPlugin = [
+  rehypeKatex,
+  {
+    macros: {
+      "\\flac": "\\left. {#1} \\middle/ {#2} \\right.",
+    },
+  },
+] as const satisfies [typeof rehypeKatex, KatexOptions];
+
+const rehypeBase = [rehypeKatexPlugin, rehypePrettyCodePlugin];
 
 /**
  * Full-page / block MDX: KaTeX, `.post-body` wrapper, and sidenote pairing.
