@@ -105,9 +105,21 @@ const NavCenter = styled.div`
   text-align: center;
 `;
 
+const SeriesTitleLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+`;
+
 type Props = {
   previous?: BlogNeighborNav;
   next?: BlogNeighborNav;
+  /** Series id for `/blog?series=…`. */
+  seriesId: string;
   seriesTitle: string;
   seriesNumber: string;
   slot: "above-title" | "under-body";
@@ -116,6 +128,7 @@ type Props = {
 export async function PostSeriesNavBar({
   previous,
   next,
+  seriesId,
   seriesTitle,
   seriesNumber,
   slot,
@@ -156,7 +169,12 @@ export async function PostSeriesNavBar({
               <InlineMarkdown source={`Part ${seriesNumber} of`} />
             </PartLine>
             <TitleLine>
-              <InlineMarkdown source={`**${seriesTitle}**`} />
+              <SeriesTitleLink
+                href={`/blog?series=${encodeURIComponent(seriesId)}`}
+                aria-label={`All posts in ${stripInlineMarkdown(seriesTitle)}`}
+              >
+                <InlineMarkdown source={`**${seriesTitle}**`} />
+              </SeriesTitleLink>
             </TitleLine>
           </SeriesCenterRoot>
         </NavCenter>
