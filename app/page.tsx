@@ -107,7 +107,7 @@ export default function HomePage() {
               writing,{" "}
               <Link
                 href={
-                  "https://medium.com/@xujustinj/my-favourite-tech-stack-is-google-sheets-79a797887b80"
+                  "/blog/google-sheets"
                 }
               >
                 spreadsheet hacking
