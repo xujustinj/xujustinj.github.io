@@ -17,10 +17,6 @@ const PartLine = styled.span`
 const TitleLine = styled.span``;
 
 const neighborLinkSurface = css`
-  ${adapt({
-  mobile: `font-size: 9pt;`,
-  desktop: `font-size: 10pt;`,
-})}
   color: inherit;
   text-decoration: none;
 
@@ -28,12 +24,6 @@ const neighborLinkSurface = css`
     text-decoration: underline;
     text-decoration-thickness: 1px;
   }
-`;
-
-const NeighborTextStack = styled.span`
-  display: inline-flex;
-  flex-direction: column;
-  min-width: 0;
 `;
 
 const PrevNeighborLink = styled(Link)`
@@ -63,16 +53,16 @@ const SeriesCenterRoot = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${adapt({
-  mobile: `font-size: 11pt;`,
-  desktop: `font-size: 12pt;`,
-})}
   color: inherit;
 `;
 
 const Shell = styled.nav<{ $slot: "above-title" | "under-body" }>`
   width: 100%;
   padding: 0.5em 1em;
+  ${adapt({
+  mobile: `font-size: 11pt;`,
+  desktop: `font-size: 12pt;`,
+})}
   background: ${Colour({ h: "blue", s: "faded", v: "lightest" })};
   border: 2px solid ${Colour({ h: "blue", s: "faded", v: "lighter" })};
   border-radius: 9999px;
@@ -152,14 +142,9 @@ export async function PostSeriesNavBar({
               aria-label={`Previous post: ${neighborLinkAriaLabel(previous)}`}
             >
               <FontAwesomeIcon icon={faChevronLeft} aria-hidden />
-              <NeighborTextStack>
-                <PartLine>
-                  <InlineMarkdown source={`Part ${previous.seriesNumber}`} />
-                </PartLine>
-                <TitleLine>
-                  <InlineMarkdown source={`**${previous.title}**`} />
-                </TitleLine>
-              </NeighborTextStack>
+              <PartLine>
+                <InlineMarkdown source={`Part ${previous.seriesNumber}`} />
+              </PartLine>
             </PrevNeighborLink>
           ) : null}
         </NavSide>
@@ -184,14 +169,9 @@ export async function PostSeriesNavBar({
               href={`/blog/post/${next.slug}`}
               rel="next"
               aria-label={`Next post: ${neighborLinkAriaLabel(next)}`}>
-              <NeighborTextStack>
-                <PartLine>
-                  <InlineMarkdown source={`Part ${next.seriesNumber}`} />
-                </PartLine>
-                <TitleLine>
-                  <InlineMarkdown source={`**${next.title}**`} />
-                </TitleLine>
-              </NeighborTextStack>
+              <PartLine>
+                <InlineMarkdown source={`Part ${next.seriesNumber}`} />
+              </PartLine>
               <FontAwesomeIcon icon={faChevronRight} aria-hidden />
             </NextNeighborLink>
           ) : null}

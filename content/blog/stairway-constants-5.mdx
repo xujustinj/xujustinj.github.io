@@ -1,0 +1,390 @@
+---
+title: "Stairway Constants, part $[4.5,7]$"
+excerpt: "$F$, $\\delta$, $5$, $\\tfrac{\\pi^3}{6}$, $8 \\tfrac{\\pi^2}{15}$, $6$, $\\tau$, $2^e$, and $7$"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2020-03-13"
+original-date: "2020-03-13"
+original-publication: "mathNEWS v142i5"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2020/03/mathNEWS-142-5.pdf#page=10"
+repost-date: "2026-04-20"
+series-id: stairway-constants
+series-title: "Stairway Constants"
+series-number: "$[4.5,7]$"
+series-index: 5
+previous: "stairway-constants-4"
+next: "stairway-people"
+---
+
+After going from floor $0$ to $4.5$ over the last four issues of mathNEWS, this installment of *Stairway Constants* covers the remaining $2.5$ floors of the MC north-northeast stairwell number line, in one fell swoop.
+But first, I should clear up a little something.
+If you consult any building plan of MC, the stairwell housing the number line is actually dead north relative to the centre of the building, not north-northeast.
+Either way, you probably know it as the stairwell in the corner of MC with the DC and M3 bridges.
+
+Take this article with you to the $4.5$^th^ floor of that stairwell.
+We have an adventure to complete.
+
+## Floor $4.5$
+
+We left off here last time.
+Between here and the top is about $\flac{1}{3}$ of MC's height, but only around $\flac{1}{5}$ of the stairwell constants live here.
+Big numbers just aren't as special, for the most part.
+
+Just a few tick marks right of the big pink $4.5$ is the first of the last stairway constants.
+
+> ### $F$
+> **Freiman's constant** \
+> $4.5278295661\dots$
+
+(For more digits, see [OEIS A118472](https://oeis.org/A118472).)
+Currently $94$ years old, Russian mathematician Gregory Abelevich Freiman is Professor Emeritus at Tel Aviv University.[^freiman]
+Around the age of $50$, he discovered this constant's very weird exact value:
+$$
+F = 4 + \tfrac{253589820 + 283748 \sqrt{462}}{491993569}
+$$
+
+[^freiman]: Unforunately, Freiman passed away in 2024.
+
+If you handed that expression to someone and told them that it's the answer to a pretty fundamental question in number theory, I bet they would be very surprised.
+As with many of the constants in this stairwell, Freiman's constant has to do with rational approximations.
+Suppose I gave you a real number $x$.
+We can measure how well a fraction $\flac{p}{q}$ (in lowest terms) approximates $x$ with an efficiency function:[^efficiency]
+
+[^efficiency]: Efficiency is something I made up to explain things in this article.
+This comes from a background of little formal training in number theory, so don't go using "efficiency" in your papers.
+
+$$
+\fnpr{E}{x, \flac{p}{q}} = \tfrac{1}{q^2 \abs{ x - \flac{p}{q} }}
+$$
+
+As we make the denominator $q$ bigger, we can get arbitrarily accurate approximations, so $\abs{ x - \flac{p}{q} }$ approaches zero, making $\fnpr{E}{x, \flac{p}{q}}$ bigger.
+However, big denominators are hard to compute with, so there is a growing cost $q^2$ associated with the approximation, making $\fnpr{E}{x, \flac{p}{q}}$ smaller.
+The efficiency function thus indicates the balance between the two.
+Large values of $\fnpr{E}{x, \flac{p}{q}}$ mean that $\flac{p}{q}$ is both accurate and cheap to compute -- the criteria for an "efficient" (good) rational approximation.
+
+For example, last issue we covered $\flac{22}{7} = 3.142857\dots$ as [an unreasonably efficient approximation](/blog/post/stairway-constants-4#frac-22-7) for $\pi$.
+
+$$
+\fnpr{E}{\pi, \flac{22}{7}} = \tfrac{1}{7^2 \abs{\pi - \flac{22}{7}}} = \tfrac{1}{49 \times 0.0012644\dots} = 16.139\dots
+$$
+
+***Exercise**: what's the most efficient rational approximation for $\pi$? That is, what rational number $\flac{p}{q}$ maximizes $\fnpr{E}{\pi, \flac{p}{q}}$?*
+$\flac{22}{7}$ is pretty darn efficient, but it's only accurate to $3$ digits.
+This is why mathematicians care more about *infinite sequences* of efficient rational approximations.
+Having an infinite sequence means that there's always another more accurate but similarly efficient approximation further down the road.
+
+Let's choose an efficiency threshold $c$, and take all rational approximations at least as efficient as $c$.
+We want $c$ to be as high as possible.
+As long as infinitely many approximations are at least as efficient as $c$, then we have our sequence!
+This maximum possible value of $c$ has a special name: the Lagrange constant $\lambda(x)$, named after the French-Italian mathematician Joseph-Louis Lagrange.
+$\lambda(x)$ isn't really constant; its value changes with $x$.
+It indicates how efficiently we can approximate $x$ with rational numbers.[^infinite-efficiency]
+For example, the [golden ratio](/blog/post/stairway-constants-2#phi) $\phi$ has no efficient rational approximations, so its Lagrange constant is small.
+In fact, $\lambda(\phi) = \sqrt{5}$ is the smallest of all Lagrange constants.
+
+[^infinite-efficiency]: $\lambda(x)$ can be infinite.
+That is, some numbers can be approximated with infinite efficiency, including the first stairway constant, [Liouville's number](/blog/post/stairway-constants-1#l).
+
+The set of all possible values of $\lambda(x)$ is called the Lagrange spectrum.
+It starts at $\sqrt{5}$, skips to $\sqrt{8}$, and skips and skips again.
+Does it have an end?
+No, but in 1947, Marshall Hall, Jr. proved that beyond *some* point, the spectrum stops skipping.
+Every real number past that point is part of the Lagrange spectrum. 28 years later G. A. Freiman found what that point was, and it is now named Freiman's constant $F$ in his honour.
+$4.5278\dots$, the end of the last skip in the Lagrange spectrum.
+
+> ### $\delta$
+> **Feigenbaum constant** \
+> $4.66920160910\dots$
+
+(For more digits, see [OEIS A006890](https://oeis.org/A006890).)
+Mitchell Jay Feigenbaum passed away recently in 2019.
+He was an American mathematical physicist whose work on turbulence led him to study chaos.
+Specifically, Feigenbaum used a simple pocket calculator (highly advanced by 1975 standards) to play with a chaotic recurrence relation called the logistic map.
+The significance of the logistic map is often explained using a "reproduction" analogy, but given the current state of global affairs, a coronavirus analogy is perhaps more fitting.
+Let $x_n$ be the proportion of people in the world who are infected with coronavirus today.
+Each infected person runs into some number of people, and infects $k$ of them.
+The infected person then recovers overnight with probability $p$.
+Then on average, each infected person today is responsible for $k+1-p$ infections tomorrow. Let $r = k+1-p$:
+
+$$
+x_{n+1} = r x_n
+$$
+
+This incorrect model gives us exponential growth: $x_n = x_0 r^n$.
+Let's run with it for now.
+Even if $x_0$ is $1$ person out of $7.77$ billion, this is going to escalate as long as $r > 1$.
+Grant Sanderson from the math YouTube channel [3blue1brown](https://www.youtube.com/c/3blue1brown) gives $1.15$ as the current best guess for $r$.
+
+Let's use the number from Worldometer: $45{,}039$ active coronavirus cases at the time of writing.[^underreporting]
+Then the exponential model predicts less than $87$ days until we're all infected by early June 2020.
+Obviously, you can see the model falling apart.
+It falls apart completely by mid-July, when it starts to predict trillions of infections.
+The key problem with an exponential model is that in a city where everyone's coughing on everyone else, there should be no new infections because there's nobody left to infect.
+In general, more sick people means fewer healthy people you can encounter and infect.
+Thus, the logistic map is a better model:
+$$
+x_{n+1} = r x_n (1 - x_n)
+$$
+
+[^underreporting]: Many people are convinced that certain countries are accidentally/intentionally undertesting/underreporting...
+
+As the proportion of infections $x_n$ approaches $1$, the growth should sputter because the proportion of healthy people $1 - x_n$ goes to zero.
+For now, the spread of coronavirus still looks exponential because $1 - x_n$ continues to be really close to 1, but it makes more sense to label this pandemic as logistic.
+After all, the logistic model never predicts trillions of people infected.[^logistic-model]
+
+[^logistic-model]: However, the logistic model does a terrible job of estimating how slowly people get better.
+You can see this by setting $x_n = 1$.
+If everyone is infected today, then $x_{n+1} = r (1) (1 - 1) = 0$, and nobody will be infected tomorrow.
+
+Of course, the logistic map isn't bulletproof.
+For $1 < r < 3$, $x_n$ approaches some fixed point as $n$ goes to infinity.
+The bigger $r$ is, the bigger that fixed point is.
+***Exercise**: for $r = 1.15$, how many infections does the coronavirus stabilize at? Is this a sensible estimate?*
+But once you push past $3$, things escalate quickly.
+Instead of one fixed point, the number of infections oscillates between a higher and lower number.
+At Waterloo, that would be as crazy as everyone coughing in your MWF lectures, but the same classmates being healthy in your TTh lectures!
+From $r > 1 + \sqrt{6} = 3.4494897\dots$, infections cycle between four numbers.
+At about 3.544 the cycle doubles in size to eight numbers.
+It continues doubling faster and faster...
+At $r = 3.5699\dots$ ([OEIS A098587](https://oeis.org/A098587)) the logistic map loses the plot completely and explodes into a chaotic mess.
+Every day would have a wildly new number of infections, impossible to draw a trendline through.
+
+<CaptionedImage
+  src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Feigenbaum.png"
+  alt="As r increases along the horizontal axis, the points of stability double faster and faster until all hell breaks loose."
+  caption="As $r$ increases along the horizontal axis, the points of stability double faster and faster until all hell breaks loose. Image by Jarosław Bielak."
+/>
+
+Feigenbaum noticed that the distances ($L_0$, $L_1$, $L_2$, etc. in the diagram) between each doubling seem to shorten at a regular rate.
+Each time it doubled, the next doubling would happen about $4.67$ times faster than the last.
+That's why the onset of total chaos comes so soon after $3.544$.
+More formally, we can write Feigenbaum's observation as
+$$
+\delta = \lim_{n \to \infty} \tfrac{L_n}{L_{n+1}}
+$$
+where $\delta$ is *the* Feigenbaum constant.
+There's another one ("Feigenbaum's second constant") that is less talked-about than this one.
+Why is this one cooler?
+From the diagram you can see that the graph of the logistic map's points of stability is like a fractal.
+One point of stability splits into two branches, which split and split and split again.
+In fact, Feigenbaum's constant shows up in all sorts of other fractals.
+Most famously, it's the ratio between the sizes of various self-similar blobs in the picturesque Mandelbrot set.
+
+## Floor $5$
+
+Five.
+V.
+Olympic rings, toes, platonic solids, senses (in the classical sense), and categories of hurricanes.
+Google "star" and you'll see a bunch of five-pointed, probably-yellow figures used in many rating systems (which are also often out of $5$).
+
+The centuries-old Goldbach's weak conjecture states that $5$ is the last odd number that can't be written as the sum of three (not necessarily distinct) prime numbers.
+It is generally accepted that the Peruvian mathematician Harald Helfgott achieved the first proof of this in 2013.
+
+There are less than $5$ constants left to explore.
+What are we waiting for?
+
+> ### $\tfrac{\pi^3}{6}$
+> **Volume of the unit sphere in $\mathbb{R}^6$** \
+> $5.16771278300\dots$
+
+(For more digits, see [OEIS A164105](https://oeis.org/A164105).)
+The plaque is wrong!
+If you punch $\tfrac{\pi^3}{6}$ into any respectable calculator (or just check the OEIS), the digit 3 in $\dots 78300 \dots$ is not supposed to be there.
+$5.16771278004997\dots$ is the correct value.
+How many other errors are there in this stairwell?
+I'm not going to check.
+
+There are a bunch of ways to derive the volume of the unit sphere in $\mathbb{R}^6$ yourself.
+In homage to the next constant up ahead, the volume of the unit sphere in $\mathbb{R}^5$, I'll show you a way to compute it from that number.
+
+For some yet-unspecified $\omega_5$, let $\omega_5 r^5$ be the volume of a sphere of radius $r$ in the $5$-dimensional space $\mathbb{R}^5$.
+Just like how we can cut a sphere in $3$ dimensions into a stack of circular slices, we can cut a $6$-dimensional sphere into a stack of $5$-dimensional spherical slices.
+
+If the centre of the $6$-D unit sphere is at height $0$, then its bottom is at $-1$ and its top is at $1$.
+As is true in any number of dimensions, the Pythagorean theorem tells us that the slice at height $h$ has a radius $r$ such that $r^2 + h^2 = 1$.
+Rearranging, we can isolate $r = \sqrt{1 - h^2}$.
+Thus, the volume of the $6$-D unit sphere is
+$$
+\omega_6 = \int_{-1}^{1} \omega_5 r^5 dh = \omega_5 \int_{-1}^{1} (1 - h^2)^{\flac{5}{2}} dh
+$$
+
+You can solve this integral through trigonometric substitution!
+Draw a line between the origin and the $5$-D sphere at arbitrary height $h$.
+It makes an angle $\theta$ with the plane $h = 0$.
+Thus, $h = \sinp{}{\theta}$ and $dh = \cosp{}{\theta} d\theta$.
+
+$$
+\begin{aligned}
+  \omega_6
+  &= \omega_5 \int_{\arcsinp{-1}}^{\arcsinp{1}} \pr{1 - \sinp{2}{\theta}}^{\flac{5}{2}} \cosp{}{\theta} d\theta \\
+  &= \omega_5 \int_{-\flac{\pi}{2}}^{\flac{\pi}{2}} \pr{\cosp{2}{\theta}}^{\flac{5}{2}} \cosp{}{\theta} d\theta \\
+  &= \omega_5 \int_{-\flac{\pi}{2}}^{\flac{\pi}{2}} \cosp{5}{\theta} \cosp{}{\theta} d\theta \\
+  &= \omega_5 \int_{-\flac{\pi}{2}}^{\flac{\pi}{2}} \cosp{6}{\theta} d\theta \\
+\end{aligned}
+$$
+
+***Exercise**: finish evaluating the integral by using the double angle formula $\cosp{2}{\theta} = 2 \cosp{2}{\theta} - 1$. You'll need it more than once!*
+At the end, a bunch of terms cancel out and you get $\omega_6 = \frac{5}{16} \pi \omega_5$.
+(Notably, $\tfrac{5}{16} \pi$ is slightly less than $1$...)
+Now what was $\omega_5$ again?
+
+> ### $8 \tfrac{\pi^2}{15}$
+> **Volume of the unit sphere in $\mathbb{R}^5$** \
+> $5.263789015\dots$
+
+(For more digits, see [OEIS A164103](https://oeis.org/A164103).)
+(The last digit on the plaque is off by $1$...)
+Aha! That's what $\omega_5$ is.
+$\omega_5 (1)^5 = \omega_5$ is the volume of a $5$-D sphere of radius $1$.
+Now we can plug it in and finish computing the volume of the $6$-D unit sphere:
+$$
+\omega_6
+= \tfrac{5}{16} \pr{8 \tfrac{\pi^2}{15}} \pi
+= \tfrac{\pi^3}{6}
+$$
+as we saw earlier.
+
+As mentioned in the discussion around the stairway constant $\sqrt{\tau e} = \sqrt{2 \pi e}$, the 5D unit sphere has the largest volume of any unit sphere in any number of dimensions.
+Why?
+Suppose that instead of finding the volume of the unit sphere in 6 dimensions, we wanted it in $n$ dimensions.
+We could set up a similar integral and use trigonometric substitution again:
+
+$$
+\omega_n
+= \int_{-1}^{1} \omega_{n-1} r^{n-1} dh
+= \dots
+= \omega_{n-1} \int_{-\flac{\pi}{2}}^{\flac{\pi}{2}} \cosp{n}{\theta} d\theta
+$$
+
+Each volume is $k = \int_{-\flac{\pi}{2}}^{\flac{\pi}{2}} \cosp{n}{\theta} d\theta$ times the previous.
+Stepping back from the integrals, $k$ represents the area under the curve $y = f(x) = \cosp{n}{x}$ between $-\flac{\pi}{2}$ and $\flac{\pi}{2}$.
+What do the graphs of $\fnpr{f}{x} = \cosp{n}{x}$ look like?
+Without even graphing, you can probably fill in some common points like $\fnpr{f}{\pm \flac{\pi}{2}} = 0$ and $\fnpr{f}{0} = 1$.
+After graphing, you might notice that the graph hugs closer and closer to the $x$-axis as you increase $n$.
+***Exercise**: why? If $n < m$, prove $\cosp{n}{x} < \cosp{m}{x}$ in the range of our integral, except at the common points mentioned above.*
+
+This means $k$ is strictly decreasing with $n$.
+For $n \leq 5$, the area is greater than $1$.
+Therefore, $\omega_n$ increases for $n \leq 5$, because $k > 1$.
+However, at $n \geq 6$, $k$ drops below $1$ and just keeps plummeting all the way to $0$.
+These two things together are why the $5$-D unit sphere has the greatest volume.
+
+## Floor $5.5$
+
+As you reach another big pink number, you realize that this time it only took $10$ steps, breaking the pattern of $11$ steps per flight that's been in force since floor $1$.
+It stays that way for the rest of the stairwell.
+
+## Floor $6$
+
+Six.
+"Habitable" floors of MC.
+Legs on an insect.
+Faces on a cube.
+In fact, if you look directly at the corner of a cube, you'll see a hexagon.
+Hexagons (irregular) tile all across the facade of QNC to represent the structure of graphene.
+$6$ sides is the most that a regular polygon can have and still be able to tile the plane.
+
+$6$ is a really nice number.
+You might even call it *sexy*.[^sexy]
+It's a perfect number, because its divisors $1$, $2$, and $3$ sum to its value ($6$).
+Most numbers don't have nearly enough divisors to do that.
+
+[^sexy]: "Sexy prime" is serious mathematical terminology.
+
+Up from here, the stairs narrow, leaving a gap for you to look down and marvel at all the steps you've climbed to get here -- but we're not at the top yet.
+
+> ### $\tau$
+> **Tau** \
+> $6.2831853071\dots$
+
+(For more digits, see [OEIS A019692](https://oeis.org/A019692).)
+On June 28, the rebel scum of mathematics gather for their annual unconventional convention.
+Why June 28?
+It marks the day that the first three base-$10$ digits of $\tau$ (a.k.a. $2 \pi$) coincide with the Gregorian calendar.
+The cult has made a name for itself by denouncing the celebrated circle constant $\pi$ in favour of its one-legged counterpart $\tau$.
+Their goal: to replace $\pi$ with $\frac{\tau}{2}$ and $2 \pi$ with $\tau$ in common and academic discourse.
+They cite a plethora of reasons, including:
+
+- $\tau$ is the ratio between the circumference of a circle and its radius, which is much easier to state than the diameter nonsense used to define $\pi$.
+  This gets us really nice angle notations like $\tfrac{\tau}{4}$ to represent 90 degrees, a *quarter* of the way around the circle.
+- The period of the sine and cosine functions is $\tau$.
+- A lot of formulas that contain $\pi$ actually use $2 \pi$, which can be written more succinctly as $\tau$. For example, take the stairway constant $\sqrt{\tau e} = \sqrt{2 \pi e}$ from [last installment](/blog/post/stairway-constants-4#sqrt-tau-e-sqrt-2-pi-e).
+- Euler's formula becomes $e^{i \tau} = 1$.
+- A bunch of physics I'm not qualified to speak about.
+- Contrarianism is good for press.
+
+You can find a whole lot more at [tauday.com](https://tauday.com/). Unfortunately for the rebels, their campaign barely makes ripples in the face of the establishment, because...
+
+- $\tau$ looks uglier.
+- $\pi$ tastes better.
+- It doesn't matter.
+  Even if all literature and people switched to $\tau$ overnight, we wouldn't gain any new insights into mathematics.
+- Inertia.
+
+Or maybe I'm wrong, and $\tau$ will be the fashion in another ten years.
+After all, the $\tau$ movement started only ten years ago when Michael Hartl published the [Tau Manifesto](https://www.tauday.com/tau-manifesto) online and introduced $\tau$ as the symbol for this previously faceless constant.
+
+For serious reasons why $\pi$ is worth defending, you can alternatively find the [Pi Manifesto](http://www.thepimanifesto.com/).
+
+***Exercise**: celebrate March 14th by throwing a pie at your local $\tau$ supporter!*
+
+## Floor $6.5$
+
+Just a little further...
+
+> ### $2^e$
+> **Froda constant** \
+> $6.5808859910\dots$
+
+(For more digits, see [OEIS A262993](https://oeis.org/A262993).)
+This constant manages to escape the mostly-exhaustive coverage of Steven R. Finch's *Mathematical Constants*.
+Apparently, in 1963 the Romanian mathematician Alexandru Froda exhibited a proof that this number is irrational, but I can't find the paper.
+All sources that mention this proof also add a mysterious remark that nobody (not even Froda, if he were still alive) knows whether the proof is valid.
+
+In general, it is very hard to prove if a number like the Froda constant is rational.
+The problem is the weird composition of crazy numbers.
+Other numbers whose rationality is unknown include various spellings of "pie" like $\pi + e$, $\pi e$, $\frac{\pi}{e}$, and $\pi^e$.
+That said, we do know that $e^2$ and $e^\pi$ are definitely irrational, since they are transcendental.
+
+***Exercise**: prove or disprove whether the Froda constant is irrational.*
+
+## Floor $7$
+
+Seven.
+The most random number between $1$ and $10$.
+The number of members in Maroon 5.
+There are seven sides on a regular heptagon, the simplest polygon that can't be constructed with compass and straightedge alone.
+
+You stand upon my favourite spot in all of MC.
+It's pretty spacious up here.
+The gap between the stairs lets you look down and get a true sense of how high up you are: $148$ steps above floor $0$.
+The stairway constants, the big pink numbers, the hundreds of tick marks... they all spiral away below you.
+Heck, not even eduroam makes it up here.
+This place is sacred.
+Adding to the heavenly feel, beautiful lights shine up from the walls to illuminate the ceiling.
+
+The stairway constants are done, and I hope you've learned something along the way.
+Slightly to the right of the big pink $7$, the number line ends just as it started -- it runs straight into the wall and stops.
+I guess Peano was wrong after all, and Randall Munroe was right -- [there really aren't any numbers above $7$](https://xkcd.com/1310/).
+Maybe if they made MC taller...
+
+Despite the huge pipes that run straight through the number line, it's not too loud up here.
+If you listen closely, you can hear the invisible dragons that nest on the roof of MC.
+"Thanks for not taking the elevator," they whisper.
+
+---
+
+> This was the final math-heavy installment of *Stairway Constants*, to the great relief of the mathNEWS editors.
+> Only later did I understand the amount of insane manual work involved in typesetting those $\LaTeX$ formulas in Adobe InDesign when importing my article submissions.
+> Nevertheless, swindlED awarded the v142i5 article of the issue to me for this series, with the following note:
+>
+> > This week's article of the issue goes to water for *Stairway Constants, part $[4.5,7]$*, though really it's for the series as a whole.
+> > On the one hand it's the most actual math we've had in mathNEWS in a while, on the other hand the *Stairways Constants* series have been by far the hardest articles to format since Zethar's cuneiform magnum opus, so you best be damn grateful we've deigned to give you the prize 😛
+>
+> Also, my friend Cix drew the most amazing cover art for the v142i5 issue in honour of the finale:
+> <Image src="/assets/cix-v142i5-cover-2400x2800.png" alt="A line art drawing of a stairway ascending into heaven, with the words THE END OF AN ERA written on the steps."/>
+>
+> *THE END OF AN ERA* was no understatement -- it defined not just the term but perhaps my entire pre-COVID university experience.
+> I sank more effort into the series than most of my courses.
+> It also had an unintended meaning: the incoming pandemic then closed the university on the very same day.

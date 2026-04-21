@@ -1,0 +1,276 @@
+---
+title: "Stairway Constants, part $[1,2)$"
+excerpt: "$1$, $S_1$, $\\sigma_1$, $P$, $\\sqrt{2}$, and $\\phi$"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2020-01-31"
+original-date: "2020-01-31"
+original-publication: "mathNEWS v142i2"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2020/01/mathNEWS-142-2.pdf#page=24"
+repost-date: "2026-04-20"
+series-id: stairway-constants
+series-title: "Stairway Constants"
+series-number: "$[1,2)$"
+series-index: 2
+previous: "stairway-constants-1"
+next: "stairway-constants-3"
+---
+
+We left off at the first floor landing, where we pick back up now.
+
+## Floor $1$
+
+One.
+The successor of zero.
+$0.999\dots$.
+The multiplicative identity.
+$e^{i \tau}$.
+Depending on how you define things, it's the first or second natural number.
+Meanwhile, it's the first *and* second Fibonacci number.
+One is unity, but it is not the only unit (in the integers).
+It's neither prime nor composite.
+One is unique, and unique is one.
+
+"Wau!" you exclaim.[^wau]
+A big pink $1$ stares you in the face.
+Above, the number line runs on by.
+Up the stairs you follow it.
+
+[^wau]: The mathemusician Vihart made [a great video](https://vimeo.com/147787609) about the properties of the underappreciated constant wau.
+You can find wau in this stairwell if you look closely.
+
+> ### $S_1$
+> **First Smarandache constant** \
+> $1.09317\dots$
+
+(For more digits, see [OEIS A048799](https://oeis.org/A048799).)
+If you've been keeping track, it seems as though whoever designed these plaques didn't care about having a consistent number of decimal places on each one.
+
+We cannot discuss the "First Smarandache constant" without acknowledging how many there are.
+From the [Wolfram MathWorld page](https://mathworld.wolfram.com/SmarandacheConstants.html), Florentin Smarandache has at least fourteen things named after him:
+
+- The Smarandache-Wellin numbers, which come up [on Wikipedia](https://en.wikipedia.org/wiki/Smarandache%E2%80%93Wellin_number) when you Google him.
+- *The* Smarandache constant ([OEIS A038458](https://oeis.org/A038458)), which is the first exponent $x$ such that we get $q^x - p^x = 1$ for two consecutive primes $p$ and $q$.
+- The Smarandache function $\mu(n)$, on which the subsequent things in the list are based (more on this later).
+  If you look for this function on Wikipedia you will see it called the [Kempner function](https://en.wikipedia.org/wiki/Kempner_function), named after the mathematician who first described an algorithm to compute $\mu(n)$ (sixty-two years before Smarandache rediscovered it).
+- The First Smarandache constant $S_1$.
+- The Second Smarandache constant $S_2$ ([OEIS A048834](https://oeis.org/A048834)).
+- The Third Smarandache constant $S_3$.
+- The Fourth Smarandache "constant" $S_4(\alpha)$ is really a series parameterized by $\alpha$, which converges for $\alpha \geq 1$.
+- $S_5$ through $S_{11}$, some of which have parameters like $S_4$ does.
+
+Florentin Smarandache is now teaching mathematics at the University of New Mexico, so he still has a chance to get even more things named after him.
+Still, he's nowhere close to Euler.
+Moreover, Smarandache's things don't have nearly the same usefulness as Euler's.
+$S_1$ through $S_{11}$ are pretty damn arbitrary.
+They come from papers by six different authors written between 1995 and 1996.
+The formulas for the eleven series get increasingly esoteric with no apparent mathematical significance to their ordering.
+If all this sounds sketchy to you, there is [a whole discussion on the r/math subreddit](https://www.reddit.com/r/math/comments/3bd1qh/is_florentin_smarandache_a_real_mathematician/) about whether or not Smarandache is legit.
+
+Nonetheless, let's see what we can learn from the First Smarandache constant.
+To begin, the Smarandache function $\mu(n)$ is defined as the least positive integer $k$ such that $k!$ is divisible by $n$.
+For example, $\mu(9) = 6$, since $6! = 720$ is divisible by $9$ (and $1!$, $2!$, $3!$, $4!$, and $5!$ aren't).
+
+Meanwhile, the First Smarandache constant is defined by:
+$$
+S_1
+= \sum_{n=2}^{\infty} \tfrac{1}{\pr{\mu(n)}!}
+= \sum_{n=2}^{\infty} \tfrac{1}{\text{the first factorial }k!\text{ divisible by }n}
+$$
+
+It doesn't really matter what the value of $S_1$ is; the significance of $S_1$ (if any) is that *it exists*.
+Paraphrasing David Jao, a good way to see how an integer sequence grows is to check the "sum of reciprocals" of its terms.
+In this case, the terms in question are $\pr{\mu(2)}!, \pr{\mu(3)}!, \pr{\mu(4)}!, \dots$.
+Since the series converges, we know this sequence grows pretty fast.
+
+***Exercise**: prove the easier theorem that the sum of reciprocals of $2!, 3!, 4!, \dots$ converges.*
+
+> ### $\sigma_1$
+> **Smallest known Salem number** \
+> (Root of Lehmer's polynomial) \
+> $1.1762808183\dots$
+
+(For more digits, see [OEIS A073011](https://oeis.org/A073011).)
+This plaque is a bit misleading.
+I interpreted it as "the Salem numbers are the roots of some mystical polynomial, and $\sigma_1$ is the smallest of them."
+I was very wrong.
+
+In actuality, Lehmer's polynomial has just ten roots, and $\sigma_1$ is the "largest" among them.
+(The other roots are not Salem numbers.)
+The infinitely many other Salem numbers (named after the 20^th^ century Greek mathematician Raphaël Salem) have nothing to do with Lehmer's polynomial, but we don't know any that are smaller than $\sigma_1$.
+The legendary late number theorist Derrick Henry Lehmer (after whom the polynomial is named) conjectured that $\sigma_1$ is the smallest Salem number, but nobody has proven it yet.
+Meanwhile, there's nothing particularly mystical about Lehmer's polynomial.
+We can actually write it out in full:
+$$
+x^{10} + x^9 - x^7 - x^6 - x^5 - x^4 - x^3 + x + 1
+$$
+That's it.
+So what's this constant doing in the stairwell?
+
+The Salem numbers have to do with polynomials satisfying a very strict set of conditions:
+
+1. The polynomial is monic (its leading coefficient is $1$).
+2. The polynomial's coefficients are integers.
+3. The polynomial has a real root greater than $1$.
+4. No other polynomial of smaller degree has the same root from condition #3.
+5. The polynomial has a complex root with modulus exactly $1$.
+6. The other (complex) roots of the polynomial have modulus $1$ or smaller.
+
+Iff the polynomial fits all of the above, then the root mentioned in condition #3 is a Salem number.
+Thanks to these conditions, Salem numbers are useful in all sorts of math, even beyond number theory.
+Chris Smyth has written [a nice paper](https://webhomes.maths.ed.ac.uk/~chris/papers/Salem_survey220315.pdf) listing some of the uses.
+
+At the moment, the next largest known Salem number is $1.1883681475\dots$, which exceeds $\sigma_1$ by less than $0.013$.
+The next one after that is very close to $1.2$.
+This is part of why $\sigma_1$ is interesting: after it, there's a ton of Salem numbers.
+But before it, there's an empty sea of nothing.[^mahler-measure]
+
+[^mahler-measure]: A sudden empty sea of nothing bounded above by $\sigma_1$ also comes up in [Mahler measure](https://en.wikipedia.org/wiki/Mahler_measure), which I don't have room to explain in this article.
+
+***Exercise**: are any of the other numbers in this stairwell Salem numbers?*
+
+## Floor $1.5$
+
+After eleven steps, you reach the next landing, with a big pink $1.5$.
+There's an alcove for a door leading to the outside world, but we're heading to the second floor.
+There's more constants to see.
+
+However, the alcove brings up an interesting question.
+This landing seems to have a larger perimeter than the others.
+Is the physical length of the number line varying between floors?
+That would be a grave travesty.
+I'll have an answer for you by the next installment, after I check using a ruler.
+
+> ### $P$
+> **Plastic number** \
+> $1.324717957\dots$
+
+(For more digits, see [OEIS A060006](https://oeis.org/A060006).)
+Hey, we've seen $P$ before.
+It's the same symbol as the one for the [prime constant](/blog/post/stairway-constants-1#p), but it's definitely not the same number.
+This brings up an important point in mathematics: a symbol means exactly the meaning you give it here and now, and it means nothing else.
+The same goes for names.
+A plastic number by any other name is just as cool, if not cooler.
+Other people might know it as:
+
+- the plastic ratio
+- the radiant number
+- the silver number
+- the smallest Pisot-Vijayaraghavan number, as conjectured by Raphaël Salem (after whom Salem numbers are named!) and proven by Carl Ludwig Siegel
+- (hence the name) Siegel's number
+
+"Plastic" might sound degrading in our modern day and age, but it is meant to be flattering, in the same way that someone might say that the human brain is plastic.
+
+The plastic number has one of the simplest definitions out of the constants so far, as the positive real solution to the equation $x^3 = x + 1$.
+That is, cubing the plastic number is the same as adding $1$.
+You might recall a famous number with a similar property: squaring the [golden ratio](#phi) is the same as adding $1$.
+
+However, like plastic, the plastic ratio is much less abundant in the natural world than its golden counterpart, and has only surfaced in relatively recent times through the influence of mankind.
+Most notably it appears in the work of the 20th century Dutch monk and architect Dom Hans van der Laan, who was one of the first people to relate the plastic ratio to the human ability to tell sizes apart in three dimensions.
+
+***Exercise**: use the cubic formula to find the exact value of $P$.*
+
+> ### $\sqrt{2}$
+> **Square root of 2** \
+> $1.4142135623\dots$
+
+(For more digits, see [OEIS A002193](https://oeis.org/A002193).)
+After a slew of 20th century constants, here's one for the ancients.
+Legend has it that someone was drowned as a result of their discovery of $\sqrt{2}$ as the first irrational number...
+You yourself may have had to come up with one of the many proofs that $\sqrt{2}$ is irrational.
+As testament to the progress of society, you were almost certainly not thrown into the sea for doing so.
+
+Probably as common as $\sqrt{2}$ is its reciprocal $\tfrac{1}{\sqrt{2}}$, which happens to be the sine (and cosine) of a certain special angle.
+Or do you prefer to write it as $\tfrac{\sqrt{2}}{2}$?
+I'll make a case for the latter:
+$$
+\begin{aligned}
+  \sin 0 = 0 &= \tfrac{\sqrt{0}}{2} \\
+  \sin \tfrac{\pi}{6} = \tfrac{1}{2} &= \tfrac{\sqrt{1}}{2} \\
+  \sin \tfrac{\pi}{4} &= \tfrac{\sqrt{2}}{2} \\
+  \sin \tfrac{\pi}{3} &= \tfrac{\sqrt{3}}{2} \\
+  \sin \tfrac{\pi}{2} = 1 &= \tfrac{\sqrt{4}}{2}
+\end{aligned}
+$$
+It makes it so much easier to memorize special angle trig ratios if you rationalize the denominators.
+
+Better than the OEIS, you can find even more digits of $\sqrt{2}$ at this [ancient NASA webpage](https://apod.nasa.gov/htmltest/gifcity/sqrt2.10mil).
+Why would anyone want to know so many decimal places of a number?
+It's mostly for the glory.
+Even for NASA, beyond the hundredth digit, you already have more precision than you need for any sort of astronomical computation.
+The current record for $\sqrt{2}$ is $10$ trillion digits, set by Ron Watkins.[^y-cruncher]
+If you're thinking of trying to beat him, you should be warned that it took his two Intel Xeon X5690 processors a month and a half to compute and verify the digits.
+***Exercise**: compute $\sqrt{2}$ to $14{,}142{,}135{,}623{,}731$ digits. (Good luck!)*[^teck-por-lim]
+
+[^y-cruncher]: You can find the full list of records at [y-cruncher](http://www.numberworld.org/y-cruncher/records.html), which features many of the constants from this stairwell.
+You might recognize the Euler-Mascheroni constant, [which we've already covered](/blog/post/stairway-constants-1#gamma).
+Undoubtedly, this page will come up again in the near future.
+
+[^teck-por-lim]: As of this 2026-04-20 repost, two people are known to have performed this exercise: Jordan Ranous ($20$ trillion digits, 2023) and Teck Por Lim ($28$ trillion digits, 2025).
+
+> ### $\phi$
+> **Golden Ratio** \
+> $1.6180339887\dots$
+
+(For more digits, see [OEIS A001622](https://oeis.org/A001622).)
+Here's another one for the ancients: the most overrated ratio in mathematics.
+A certain author (who I will not name, to avoid promoting him) has even cooked up a $120 wellness guide consisting of various things in golden proportions to help its readers harness the magical power of the ~placebo effect~ golden ratio.[^diet]
+
+[^diet]: As I write this, the editors are having a blast while they ridicule this book.
+If you really want to laugh along, it's called [*The Golden Ratio Lifestyle Diet*](https://leadershipalliance.com/wp-content/uploads/2014/04/GR-DIET-Life-Ext-ARTICLE.pdf).
+
+In all seriousness, the exact value of the golden ratio is $\frac{1 + \sqrt{5}}{2}$, and it does have serious mathematical applications.
+These properties stem from the fact that the golden ratio is the positive solution to the quadratic relation "squaring is the same as adding $1$":
+$$
+\phi^2 = \phi + 1
+$$
+
+That relation is the source of the golden ratio's "unexplained" powers.
+For example, we can divide both sides by $\phi$ to get the continued fraction
+$$
+\phi
+= 1 + \tfrac{1}{\phi}
+= 1 + \frac{1}{1 + \tfrac{1}{\phi}}
+= \dots
+= 1 + \frac{1}{1 + \tfrac{1}{1 + \ddots}}
+$$
+
+At any point, we can cut off the continued fraction to get an approximation of $\phi$.
+Cutting it off immediately gives $1 = \flac{1}{1}$.
+Cutting it off after one term gives $1 + \frac{1}{1} = \flac{2}{1}$.
+Cutting it off after two terms gives $1 + \tfrac{1}{1 + \flac{1}{1}} = 1 + \tfrac{1}{2} = \flac{3}{2}$.
+And then $\flac{5}{3}$, $\flac{8}{5}$, $\flac{13}{8}$... the appearance of the Fibonacci numbers in this sequence is no coincidence.
+For the same reason, the rational approximations converge really slowly to $\phi$; slower than they do for any other number between $1$ and $2$.
+Thus, $\phi$ is also known as "the most irrational number" (you can find a lot of YouTube videos on this topic).
+This is ultimately why it occurs famously in the centres of so many flowers: you can fit more seeds that way.
+
+See? Nothing magical about $\phi$.
+Nothing magical about the golden spiral.
+In fact, there is a whole sequence of ratios that come up when you generalize the defining property of the golden ratio.
+Consider "squaring it is the same as adding $n$" for any integer $n$.
+
+$$
+x^2 = x + n
+$$
+
+$n = 1$ gives us the beloved golden ratio.
+For $n = 2$ you get the aptly named silver ratio.
+For $n = 3$ you get the bronze ratio.[^plastic]
+Each of these has their own spiral, their own fractals, and falls short perhaps only in fame and recognition.
+
+[^plastic]: The aforementioned plastic ratio does not appear in this sequence.
+We're dealing with metals only here.
+
+***Exercise**: can you find examples of the golden ratio in the architecture on campus?*
+
+## Floor $2$
+
+Hey look, we made it.
+After climbing another eleven steps, a big pink $2$ greets us.
+If you've been keeping track, that makes a total of forty-two steps from the very bottom.
+(Coincidence? Probably.)
+The editors are getting a bit scared by the length of this article, which means the next floor of constants will have to wait until the next issue.
+See you then!
+
+***Exercise**: don't take the elevator.*

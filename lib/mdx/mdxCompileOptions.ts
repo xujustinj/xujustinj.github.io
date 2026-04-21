@@ -31,12 +31,35 @@ const rehypePrettyCodePlugin = [
   { theme: "github-dark", keepBackground: true },
 ] as const satisfies [typeof rehypePrettyCode, RehypePrettyCodeOptions];
 
-/** Slash-style fraction: `\flac{a}{b}` → `\left. a \middle/ b \right.` */
+/**
+ * Custom KaTeX macros (see https://katex.org/docs/options.html#macros).
+ * KaTeX preset macros cannot use optional `[]` like `\sinp[2]{x}`; use `\sinp{2}{x}`.
+ */
 const rehypeKatexPlugin = [
   rehypeKatex,
   {
     macros: {
       "\\flac": "\\left. {#1} \\middle/ {#2} \\right.",
+      "\\pr": "\\left( {#1} \\right)",
+      "\\vv": "\\left\\lvert {#1} \\right\\rvert",
+      "\\abs": "\\vv{#1}",
+      "\\size": "\\vv{#1}",
+      "\\prarg": "\\mathopen{} \\pr{#1} \\mathclose{}",
+      "\\fnpr": "{#1}\\mathopen{} \\left( {#2} \\right) \\mathclose{}",
+      "\\cosp": "\\fnpr{\\cos^{#1}}{#2}",
+      "\\sinp": "\\fnpr{\\sin^{#1}}{#2}",
+      "\\tanp": "\\fnpr{\\tan^{#1}}{#2}",
+      "\\secp": "\\fnpr{\\sec^{#1}}{#2}",
+      "\\cscp": "\\fnpr{\\csc^{#1}}{#2}",
+      "\\cotp": "\\fnpr{\\cot^{#1}}{#2}",
+      "\\arccosp": "\\fnpr{\\arccos}{#1}",
+      "\\arcsinp": "\\fnpr{\\arcsin}{#1}",
+      "\\arctanp": "\\fnpr{\\arctan}{#1}",
+      "\\arcsecp": "\\fnpr{\\arcsec}{#1}",
+      "\\arccscp": "\\fnpr{\\arccsc}{#1}",
+      "\\arccotp": "\\fnpr{\\arccot}{#1}",
+      "\\Gammap": "\\fnpr{\\Gamma}{#1}",
+      "\\chromial": "\\fnpr{\\chi}{#1}",
     },
   },
 ] as const satisfies [typeof rehypeKatex, KatexOptions];

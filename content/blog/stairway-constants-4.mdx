@@ -1,0 +1,382 @@
+---
+title: "Stairway Constants, part $[3,4.5)$"
+excerpt: "$3$, $\\pi$, $\\tfrac{22}{7}$, $S$, $\\Psi$, $4$, and $\\sqrt{\\tau e} = \\sqrt{2 \\pi e}$"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2020-02-28"
+original-date: "2020-02-28"
+original-publication: "mathNEWS v142i4"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2020/02/mathNEWS-142-4.pdf#page=8"
+repost-date: "2026-04-20"
+series-id: stairway-constants
+series-title: "Stairway Constants"
+series-number: "$[3,4.5)$"
+series-index: 4
+previous: "stairway-constants-3"
+next: "stairway-constants-5"
+---
+
+So far, we've covered the constants in the intervals $[0,1)$, $[1,2)$, and $[2,3)$; this issue we'll cover $[3,4.5)$.
+As always, it's highly recommended that you actually go to the stairwell with this article in hand, for a fully-immersive tour.
+
+One thing this series mentions very frequently is the OEIS.
+"For more digits, see OEIS Axxxxxx."
+OEIS stands for the [Online Encyclopedia of Integer Sequences](https://oeis.org), and xxxxxx is a six-digit code used to look up an OEIS entry.
+Yes, we need all six digits.
+Despite being restricted to only integer terms, the OEIS has enough sequences (over $100{,}000$) to fill a book as thick as this stairwell is tall.
+
+However, many of the stairway constants are transcendental -- what are they doing in a database of integer sequences?
+It turns out that there's a very simple correspondence between real numbers and integer sequences, so common that you use it every day without thinking.
+
+For example, take Mills' constant (not in this stairwell).
+Its hypothesized value is $1.3063778838630806\dots$ and it has some really cool properties you should totally look into in your free time.
+The corresponding OEIS sequence is [A051021](https://oeis.org/A051021), which goes
+
+$$
+1, 3, 0, 6, 3, 7, 7, 8, 8, 3, 8, 6, 3, 0, 8, 0, 6, \dots
+$$
+
+Quite simply, the sequence is the base-$10$ digits of the constant.
+The uses of the OEIS go far beyond simply storing the digits of long numbers.
+For more about the OEIS, you can hear it from the man who created it.
+Check out the [*Numberphile Podcast* with Neil Sloane](https://youtu.be/mNk_MfFKnuY).
+
+## Floor $3$
+
+Three.
+The first odd prime number.
+The number of petals on this province's official flower.
+$3$ non-collinear points in our $3$-dimensional space uniquely define a plane containing $3$ line segments that bound the simplest polygon: a triangle.
+Remarkable as it is, the number $3$ lives in the shadow of its smaller cousin $2$.
+Just look at this number line! $\sqrt{2}$ is here, but $\sqrt{3}$ isn't.
+
+Being in the shadows doesn't mean that three can't be cool.
+Have you noticed how many meme numbers are divisible by $3$?
+Here are a few:
+
+- $21$
+- $42$
+- $69$
+- $420$ (and $42{,}069$, and $69{,}420$)
+- $666$
+- $9{,}000$
+- $58{,}008$ and $80{,}085$ (but not $5{,}318{,}008$ or $8{,}008{,}135$)
+
+Of course, a lot of meme numbers are divisible by $2$ as well, but that just sounds stupid to point out.
+Divisibility by $3$ is way more impressive because you actually have to look at *all* of the digits to check (in base $10$).
+
+> ### $\pi$
+> **Pi** \
+> $3.1415926535\dots$
+
+(For more digits, see [OEIS A000796](https://oeis.org/A000796).) $\pi$ is probably the most famous constant of all time -- even more popular than $e$.
+Just look at this number line!
+We've already seen the golden angle, which is derived directly from the [golden ratio](/blog/post/stairway-constants-2#phi) and $\pi$.
+Now here's $\pi$ itself in full glory.
+Up ahead, about half of the remaining stairway constants are related to $\pi$.
+
+$\pi$ is prominent because it's so simple.
+Draw a circle.
+Draw a line perfectly through that circle.
+The edge of the circle -- the circumference -- is $\pi$ times longer than the line through the circle -- the diameter.
+See something round?
+$\pi$ is probably involved.
+See something completely unrelated to circles?
+$\pi$ is still probably involved.
+For example, Euler famously proved
+
+$$
+\tfrac{\pi^2}{6} = \tfrac{1}{1} + \tfrac{1}{4} + \tfrac{1}{9} + \dots = \sum_{k=1}^{\infty} \tfrac{1}{k^2}
+$$
+
+$\pi$ is so prominent that it has become a symbol representing all of mathematics.
+Pi Day (March 14^th^) is an annual occasion for everyone to fire up their Twitter accounts and pretend to like math.
+MathSoc distributes certain baked pastry dishes with sweet or savoury fillings -- also known as pies.
+Among the many Pi Day traditions is $\pi$ recitation.
+The Guinness world record is held by Rajveer Meena with $70{,}000$ digits, but Akira Haraguchi holds the unofficial world record with $100{,}000$ digits!
+As a species, we didn't even know $100{,}000$ digits until $1961$.
+Since then, our ability to compute $\pi$ has grown exponentially.
+Last month, Timothy Mullican broke the world record for $\pi$ computation with $50$ trillion digits.
+I'm kind of bummed about that, because the previous record was pure awesome: Emma Haruka Iwao computed exactly $31{,}415{,}926{,}535{,}897$ digits.[^y-cruncher]
+
+[^y-cruncher]: These records are according to [y-cruncher](http://www.numberworld.org/y-cruncher/records.html) which we have visited before in this series.
+
+***Exercise**: Pi Day is on March 14^th^ because we use a base $10$ decimal number system. Is there a hexadecimal Pi Day? Which bases have Pi Days, and which do not?*
+
+Memorizing and computing digits of $\pi$ are both extremely deep arts that have much more to them than meets the eye.
+Algorithms for computing $\pi$ have been known for centuries before computers came along to use them.
+The recent records were set using the Chudnovsky algorithm (Google that if you want to see a really long formula).
+Simpler but slower algorithms exist, like this one based on the Maclaurin series for the $\arctan$ function:
+$$
+\arctanp{x} = \sum_{k=0}^{\infty} \tfrac{(-1)^k}{2k+1} x^{2k+1}
+\qquad -1 \leq x \leq 1
+$$
+
+For example, we can start from the equation $\tanp{\tfrac{\pi}{6}} = \tfrac{1}{\sqrt{3}}$ and solve for $\pi$:
+$$
+\begin{aligned}
+  \tfrac{\pi}{6} &= \arctanp{\tfrac{1}{\sqrt{3}}} \\
+  \tfrac{\pi}{6} &= \sum_{k=0}^{\infty} \tfrac{(-1)^k}{2k+1} \pr{\tfrac{1}{\sqrt{3}}}^{2k+1} \\
+  \pi &= 6 \pr{\tfrac{1}{\sqrt{3}}} \sum_{k=0}^{\infty} \tfrac{(-1)^k}{2k+1} \pr{\tfrac{1}{\sqrt{3}}}^{2k} \\
+  \pi &= 2 \sqrt{3} \sum_{k=0}^{\infty} \tfrac{(-1)^k}{3^k (2k+1)} \\
+\end{aligned}
+$$
+
+Ignoring the problem of needing to know the precise value of $\sqrt{3}$, let's try using this formula to compute $\pi$.
+Summing the first $9$ terms of the series already gets us $5$ decimal places of precision: $3.14159$.
+Can we do better?
+In general, the Maclaurin series for $\arctan x$ converges faster the closer $x$ is to 0.
+"Machin-like formulae" use sneaky compound angle witchcraft to take advantage of extremely small values of $x$ -- they can converge at *ludicrous* speed.
+
+But why does one even need that many digits of $\pi$?
+There are some open mathematical problems that we still don't have enough digits of $\pi$ to solve computationally.
+Here's one to scratch your head with.
+Prove or disprove:[^challenge]
+$$
+\pi^{\pi^{\pi^\pi}} \text{is an integer}
+$$
+
+[^challenge]: This came up originally in [a Tweet](https://twitter.com/sigfpe/status/330415672549068800).
+Conner Davis [showed](https://www.quora.com/Why-is-it-unknown-whether-4-pi-pi-pi-pi-pi-is-an-integer/answer/Conner-Davis-2) that the brute force method of the disproof requires $\pi$ to be known to at least $630$ quadrillion digits (more than $12$ thousand times more digits than the current world record).
+
+> ### $\frac{22}{7}$
+> $3.142857143\dots$
+
+(For once, the OEIS doesn't have more digits of this constant. Why? It's rational; the sequence 142857 repeats endlessly.)
+A pink line connects the $\pi$ plaque to the number line.
+Barely a finger's width to the right is another pink line connecting $\frac{22}{7}$ to the number line.
+Clearly, $\frac{22}{7}$ is an unreasonably good rational approximation of $\pi$.
+
+The general relationship between continued fractions and good rational approximations is a recurring theme in this stairwell.
+To recap, a rational approximation of $x$ is a fraction $\frac{p}{q}$ which is closer to $x$ than any other fraction with a denominator no larger than $q$.
+We can always get better precision with a denominator larger than $q$, but that comes at the cost of way more computation.
+
+In general, rational approximations for a number can be found by truncating its continued fraction at arbitrary points.
+For example, here are the continued fractions for $\pi$ and the [golden ratio](/blog/post/stairway-constants-2#phi):
+$$
+\begin{aligned}
+\pi &= 3 + \frac{1}{7 + \tfrac{1}{15 + \ddots}} \\
+\phi &= 1 + \frac{1}{1 + \tfrac{1}{1 + \ddots}}
+\end{aligned}
+$$
+
+Let's truncate these continued fractions after the second coefficient:
+$$
+\begin{aligned}
+3.14159... = \pi &\approx 3 + \tfrac{1}{7} = \tfrac{22}{7} = 3.14285... \\
+1.61803... = \phi &\approx 1 + \tfrac{1}{1} = 2
+\end{aligned}
+$$
+
+On the number line, $\frac{22}{7}$ is off from $\pi$ by the width of a finger, while $\phi$ and $2$ are separated by a flight of stairs.
+How can the accuracy vary so much?
+If we reexamine the continued fractions, we can write them as
+$$
+\begin{aligned}
+\pi &= 3 + \frac{1}{7 + \text{at most } \tfrac{1}{15}} \\
+\phi &= 1 + \frac{1}{1 + \text{at least } \tfrac{1}{2}}
+\end{aligned}
+$$
+
+By comparing the error terms, it's a no-brainer why $\pi$ is so well-approximated whereas $\phi$ isn't.
+$\frac{1}{2}$ is over seven times larger than $\frac{1}{15}$.
+In general, a large coefficient (like $15$) in a continued fraction is a sign that the previous rational approximation ($\frac{22}{7}$) is better than average.
+
+Cutting off the continued fraction for $\pi$ after the next coefficient gives us an even better approximation:
+$$
+\pi \approx 3 + \frac{1}{7 + \tfrac{1}{15}} = 3 + \tfrac{15}{106} = \tfrac{333}{106} = 3.141509433...
+$$
+
+However, because $15$ is such a large number, the better approximation has a much larger denominator ($106$) than before ($7$).
+That's another way we know that we had an amazing approximation before -- even with a denominator of $100$, you still can't do better than the short and simple $\frac{22}{7}$.
+Thus, people[^in-practice] usually keep $\frac{22}{7}$ as the go-to rational approximation for $\pi$.[^goodwin]
+
+[^in-practice]: Of course, most people (even engineers) actually just hit the $\pi$ button on their calculator, or write $3.14$.
+For the record, $\frac{22}{7}$ is about $20\%$ more accurate than $3.14$.
+
+[^goodwin]: An idiot named Edward J. Goodwin once tried to get the state of Indiana to legislate a bill accepting an incorrect proof.
+The proof implied among many other falsities that $\pi = 3.2$.
+Indiana was saved from being ridiculed off the face of the Earth by the hero Professor Clarence Abiathar Waldo, who gave the senators a proper education before they voted.
+
+***Exercise**: prove that $\frac{22}{7} > \pi$ by evaluating the famous integral:*
+$$
+\int_0^1 \tfrac{x^4 (1 - x)^4}{1 + x^2} dx
+$$
+
+> ### $S$
+> **Silver constant (Seventh Beraha constant)** \
+> $3.2469796037\dots$
+
+(For more digits, see [OEIS A116425](https://oeis.org/A116425).)
+This constant is so obscure that even Wikipedia confuses it with the completely different silver *ratio*, which is $\sqrt{2} + 1 = 2.414\dots$ and is not found on this number line.
+To find anything useful about the silver constant, we have to dig deep into its second name: the seventh Beraha constant.
+What makes the seventh so important?
+After all, the first, second, third, fourth, fifth, and sixth Beraha constants weren't worthy enough to be on this number line.
+Or were they?
+
+The Beraha constants are commonly denoted by $B_n$ in mathematical literature, and there are infinitely many of them.
+They are defined by
+$$
+B_n = 2 + 2 \cosp{}{\tfrac{2 \pi}{n}}
+$$
+
+***Exercise**: show that $B_n = 4 \cosp{2}{\tfrac{\pi}{n}}$.*
+
+$B_1$, $B_2$, $B_3$, $B_4$, and $B_6$ are all non-negative integers, so they appear on this number line but without labels.
+Meanwhile, $B_5$ is exactly the [golden ratio](/blog/post/stairway-constants-2#phi) plus one, so it would be pretty redundant if it were featured in this stairwell -- we already have the golden ratio.[^silver-constant]
+
+[^silver-constant]: In *Mathematical Constants*, Steven R. Finch alleges that this correspondence between $B_5$ and the golden ratio is ultimately why $B_7$ is called the silver constant.
+
+The silver constant is thus the first "non-trivial" Beraha constant: $B_7 = 2 + 2 \cosp{}{\tfrac{2 \pi}{7}}$.
+But why do we care about it anyway?
+
+Sami Beraha introduced a very curious conjecture in his 1974 PhD thesis relating his namesake Beraha constants to graph theory.
+The formal statement of the conjecture is really esoteric, so I'm going to smooth over some details with an analogy.
+Suppose you had a $3$-D solid constructed entirely from triangles (a tetrahedron, for example), and a paint palate with $k$ colours.
+How many ways can you paint the faces using those colours, so that no two triangles of the same colour share an edge?
+According to graph theory, there exists a chromatic polynomial (a "chromial") $\chi$ such that $\chromial{k}$ is exactly the number of ways we can paint the solid with $k$ colours.
+Different solids have different chromials, and different chromials have different roots.
+People care about roots, because $\chromial{k} = 0$ indicates that it's impossible to colour the solid with $k$ colours.[^chromial]
+
+[^chromial]: A few years after Beraha's conjecture, one of the most famous problems in graph theory was solved.
+[The problem](https://en.wikipedia.org/wiki/Four_color_theorem) asked (roughly) whether or not $4$ is a root of any chromial.
+
+Then we can ask really crazy questions, like what happens when we make $k = 4.2$, or $k = \pi$?
+Suddenly we're not talking about actual paints and colours anymore.
+Chromials, like all polynomials, don't care whether you plug in a whole number or not.
+Often, their roots are irrational.
+
+Beraha's conjecture roughly states: "Roots of chromials like to hang out near Beraha constants."
+That is, for any Beraha constant, you can find a solid whose chromial has a root arbitrarily close to that constant.
+A stronger version of the conjecture is that *only* Beraha constants have this property.
+As far as I know, neither conjecture has been proven or disproven.
+
+Though the conjecture seems to have some implications in the study of magnetism, it's probably still too obscure to warrant featuring a Beraha constant on the number line.
+So what's it doing here? I'd bet that it's because Beraha constants are also known as the Tutte-Beraha constants. Wikipedia specifically calls $S$ the "Tutte-Beraha constant" among other names.
+
+"Tutte" refers to the late professor William Thomas Tutte, known best for his work cracking the "FISH" cipher at Bletchley Park during WWII.
+After the war, Tutte moved to Canada to perform remarkable research on graph theory.
+Bill Tutte might also be familiar to you because he is featured on the wall next to the MathSoc office in recognition of his contributions to creating the Faculty of Math, and later the Department of Combinatorics and Optimization (including its logo).
+This stairwell might very well not exist without professor Tutte, so the silver constant is a fitting tribute for the legendary mathematician.[^tutte]
+
+[^tutte]: There is no way I can do justice to Bill Tutte's accomplishments in the space of this article.
+You can read about him in depth in his [UWaterloo biography](https://uwaterloo.ca/combinatorics-and-optimization/about/professor-william-t-tutte/biography-professor-tutte).
+
+## Floor $3.5$
+
+Eleven steps, as usual.
+What a stretch of constants that was!
+There's another one to your left.
+
+> ### $\Psi$
+> **Reciprocal Fibonacci constant** \
+> $3.3598856662\dots$
+
+(For more digits, see [OEIS A079586](https://oeis.org/A079586).)
+Leonardo of Pisa, or "Fibonacci" as he was later named by historians, is most famous for the Fibonacci sequence ([OEIS A000045](https://oeis.org/A000045)), which goes $0$, $1$, $1$, $2$, $3$, $5$, $8$, $13$, $21$, $34$, etc.
+The Fibonacci numbers $F_n$ are generated by the rule "add the last two terms to get the next" starting with $F_0 = 0$ and $F_1 = 1$.
+For example, the next term after $34$ is $21 + 34 = 55$.
+Connected to the [golden ratio](/blog/post/stairway-constants-2#phi), Fibonacci numbers show up in all sorts of unexpected places in mathematics.
+
+The reciprocal Fibonacci constant is the sum of the reciprocals of all nonzero Fibonacci numbers:
+$$
+\Psi = \tfrac{1}{1} + \tfrac{1}{1} + \tfrac{1}{2} + \tfrac{1}{3} + \tfrac{1}{5} + \dots = \sum_{k=1}^{\infty} \tfrac{1}{F_k}
+$$
+
+As David Jao once told me, one of the reasons we care to calculate a sum of reciprocals is to see how quickly a sequence grows.
+The faster it grows, the faster its reciprocals decrease.
+If they decrease fast enough, the series converges to a real value (otherwise, it blows up to infinity).
+In this case, that real value is an irrational number slightly less than $3.36$.
+
+***Exercise**: the Brady numbers ([OEIS A247698](https://oeis.org/A247698)) are defined by the same "add the last two terms to get the next" rule, but they start with different values ($2{,}308$ and $4{,}261$). What is the reciprocal Brady constant?*
+
+## Floor $4$
+
+Four.
+Seasons, blood types, rocky planets, beats per measure.
+Four stairway constants between $3$ and $3.5$.
+In the eleven steps between $3.5$ and $4$, there were none.
+How strange?
+At least we have a fourth floor.
+You might be familiar with some buildings in Waterloo that don't have a fourth floor -- not because they are too short, but because $4$ is associated with death in various East Asian languages.
+
+> ### $\sqrt{\tau e} = \sqrt{2 \pi e}$
+> **Square root of ($\tau \times e$)** \
+> $4.13273135412\dots$
+
+(For more digits, see [OEIS A019633](https://oeis.org/A019633).)
+If you're confused why there's an equals sign in this constant, it's because there are two ways of writing it.
+As we'll cover later, tau ($\tau$) is defined as $2 \pi$.
+If you're confused why this constant is here in the first place, you wouldn't be the first.
+The only reference I can find to $\sqrt{\tau e}$ is in Steven R. Finch's book *Mathematical Constants*, which seems to be the go-to book about constants.
+Bear with me, this will take quite some explaining...
+
+Let $\omega_n$ by the "volume" of the unit ball in $n$-dimensional space.
+(A unit ball centred at a point $O$ is the set of all points within a distance of $1$ from $O$.)
+For example, $\omega_2 = \pi$ is the area of a circle with radius $1$, and $\omega_3 = \frac{4}{3} \pi$ is the volume of a sphere with radius $1$.
+The volume peaks at $5$ dimensions (more on this later in the stairwell).
+From $n=6$ dimensions onward, $\omega_n$ diminishes to zero.
+$\sqrt{\tau e}$ arises when we try to quantify exactly how fast the volume decreases.
+
+But wait, why does it even go to zero?
+To help your intuition, imagine putting the unit ball inside an $n$-dimensional cube with side length $2$.
+How far are the corners of that cube from the centre of the ball?
+If the ball is centred at the origin $(0,0,0,\dots,0)$, then the corners of the cube are at $(\pm1,\pm1,\pm1,\dots,\pm1)$.
+According to the Pythagorean theorem, the distance from any corner to the origin is $\sqrt{(\pm1)^2+(\pm1)^2+(\pm1)^2+\dots+(\pm1)^2} = \sqrt{1+1+1+\dots+1}$.
+There are as many $1$'s in that sum as there are dimensions, so the distance is $\sqrt{n}$.
+As we increase the number of dimensions, this distance grows to infinity!
+
+If we started at the origin and travelled to a corner of the box in a rocket ship, we would have to go $\sqrt{n}$ units of distance.
+After the first unit, we'd already be outside the ball.
+The rest of the trip ($\sqrt{n} - 1$ units) is spent travelling through space that isn't part of the ball.
+In $4$ dimensions, that's just half the trip.
+In $9$ dimensions, that's two thirds.
+In $1$ million dimensions, we're outside the ball for $99.9\%$ of the trip!
+Hopefully, now you have a feeling for why the unit ball's volume approaches zero in higher dimensions.
+The amount of space inside the box becomes unfathomable, and the sphere takes up less and less of it.
+
+If you're still in doubt, there is an exact formula for the volume:
+$$
+\omega_n = \frac{\pi^{\flac{n}{2}}}{\Gammap{\tfrac{n}{2}+1}}
+$$
+
+The gamma function $\Gammap{x}$ is like a continuous version of $(x-1)!$, so you can think of this informally as
+$$
+\omega_n = \frac{\pi^{\flac{n}{2}}}{\pr{\tfrac{n}{2} + 1 - 1}!} = \frac{\pi^{\flac{n}{2}}}{\pr{\tfrac{n}{2}}!}
+$$
+
+***Fun fact**: when you tell Desmos to graph $x!$, it actually graphs $\Gammap{x+1}$.*
+The problem is, factorials are a pain to compute.
+Fortunately, something called Stirling's formula gives us a very good approximation of $x!$:
+$$
+x! \sim \sqrt{2 \pi x} \pr{\tfrac{x}{e}}^x
+$$
+
+The $\sim$ symbol means that the ratio between $x!$ and Stirling's approximation approaches $1$ as $x$ increases.
+We can use this to approximate $\omega_n$:
+$$
+\begin{aligned}
+  \pr{\flac{n}{2}}!
+  &\sim \sqrt{2 \pi \pr{\flac{n}{2}}} \pr{\tfrac{\flac{n}{2}}{e}}^{\flac{n}{2}}
+  = \sqrt{\pi n} \pr{\tfrac{n}{2e}}^{\flac{n}{2}} \\
+  \omega_n
+  &\sim \frac{\pi^{\flac{n}{2}}}{\sqrt{\pi n} \pr{\tfrac{n}{2e}}^{\flac{n}{2}}}
+  = \frac{(2 \pi e)^{\flac{n}{2}}}{\sqrt{\pi n} \pr{\sqrt{n}}^n}
+  = \frac{\pr{\sqrt{\tau e}}^n}{\sqrt{\pi n} \pr{\sqrt{n}}^n}
+\end{aligned}
+$$
+
+Look at the numerator.
+$\sqrt{\tau e}$ has appeared!
+
+***Exercise**: it'd be nicer if we could isolate for $\sqrt{\tau e}$. Fill in the rest of the steps to derive the identity $\lim_{n \to \infty} \sqrt{n} \pr{\omega_n}^{\flac{1}{n}} = \sqrt{\tau e}$.*
+
+## Floor $4.5$
+
+Eleven steps brings you within view of a big pink $4.5$, and a silvery plaque just to the right of it.
+Unfortunately, that's not part of today's menu.
+Next issue, I'll finish covering that constant and all the rest of them up to the seventh floor.
+Until then, good luck on midterms!
+
+***Exercise**: don't take the elevator.*

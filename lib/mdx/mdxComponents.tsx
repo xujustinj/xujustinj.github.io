@@ -3,6 +3,7 @@ import {
   SpotifyPlaylistEmbed,
   SpotifyTrackEmbed,
 } from "@components/blog/SpotifyEmbed";
+import { NextImage } from "./NextImage";
 
 /**
  * Default MDX components for site content (`compileMdx`). Heading overrides are
@@ -12,6 +13,7 @@ import {
  * exposes the typed helpers.
  */
 export const mdxComponents = {
+  Image: NextImage,
   CaptionedImage,
   SpotifyPlaylistEmbed,
   SpotifyTrackEmbed,

@@ -1,0 +1,260 @@
+---
+title: "Stairway Constants, part $[2,3)$"
+excerpt: "$2$, $\\theta_G$, $K$, $e$, and $F$"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2020-02-14"
+original-date: "2020-02-14"
+original-publication: "mathNEWS v142i3"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2020/02/mathNEWS-142-3.pdf#page=16"
+repost-date: "2026-04-20"
+series-id: stairway-constants
+series-title: "Stairway Constants"
+series-number: "$[2,3)$"
+series-index: 3
+previous: "stairway-constants-2"
+next: "stairway-constants-4"
+---
+
+I promised I would go back with a ruler and measure the distances between tick marks on the MC north-northeast number line, so I did.
+At the floor $3$ landing, we find the white-space between adjacent tick marks to be about $22$ cm.
+At the floor $1.5$ landing, that space is at least a few centimetres past the end of my $30$ cm ruler.
+That's a difference of over $10$ cm!
+The painters really did an excellent job of making the transitions seamless.
+
+Those (SandwichExpert) in disbelief that a number line could be irregularly spaced might find consolation in a few alternate explanations:
+
+- All this stair-climbing has made me so physically fit that I accidentally made some of the measurements while walking at relativistic speed.
+- MC is non-Euclidean.
+- Black holes.
+- Witches.
+
+So far, we've covered the constants in the intervals $[0,1)$ and $[1,2)$; this issue we'll cover $[2,3)$.
+It's highly recommended that you actually go to the stairwell with this article in hand, for a fully-immersive tour.
+
+## Floor $2$
+
+Two.
+$2!$
+A couple.
+The number of sides of this page.[^printing]
+The number of eyes it takes to see depth.
+The minimum number of elements in a field.
+Heck, fields can't even exist without the notion of binary operators.
+Two distinct points define a line, and two lines are obtained by cutting it.
+Undoubtedly, humanity and mathematics would be impossible without the notion of grouping and dividing things into pairs -- so much so, that we *even* have words for when a number is divisible by two.
+$2$ defines the even numbers, yet it defies them by being the only one that is prime.
+How odd is that?
+
+[^printing]: Back in the day, this was printed on real paper!
+
+Puns aside, there are more constants to look at...
+
+## Floor $2.5$
+
+You reach the top of the next flight of stairs (eleven steps) before you can read the next constant. Are there really no interesting numbers near $2$?
+(Quickly scouring Wikipedia, I couldn't find any seriously notable constants around $2$.)
+***Exercise**: invent a constant worthy enough to fill the void near $2$.*
+
+You recall that the last constant we covered (in the previous issue) was around $1.6$ (the golden ratio), so this gap has lasted nearly two flights of stairs.
+Let's see what constant broke the silence...
+
+> ### Golden Angle
+> $2.3999632297\dots$
+
+(For more digits, see [OEIS A131988](https://oeis.org/A131988).)
+A constant without a symbol?
+Let's give it a symbol -- how about $\theta_G$?
+It's an angle, after all.
+But what is $\theta_G$ the angle of?
+Let's do a thought experiment to find out.
+
+Suppose you're a flower, and your main goal is to look pretty.
+Evolution has told you that the prettiest flowers appear to have their petals evenly spaced.
+Unfortunately, you can only grow one petal at a time.
+Once it's grown, you can't move it.
+You also don't know how many petals you will grow in your lifetime, so you better place them wisely.
+Even worse, plants don't have much free will.
+The only thing you can choose is the angle $\theta$ between the last petal you grew, and the next.
+
+So what should $\theta$ be?
+To ensure that your petals appear to be evenly spaced, you want to avoid having two petals that are close to one another.
+How might such a situation arise?
+Consider the $n$^th^ petal and the $(n + a)$^th^ petal, where $a > 0$.
+If they appear to be close to one another, then the angle between them, $a \theta$, is approximately a multiple of $2 \pi$: the number of radians in a full rotation.
+Then, for some integer $b$, $a \theta \approx 2 b \pi$.
+If $b = 0$, then $\theta$ must be very small.
+Thus, we want to avoid small values of $\theta$ (but intuitively, you probably already knew that).
+Otherwise, when $b > 0$, we can rearrange:
+$$
+\tfrac{2 \pi}{\theta} \approx \tfrac{a}{b}
+$$
+
+In English, this means that we'll find two petals close to one another if $\flac{2 \pi}{\theta}$, the number of times $\theta$ fits into a full 360-degree rotation, is well-approximated by a ratio of two integers ($a$ and $b$).
+*Aha!*
+If we make $\frac{2 \pi}{\theta}$ a number with bad rational approximations, we can avoid that.
+Let's make it the famous irrational number with *the worst* rational approximations.
+We've seen that number before in this stairwell: it's the [golden ratio](/blog/post/stairway-constants-2#phi) $\phi$.
+
+$$
+\begin{aligned}
+  \tfrac{2 \pi}{\theta} &= \phi \\
+  \theta &= \tfrac{2 \pi}{\phi}
+\end{aligned}
+$$
+
+However, if you evaluate $\frac{2 \pi}{\phi}$, you'll actually get a number around $3.88$.
+To get the golden angle you must convert this to standard form: $3.88... - 2 \pi = -2.39...$.
+Since direction doesn't matter here, that's equivalent to $+2.39...$.
+
+To recap, the golden angle $\theta_G$ is explicitly tied to the golden ratio $\phi$ by the relation $\theta_G = 2 \pi - \frac{2 \pi}{\phi}$.
+It's the optimal angle (in radians) between consecutive items arranged in a circle, so that you minimize overlap.
+
+<CaptionedImage
+  src="https://i.imgur.com/e1fE9sx.png"
+  alt="Flower petals, separated by the golden angle."
+  caption="Flower petals, separated by the golden angle. Image credit: Wolfgangbeyer on German Wikipedia."
+/>
+
+***Exercise**: as much as we like our radians, most of us are better at visualizing angles in degrees. What's $\theta_G$ to the nearest degree?*
+
+> ### $K$
+> **Khinchin's constant** \
+> $2.685452001\dots$
+
+(For more digits, see [OEIS A002210](https://oeis.org/A002210).)
+Aleksandr Khinchin was a 20^th^ century Soviet mathematician who proved something remarkable about continued fractions.
+We've seen continued fractions before in this series -- the [golden ratio](/blog/post/stairway-constants-2#phi) has the infinite continued fraction:
+$$
+\phi = 1 + \frac{1}{1 + \tfrac{1}{1 + \ddots}}
+$$
+
+In general, simple continued fractions can be finite or infinite, and are of the form
+$$
+a_0 + \frac{1}{a_1 + \tfrac{1}{\ddots + \tfrac{1}{a_n}}}
+$$
+where $a_i$ is positive for all $i > 0$.
+The finite continued fractions represent rational numbers, and the infinite continued fractions represent irrational numbers.
+Altogether, all real numbers can be expressed (almost uniquely) by a simple continued fraction.
+
+Khinchin proved that the continued fractions for "almost all" real numbers have a very strange property.
+If you take the geometric mean of the coefficients ($a_0$, $a_1$, $a_2$, etc), that mean will equal $K$.[^infinite-mean]
+
+[^infinite-mean]: For infinite continued fractions, you have to take the limit as $n$ goes to infinity of the geometric mean of the first $n$ coefficients: $\lim_{n \to \infty} \sqrt[n]{a_0 a_1 a_2 \dots a_{n-1}}$.
+
+"Almost all" comes with infinitely many exceptions. For starters, we're pretty sure that no rational number has this property.
+(The irrationals far outnumber the rationals, so this is okay.)
+More interesting exceptions include the golden ratio, where $a_i = 1$ for all $i$.
+In that case, the geometric mean is obviously $1$.
+
+Khinchin's constant itself also has a continued fraction expansion.
+The coefficients go $2, 1, 2, 5, 1, 1, 2, \dots$ (for more terms, see [OEIS A002211](https://oeis.org/A002211)).
+However, we don't actually know if their geometric mean is $K$.
+In fact, we don't even know if $K$ is rational.
+
+***Exercise**: here's a throwback to the first stairway constant. What is the continued fraction for [Liouville's constant](/blog/post/stairway-constants-1#l)? Does the geometric mean of its coefficients work out to $K$?*
+
+> ### $e$
+> **Napier's constant (Euler's number)** \
+> $2.71828182845\dots$
+
+(For more digits, see [OEIS A001113](https://oeis.org/A001113).)
+Chances are that you recognized this number by its symbol, rather than its name.
+Maybe you were even waiting to see it on this number line.
+That's how you know this is *some* constant.
+We don't use $e$ for anything else, because that would be an insult to the one true $e$.
+
+Why $e$?
+Euler was the first to use that symbol for this number, but his choice of $e$ was probably not in honour of himself.
+When you're churning out papers like Leonhard Euler, you'll gladly take the first letter you haven't yet used for anything else.
+Before Euler, the number was also known as $b$.
+Nowadays, in honour of Euler, we use his notation.
+The fact that the notation happens to be the first letter of "**E**uler" and "**e**xponential" is [probably just a happy coincidence](http://mathshistory.st-andrews.ac.uk/HistTopics/e.html).
+
+Indeed, Euler did not discover Euler's number.
+John Napier, the Scottish inventor of logarithms, published a table of values for the natural logarithm function $\ln$ almost a century before Euler was born.
+Since $e$ is the base of the natural logarithm ($\ln = \log_e$), Napier is considered to be the first to observe the special properties of $e$ (hence the name Napier's constant). Euler comes into the picture with his many discoveries about $e$. Most notably, the famous equation $e^{i \pi} = -1$ is Euler's identity.[^euler-identity]
+
+[^euler-identity]: Whether Euler explicitly made this discovery is questionable, but it follows immediately from a more general equation called Euler's formula.
+
+How'd he come up with that?
+Short answer: Maclaurin series.
+The Maclaurin series is also how Euler computed $e$ to 18 decimal places by hand!
+You can try it yourself:
+
+$$
+e^x = \sum_{i=0}^{\infty} \tfrac{x^i}{i!}
+$$
+
+A complete list of the properties of $e$ could probably fill a book thicker than this stairwell is tall.
+You yourself are familiar with many of them.
+Here's a relatively accessible one from statistics you may or may not know: derangements.
+If you randomly shuffle a deck of $n$ cards, the probability that no card ends up in its original position approaches $\flac{1}{e}$ as $n$ increases to infinity.
+Of course, the proof of this result involves the Maclaurin series above.
+***Exercise**: fill in the details of the proof.*
+
+## Floor $3$
+
+Another eleven steps later, you reach a big pink $3$.
+The third floor!
+The hub of math hubbub.
+It's home to the MC-DC bridge (lower half), the Comfy, the C&D, MathSoc, and of course the filthy mathNEWS office.
+Perhaps one day it may also have a bridge to SLC, but for now the shit's *still* broken.[^not-anymore]
+
+[^not-anymore]: They finished building it during the pandemic.
+Funnily enough, at the time of re-posting, it is a different bridge (the MC-DC bridge) that is broken due to the construction of M4.
+
+Hiding above the door to the 3^rd^ floor is this article's final constant.
+
+> ### $F$
+> **Fransén-Robinson constant** \
+> $2.8077702420\dots$
+
+(For more digits, see [OEIS A058655](https://oeis.org/A058655).)
+This constant is relatively new.
+It seems to have emerged in Arne Fransén's 1979 paper [*Accurate determination of the inverse gamma integral*](https://doi.org/10.1007/BF01931232).
+Wikipedia mentions a Herman P. Robinson, which is the name of a late OEIS contributor and co-author of the report [*Mathematical constants*](https://escholarship.org/uc/item/2t95c0bp).
+It's likely, but I'm not sure he is the Robinson after whom $F$ is named.
+
+As the title of Arne Fransén's paper suggests, $F$ is the value of an integral of the inverse gamma function:
+
+$$
+F = \int_{0}^{\infty} \tfrac{1}{\Gammap{x}} dx
+$$
+
+In English, it's the area bounded above by the graph of the reciprocal of the gamma function and bounded below by the $x$-axis.
+If you're unfamiliar with the gamma function $\Gamma$, it is the continuous function where $\Gammap{n} = (n - 1)!$ for all positive integers $n$.
+Essentially, it's what you get when you draw a curve of best fit through the points $(n, (n - 1)!)$.
+$\Gammap{n}$ grows *really* fast -- it's beyond exponential.
+(Next time someone uses the word "exponential" incorrectly, you can show them the gamma function and say that exponential growth is for babies.)
+
+As a consequence of that growth, $\frac{1}{\Gammap{x}}$ approaches zero *really* fast.
+This is how $K$ can be finite; it's the area between the $x$-axis and the graph of a function that pretty much kisses it.
+
+***Exercise**: use lower Riemann sums to prove that $F \geq e$.*
+
+---
+
+Halfway through the term, we have reached just short of halfway up the MC north-northeast stairwell.
+However, we have covered more than half of the stairway constants.
+Why is that?
+
+We're not the first ones to notice.
+Simon Newcomb and Frank Albert Benford Jr. both observed this trend more than 80 years ago: numbers, in practice, tend to have small leading digits.
+This is known as the Newcomb-Benford law.
+It's not a theorem, but rather a highly-applicable pattern for all sorts of real-world ("realistically-distributed") data.
+In fact, the Newcomb-Benford law holds so reliably that it can and has been used to detect financial fraud!
+
+Out of the numbers between $1$ and $7$, we've covered the leading digits $1$ and $2$ so far.
+According to the Newcomb-Benford law, almost $48\%$ of all "realistically-distributed" numbers should begin with $1$ or $2$ (on average, of course).
+The rest of the constants we have yet to cover in this stairway begin with $3$, $4$, $5$, or $6$; those digits account for less than $37\%$ of all "realistically-distributed" numbers.
+If you believe that stairway constants have a "realistic" distribution (whatever that means), then it should be no surprise that there are more of them on the lower floors.
+
+Of course, there is also a bias towards smaller numbers in mathematics.
+We care much more about extremes, and many of the stairway constants are significant in the first place, because they are the smallest or the simplest number to satisfy some condition.
+
+The only way to truly know why the stairway constants are distributed the way they are, is to ask the people who created this number line in the first place.
+Stay tuned for more developments.
+
+***Exercise**: don't take the elevator.*
