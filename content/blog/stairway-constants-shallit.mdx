@@ -1,0 +1,71 @@
+---
+title: "Stairway Constants, part $1.36945140399377\\dots$"
+excerpt: "A new stairway constant!"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2024-03-29"
+original-date: "2024-03-29"
+original-publication: "mathNEWS v154i6"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2024/03/mathNEWS-154-6.pdf#page=22"
+repost-date: "2026-04-22"
+series-id: stairway-constants
+series-title: "Stairway Constants"
+series-number: "Part $1.36945140399377\\dots$"
+series-index: 10
+previous: "pi-news-2024"
+---
+
+The stairwell in the north corner of MC (where it connects to DC and M3) is known for its number line, a collection of over twenty mathematical constants between $0$ and $7$.
+But just five years ago, it was barren.
+Renovations were an opportunity to breathe some life into the building, so [Prof. Kevin Hare, Debbie Brown, and others](/blog/post/stairway-people) put together the fantastic display we can climb through today.
+
+Since then, we've nearly rotated through an entire generation of undergraduates without any new additions to the number line.
+I was starting to think that it would never happen, until I saw
+
+> ### $\mathrm{SC}$
+> **Shallit Constant** \
+> $1.3694514039937700584355279242$
+
+(For more digits, see [OEIS A086276](https://oeis.org/A086276).)
+The plaque seems uncanny next to the original constants.
+It was put up some time in the last year (I don't know exactly when), so it needs at least four years of dust and tarnish to catch up with the others.
+It displays $28$ decimal places, way more than was afforded to any other number.
+(It's also missing an ellipsis...)
+But the fact is unmistakable.
+**NEW STAIRWAY CONSTANT!!!**
+
+Shallit should be a familiar name -- Prof. Jeffrey Outlaw Shallit is a professor of computer science and number theory at UW.
+He is retiring at some point this year, so you can probably guess why this constant has appeared in the stairwell.
+The constant comes from an [optimization problem](https://doi.org/10.1137/1036109) he posed in 1994.
+For $n \in \set{ 1, 2, \dots}$, define
+
+$$
+f(n) = \min_{x_1, \dots, x_n > 0}\!\pr{\sum_{i=1}^n x_i + \sum_{1 \leq i \leq j \leq n} \prod_{k=i}^j \tfrac{1}{x_k}}
+$$
+
+The thing we're trying to minimize has two parts.
+The first sum $\sum_{i=1}^n x_i$ can be made smaller by decreasing the $x$ values.
+However, at some point, the reciprocals $\sum_{1 \leq i \leq j \leq n} \prod_{j=i}^k \tfrac{1}{x_j}$ get too big.
+Somewhere in between is the minimum, and Shallit's constant is all about this trade-off.
+For example, $x + \tfrac{1}{x}$ is minimized when $x = 1$, so we can say that $f(1) = 1 + \tfrac{1}{1} = 2$.
+***Exercise**: what is the exact value of $f(2)$?*
+
+Now, consider the sequence $C_n = 3n - f(n)$.
+Rounded to the nearest thousandth, it goes $1.000$, $1.271$, $1.343$, $1.362$, $1.368$, and so on, rapidly approaching Shallit's constant!
+This means that $f(n)$ has an oblique (increasing) asymptote $3n - \mathrm{SC}$.
+
+Sergey Sadov has a [26-page paper](https://arxiv.org/pdf/1806.03651.pdf) that exhausts the theory on Shallit's constant, including its first $401$ digits after the decimal point.
+However, not mentioned in any of that is the question of where a minimization problem like $f(n)$ would actually show up in real life.
+As far as I can tell, this was a purely intellectual exercise that happened to produce a constant.
+Objectively, it is insignificant compared to Prof. Shallit's career and work.
+
+But *subjectively*, we have a fascination with constants.
+Steven R. Finch, kingmaker of numbers, picked up on Shallit's 1994 problem and included it in his encyclopedia [*Mathematical Constants*](https://sites.oxy.edu/lengyel/originals/0521818052ws.pdf).
+That book makes the first published mention that I could find of the name "Shallit's Constant."
+That name has stuck -- literally, now, to the wall of the first-floor landing of the MC north stairwell, between the [plastic number](/blog/post/stairway-constants-2#p) and the [square root of two](/blog/post/stairway-constants-2#sqrt-2).
+People will pass by it for years to come and wonder *"what the heck is that number used for?"*
+They might Google it like me and find out that it's used for just about nothing, but that's beside the point.
+More importantly, $1.3694514\dots$ stands for the legacy of a great UWaterloo professor.
+
+Congratulations, Professor Jeffrey Shallit!

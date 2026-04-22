@@ -1,0 +1,61 @@
+---
+title: "The $100{,}000{,}000{,}000{,}000$^th^ Digit of $\\pi$ is $0$"
+excerpt: "Who asked?"
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2023-03-03"
+original-date: "2023-03-03"
+original-publication: "mathNEWS v151i3"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2023/03/mathNEWS-151-3.pdf#page=40"
+repost-date: "2026-04-22"
+series-id: stairway-constants
+series-title: "Stairway Constants"
+series-number: "$\\pi$NEWS 2023"
+series-index: 8
+previous: "pi-news-2022"
+next: "pi-news-2024"
+---
+
+In 2020, I wrote the [*Stairway Constants*](/blog/series/stairway-constants) series that covered all the numbers in the northeast stairwell of MC.
+In it, I reported that the record for most decimal (base 10) digits of $\pi$ ever computed was $50$ trillion.
+
+[Last year](/blog/post/pi-news-2022), leading up to Pi Day 2022, I decided to check again and found out that a team at the University of Applied Sciences of Eastern Switzerland had beaten the record with $\floor{2 \pi \times 10^{13}} = 62{,}831{,}853{,}071{,}796$ digits.
+I really liked how they chose such a cute stopping point -- if having more digits than there are fish in the ocean can be called "cute".
+
+This is the last mathNEWS issue that will be published before Pi Day 2023 coming up on March 14th, so here we are checking up again on the most iconic stairway constant.
+In [June 2022](https://cloud.google.com/blog/products/compute/calculating-100-trillion-digits-of-pi-on-google-cloud), Emma Haruka Iwao (who had previously held the record at $\floor{\pi \times 10^{13}} = 31{,}415{,}926{,}535{,}897$ digits) returned to take back her crown.
+After spinning the fans of Google Cloud servers for nearly 158 days, her team stopped at 100 trillion digits.
+
+I'm a bit disappointed Iwao didn't find a more $\pi$-themed number to stop at like $\floor{3 \pi \times 10^{13}} = 94{,}247{,}779{,}607{,}693$.
+Anyways, it doesn't really matter because I'm sure the record will be broken again by next year.
+The thing about computing $\pi$ nowadays is that we've pretty much been using the same software called [y-cruncher](https://www.numberworld.org/y-cruncher/) by Alexander Yee since 2010.
+In turn, y-cruncher uses an extremely specialized algorithm published by the Chudnovsky brothers in 1988.
+Thus, the latest record is less a feat of mathematics or computer science than it is a feat of computer engineering, money, and patience.
+As computers continue to get faster, breaking records is as inevitable as Moore's law.
+
+And inevitably, someday we'll have multiple teams attempt to break the record at the same time, and at least one of them will find all their work wasted.
+So, after finding the idea really cool for the last few years, I'm now rolling my eyes at this foolish and wasteful challenge.
+Heck, even if you do get the record, what is it really worth?
+
+For Google, the stunt lets them show off how reliable and fast their cloud platform is for serious computing.
+People see computers as these perfectly deterministic reliable beasts, but they make errors too, just extremely rarely.
+One of the main engineering challenges when you spin a server for $158$ days is that those errors become nearly inevitable.
+You constantly have to back up and double check your work.
+Google also boasts that it took *only* 158 days; they used automated techniques to find the best computer configuration, and without that insight, the crunching apparently could've taken twice as long.
+These solutions (among many others) are legitimately impressive, but I wonder if Google is now kicking themselves that they didn't spend that computer time training their ChatGPT competitor instead.
+
+While we're on the topic of computing needlessly many digits, let's check in on some other stairway constants whose records have been broken:
+
+- the $\floor{\pi \times 10^{13}} = 31{,}415{,}926{,}535{,}897$th digit of [Napier's constant (Euler's number)](/blog/post/stairway-constants-3#e) $e$ is 7 (David Christle, 2020-12-05)
+- the $10^{13} + 10^3 = 10{,}000{,}000{,}001{,}000$th digit of [$\sqrt{2}$](/blog/post/stairway-constants-2#sqrt2) is 8 (Tizian Hanselmann, 2022-01-05)
+- the $10^{13} = 10{,}000{,}000{,}000{,}000$th digit of the [golden ratio](/blog/post/stairway-constants-2#phi) $\phi$ is 2 (Clifford Spielman, 2021-02-14)
+- the $6 \times 10^{11} + 10^2 = 600{,}000{,}000{,}100$th digit of the [Euler-Mascheroni constant](/blog/post/stairway-constants-3#gamma) $\gamma$ is 5 (Seungmin Kim & Ian Cutress, 2020-05-28)
+
+Together with $\pi$, humanity has spent over a year grinding away the world's fastest processors to get these digits that will never get used except to verify the leading digits of the next record-breaking computation.
+Since even the verification process is automated, most of the digits will likely never be seen by a human, ever.
+
+Then again, humanity also spends decades of computer time running League of Legends every day.
+Maybe calculating $\pi$ isn't so wasteful after all...
+
+***Exercise**: give your computer a break and go to the gym.*
