@@ -43,7 +43,7 @@ const NextNeighborLink = styled(Link)`
 `;
 
 function neighborLinkAriaLabel(neighbor: BlogNeighborNav): string {
-  return `Part ${stripInlineMarkdown(neighbor.seriesNumber)}: ${stripInlineMarkdown(neighbor.title)}`;
+  return `${stripInlineMarkdown(neighbor.seriesNumber)}: ${stripInlineMarkdown(neighbor.title)}`;
 }
 
 /* ——— bar chrome + center label ——— */
@@ -126,7 +126,7 @@ export async function PostSeriesNavBar({
   const hasNeighbors = previous !== undefined || next !== undefined;
 
   let ariaLabel = "Series navigation";
-  ariaLabel = `Part ${stripInlineMarkdown(seriesNumber)} of ${stripInlineMarkdown(seriesTitle)}`;
+  ariaLabel = `${stripInlineMarkdown(seriesNumber)} of ${stripInlineMarkdown(seriesTitle)}`;
   if (hasNeighbors) {
     ariaLabel += ". Previous and next posts";
   }
@@ -143,7 +143,7 @@ export async function PostSeriesNavBar({
             >
               <FontAwesomeIcon icon={faChevronLeft} aria-hidden />
               <PartLine>
-                <InlineMarkdown source={`Part ${previous.seriesNumber}`} />
+                <InlineMarkdown source={previous.seriesNumber} />
               </PartLine>
             </PrevNeighborLink>
           ) : null}
@@ -151,7 +151,7 @@ export async function PostSeriesNavBar({
         <NavCenter>
           <SeriesCenterRoot>
             <PartLine>
-              <InlineMarkdown source={`Part ${seriesNumber} of`} />
+              <InlineMarkdown source={`${seriesNumber} of`} />
             </PartLine>
             <TitleLine>
               <SeriesTitleLink
@@ -170,7 +170,7 @@ export async function PostSeriesNavBar({
               rel="next"
               aria-label={`Next post: ${neighborLinkAriaLabel(next)}`}>
               <PartLine>
-                <InlineMarkdown source={`Part ${next.seriesNumber}`} />
+                <InlineMarkdown source={next.seriesNumber} />
               </PartLine>
               <FontAwesomeIcon icon={faChevronRight} aria-hidden />
             </NextNeighborLink>

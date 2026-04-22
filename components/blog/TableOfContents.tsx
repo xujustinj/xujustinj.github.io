@@ -39,6 +39,51 @@ const TocContainer = styled.nav`
   max-height: calc(100vh - 96px);
   overflow: auto;
   padding-right: 12px;
+
+  /*
+   * Match code-block scrollbars in BlogProse (8px, rounded, no buttons). Lighter
+   * track/thumb for the page rail. Do not set scrollbar-width / scrollbar-color —
+   * in Chromium they override ::-webkit-scrollbar-* and restore OS-style bars.
+   */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    min-width: 0;
+    height: 0;
+    min-height: 0;
+  }
+
+  &::-webkit-scrollbar-button:horizontal:start:decrement,
+  &::-webkit-scrollbar-button:horizontal:end:increment,
+  &::-webkit-scrollbar-button:vertical:start:decrement,
+  &::-webkit-scrollbar-button:vertical:end:increment {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: hsl(215, 12%, 91%);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsl(215, 9%, 68%);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: hsl(215, 9%, 58%);
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: hsl(215, 12%, 91%);
+  }
 `;
 
 const TocList = styled.ul`
