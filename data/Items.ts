@@ -5,6 +5,29 @@ import { Icons } from "./Icons";
 
 export const Items: ReadonlyArray<Item> = [
   {
+    title: "AceTeam",
+    subtitle: "Senior Software Engineer",
+    description:
+      "Current job: building workflows for AI agents, state of the art information extraction, and more.",
+    tags: [Tags.AI, Tags.PYTHON, Tags.TS, Tags.REACT, Tags.NEXT],
+    icon: Icons.ACETEAM,
+    links: [
+      {
+        url: "https://aceteam.ai/",
+        icon: FontAwesome.WEBSITE,
+      },
+      {
+        url: "https://www.linkedin.com/company/aceteam-ai/",
+        icon: FontAwesome.LINKEDIN,
+      },
+      {
+        url: "https://github.com/aceteam-ai/workflow-engine",
+        icon: FontAwesome.GITHUB,
+      },
+    ],
+    status: "featured",
+  },
+  {
     title: "Waabi",
     subtitle: "Research Intern",
     description:
@@ -71,7 +94,7 @@ export const Items: ReadonlyArray<Item> = [
         icon: FontAwesome.YOUTUBE,
       },
     ],
-    status: "featured",
+    status: "ended",
   },
   {
     title: "E2E TS Template",
@@ -249,8 +272,8 @@ export const Items: ReadonlyArray<Item> = [
     icon: Icons.STAIRWAY_CONSTANTS,
     links: [
       {
-        url: "https://github.com/xujustinj/stairway-constants/",
-        icon: FontAwesome.GITHUB,
+        url: "/blog/series/stairway-constants",
+        icon: FontAwesome.BLOG,
       },
     ],
     status: "featured",

@@ -6,6 +6,7 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import {
+  faBlog,
   faBookOpen,
   faFileLines,
   faGamepad,
@@ -14,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export const FontAwesome = {
+  BLOG: faBlog,
   GAME: faGamepad,
   GITHUB: faGithub,
   LINKEDIN: faLinkedin,

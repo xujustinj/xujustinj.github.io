@@ -1,3 +1,4 @@
+import ACETEAM from "../public/assets/aceteam-400x400.png";
 import ADETOS from "../public/assets/adetos-288x288.png";
 import ALLOY from "../public/assets/alloy-256x256.png";
 import AMAZON from "../public/assets/amazon-smile-630x630.jpg";
@@ -20,6 +21,7 @@ import WEBSITE from "../public/assets/website-logo-400x400.png";
 import WISH from "../public/assets/wish-512x512.png";
 
 export const Icons = {
+  ACETEAM,
   ADETOS,
   ALLOY,
   AMAZON,

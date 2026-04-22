@@ -65,9 +65,9 @@ const FooterLinks = styled.div`
 export const Footer = (props: SectionProps) => (
   <Section {...props}>
     <FooterContainer>
-      <FooterLastUpdated>Last updated April 20, 2026.</FooterLastUpdated>
+      <FooterLastUpdated>Last updated April 22, 2026.</FooterLastUpdated>
       <FooterLinks>
-        <FooterLink href={"/blog"} icon={FontAwesome.PAPER}>
+        <FooterLink href={"/blog"} icon={FontAwesome.BLOG}>
           Blog
         </FooterLink>
         <FooterLink
@@ -84,9 +84,6 @@ export const Footer = (props: SectionProps) => (
         </FooterLink>
         <FooterLink href={"/resume.pdf"} icon={FontAwesome.RESUME}>
           Résumé
-        </FooterLink>
-        <FooterLink href={"/cv.pdf"} icon={FontAwesome.RESUME}>
-          Curriculum Vitae
         </FooterLink>
       </FooterLinks>
     </FooterContainer>

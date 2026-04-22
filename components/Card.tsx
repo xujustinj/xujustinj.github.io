@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { Item } from "@models/Item";
 import { adapt } from "@styles/Adaptive";
-import { Colour, primary } from "@styles/Colours";
+import { bgLight, Colour, primary } from "@styles/Colours";
 import { TagBubble } from "./TagBubble";
 
 interface CardContainerProps {
@@ -14,6 +14,7 @@ const CardContainer = styled.div<CardContainerProps>`
   width: ${(props) => props.$size}px;
   height: ${(props) => props.$size}px;
   position: relative;
+  background-color: ${bgLight};
 
   border-radius: 16px;
   overflow: hidden;
