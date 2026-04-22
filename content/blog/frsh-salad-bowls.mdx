@@ -1,0 +1,119 @@
+---
+title: "How Many FRSH Salad Bowls Are There?"
+excerpt: "A lot more than you think."
+authors:
+  - name: "water"
+    url: "/blog"
+date: "2019-10-04"
+original-date: "2019-10-04"
+original-publication: "mathNEWS v141i2"
+original-url: "https://mathnews.uwaterloo.ca/wp-content/uploads/2019/10/mathNEWS-141-2.pdf#page=24"
+repost-date: "2026-04-22"
+---
+
+FRSH is a wonderful and slightly-overpriced vegan food establishment run by UW Food Services.
+Not to be confused with Freshii, it is open weekdays from 11:00-14:30 in AHS (next to Starbucks).
+The lines there are usually no longer than two people, and most of your time will be spent waiting for the staff while they make your custom order.
+
+And it's a pretty detailed custom order.
+In the queuing area, FRSH provides paper forms that you can fill out to dictate exactly what you want.
+You never have to worry about how to pronounce "quinoa"; all you need to do is check off a box beside the word.
+There are 3 different types of forms, corresponding to flatbreads, hot bowls, and salad bowls.
+Personally, I recommend salad bowls, not just because they are cheaper, but also because it's physically impossible to finish a salad bowl and still be hungry.
+
+So you heed my advice and pick up a form for a salad bowl, only to find yourself bombarded by a whole sheet of decisions.
+
+- Greens ($4$ options, choose up to $2$)
+- Raw toppings ($11$ options, choose up to $5$)
+- Roasted toppings ($5$ options, choose up to $3$)
+- Cooked grains ($2$ options, choose $1$)
+- Protein ($4$ options, choose $1$)
+- Crunch ($5$ options, choose $1$)
+- Dressings ($5$ options, choose $1$)[^out-of-stock]
+
+[^out-of-stock]: I think one of the dressings might be perpetually out of stock.
+
+With all those options, it always surprises me how quickly the staff make the orders.
+
+So you pull aside to fill out your form (with the pens they provide you), and soon you are left wondering the question that any mathematician should have when ordering at FRSH.
+
+*How many combinations of ingredients can we choose?*
+
+But when we try to come up with an answer, we're faced with an English problem, not a math problem.
+Do we include choosing nothing when we say "choose up to $x$"?
+Likewise, if they say "choose $1$", do they mean we must choose one of the options?
+What if I don't want protein in my salad?
+
+So I went to FRSH and asked them if I could order a salad bowl without any greens, the answer was a shifty and confused no.
+Not wanting to bother the staff again, I went to consult Merriam-Webster instead, where the relevant definition of salad is
+> *raw greens (such as lettuce) often combined with other vegetables and toppings and served especially with dressing*
+Clearly, a legal salad bowl must consist of at least greens and dressing, and all else is optional.
+
+- Greens ($4$ options, choose $1$ to $2$ of them)
+- Raw toppings ($11$ options, choose $0$ to $5$ of them)
+- Roasted toppings ($5$ options, choose $0$ to $3$ of them)
+- Cooked grains ($2$ options, choose $0$ to $1$ of them)
+- Protein ($4$ options, choose $0$ to $1$ of them)
+- Crunch ($5$ options, choose $0$ to $1$ of them)
+- Dressings ($5$ options, choose exactly $1$ of them)
+
+Given $n$ options, the number of ways we can choose $a$ to $b$ of them is a sum: the number of ways we can choose $a$ options, plus the number of ways we can choose $a+1$ options, and so on, up to the number of ways we can choose $b$ options.
+For example, the number of ways we can choose raw toppings is:
+
+$$
+\begin{aligned}
+  \sum_{k=0}^5 {11 \choose k}
+  &= {11 \choose 0} + {11 \choose 1} + {11 \choose 2} + {11 \choose 3} + {11 \choose 4} + {11 \choose 5} \\
+  &= 1 + 11 + 55 + 165 + 330 + 462
+  = 1024
+\end{aligned}
+$$
+
+(The fact that this is a power of $2$ is a rather interesting coincidence that you should look into if you don't already know when and why it happens.)
+Repeating the calculations for each of our categories, we find that there are:
+
+- $10$ ways to choose greens
+- $1024$ ways to choose raw toppings
+- $26$ ways to choose roasted toppings
+- $3$ ways to choose grains
+- $5$ ways to choose protein
+- $6$ ways to choose crunch
+- $5$ ways to choose dressings
+
+However, we run into a dilemma.
+Korean chickpeas are listed as options for both protein and crunch.
+Thus, out of the $30$ ways ($5 \times 6$) you can choose pairs of protein and crunch, two are identical:
+
+- Korean chickpeas and no crunch
+- no protein and Korean chickpeas
+
+Checking off Korean chickpeas twice will probably get you extra chickpeas (and some judgemental glances), so we'll consider it distinct.
+Thus, there are actually $29$ distinct ways you can choose pairs of protein and crunch.
+With no other overlap between categories, calculating the total number of FRSH salad bowls is as simple as taking a product: $115{,}814{,}400$.
+This is bad news if you want to try every possible salad bowl, but in the grand scheme of things this isn't an epic number.
+
+- At three bowls per day, it'd take you over $105$ thousand years.
+- At three bowls per day per capita, it would take the current UW student body over $3$ years, assuming we can somehow coordinate to avoid ordering the same combination twice.
+  To match this sharp increase in demand, FRSH staff would have to produce more than one salad bowl per second.
+- If everyone in Canada coordinated to binge on FRSH salad, we could finish within $2$ days.
+- If Santa Claus distributed one of each unique salad bowl every Christmas, every child could expect to get just one before they reached adulthood.
+- A stack of $115{,}814{,}400$ unique salad bowls wouldn't reach the moon.
+  It probably wouldn't even be visible from the moon.[^terrified]
+
+[^terrified]: terrifiED's note: I'll try to investigate this in my next article ;)]
+
+Of course, many economists wouldn't even consider buying a FRSH salad bowl containing just leaves and dressing.
+Why would you do that, when you can add veggies and protein on top and still pay the same price?
+We already established that there are simply too many FRSH salads for you to try them all, so why waste your time on the ones that offer diminished utility?
+
+You want salads that are bursting out of the seams of their paper bowls.
+Not a single choice shall be wasted.
+$5$ raw toppings!
+$3$ roasted toppings!
+Protein and crunch!
+The staff will giggle at the girth of your leafy goodness as they try to squeeze it underneath the lid.
+
+*How many economically rational combinations of ingredients can we choose?*
+The computation is left to the reader, but I'll just say it's still too much for a single person to try all of them in their lifetime.
+If that gives you choice paralysis, you might be better off choosing from FRSH's much smaller selection of preset salad bowls.
+At the leisurely rate of one salad bowl every time you have a quiz in AHS 1689, you could conceivably get through those in the time it takes you to graduate.
