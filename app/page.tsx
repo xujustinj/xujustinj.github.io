@@ -12,26 +12,26 @@ import { bgLight, bgDark } from "@styles/Colours";
 const IntroContainer = styled.div`
   display: flex;
   ${adapt({
-    mobile: `
+  mobile: `
       flex-direction: column;
     `,
-    desktop: `
+  desktop: `
       flex-direction: row;
     `,
-  })}
+})}
   gap: 32px;
   align-items: top;
 `;
 
 const IntroIcon = styled.div`
   ${adapt({
-    mobile: `
+  mobile: `
       display: none;
     `,
-    desktop: `
+  desktop: `
       display: inline;
     `,
-  })}
+})}
   flex-grow: 0;
   flex-shrink: 0;
   width: min(200px, 40vw);
@@ -45,17 +45,16 @@ const IntroContent = styled.div`
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
-  gap: 8px;
   align-items: flex-start;
 
   ${adapt({
-    mobile: `
+  mobile: `
       font-size: 12pt;
     `,
-    desktop: `
+  desktop: `
       font-size: 14pt;
     `,
-  })}
+})}
 
   > * {
     margin: 0;
@@ -68,13 +67,13 @@ const IntroContent = styled.div`
 
 const NameText = styled.h2`
   ${adapt({
-    mobile: `
+  mobile: `
       font-size: 24pt;
     `,
-    desktop: `
+  desktop: `
       font-size: 36pt;
     `,
-  })}
+})}
   line-height: 100%;
   margin-bottom: 8px;
 `;
@@ -94,6 +93,9 @@ export default function HomePage() {
           </IntroIcon>
           <IntroContent>
             <NameText>Justin Xu</NameText>
+            <EmojiBulletItem $bullet={"💼"}>
+              Senior Software Engineer @<Link href={"https://aceteam.ai/"}>AceTeam</Link>
+            </EmojiBulletItem>
             <EmojiBulletItem $bullet={"🎓"}>
               MMath Computer Science student @UWaterloo
             </EmojiBulletItem>
@@ -114,7 +116,7 @@ export default function HomePage() {
               , web development
             </EmojiBulletItem>
             <EmojiBulletItem $bullet={"🕹️"}>
-              bad at video games and bouldering
+              bad at video games and badminton
             </EmojiBulletItem>
           </IntroContent>
         </IntroContainer>

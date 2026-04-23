@@ -5,6 +5,20 @@ import { Icons } from "./Icons";
 
 export const Items: ReadonlyArray<Item> = [
   {
+    title: "Defensive Python",
+    description:
+      "A running series of articles on programming habits for producing Python code that protects itself from mistakes.",
+    tags: [Tags.PYTHON, Tags.WRITING],
+    icon: Icons.PYTHON,
+    links: [
+      {
+        url: "/blog/series/defensive-python",
+        icon: FontAwesome.BLOG,
+      },
+    ],
+    status: "featured",
+  },
+  {
     title: "AceTeam",
     subtitle: "Senior Software Engineer",
     description:
@@ -74,12 +88,6 @@ export const Items: ReadonlyArray<Item> = [
       },
     ],
     status: "ended",
-  },
-  {
-    title: "Project Cellar",
-    description: "A well-kept secret.",
-    icon: Icons.PROJECT_CELLAR,
-    status: "hidden",
   },
   {
     title: "Raytracer",

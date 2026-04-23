@@ -1,4 +1,5 @@
-import ACETEAM from "../public/assets/aceteam-400x400.png";
+import ACETEAM from "../public/assets/aceteam-800x800.png";
+import PYTHON from "../public/assets/python-800x800.png";
 import ADETOS from "../public/assets/adetos-288x288.png";
 import ALLOY from "../public/assets/alloy-256x256.png";
 import AMAZON from "../public/assets/amazon-smile-630x630.jpg";
@@ -10,7 +11,6 @@ import HEXAGONAL_2048 from "../public/assets/hexagonal-2048-672x672.png";
 import IMAGINE_SCRUM from "../public/assets/imagine-scrum-400x400.png";
 import LOO_LABS from "../public/assets/loo-labs-400x400.jpg";
 import OSELLUS from "../public/assets/osellus-925x925.png";
-import PROJECT_CELLAR from "../public/assets/project-cellar-200x200.png";
 import RAYTRACER from "../public/assets/raytraced-500x500.png";
 import STAIRWAY_CONSTANTS from "../public/assets/stairway-constants-400x400.png";
 import SWIFT from "../public/assets/swift-396x396.png";
@@ -33,8 +33,8 @@ export const Icons = {
   IMAGINE_SCRUM,
   LOO_LABS,
   OSELLUS,
-  PROJECT_CELLAR,
   RAYTRACER,
+  PYTHON,
   STAIRWAY_CONSTANTS,
   SWIFT,
   ULAM_SPIRAL,
